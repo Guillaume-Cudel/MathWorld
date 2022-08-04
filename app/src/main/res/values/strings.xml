@@ -6,4 +6,9 @@
     <string name="_5e">5e</string>
     <string name="_4e">4e</string>
     <string name="_3e">3e</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+    <string name="management">Management</string>
+    <string name="notebook">Notebook</string>
+    <string name="num_ninja">Num Ninja</string>
 </resources>
