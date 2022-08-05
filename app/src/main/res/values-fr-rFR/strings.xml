@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MathWorld</string>
+    <string name="open">Ouvert</string>
+    <string name="close">Ferme</string>
+    <string name="management">Gestion</string>
+    <string name="notebook">Cahier</string>
+    <string name="hello_blank_fragment">Salut fragment vide</string>
+</resources>

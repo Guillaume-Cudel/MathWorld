@@ -10,7 +10,7 @@
         android:icon="@drawable/baseline_auto_stories_black_24"
         android:title="@string/notebook"/>
     <item
-        android:id="@+id/num_ninja"
+        android:id="@+id/item_num_ninja"
         android:icon="@drawable/ninja"
         android:title="@string/num_ninja"/>
 </menu>
