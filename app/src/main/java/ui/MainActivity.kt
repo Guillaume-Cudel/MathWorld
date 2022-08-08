@@ -2,14 +2,12 @@ package ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
-import androidx.navigation.ui.AppBarConfiguration
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
-import com.google.android.material.navigation.NavigationView
 import com.guillaume.mathworld.R
 import com.guillaume.mathworld.databinding.ActivityMainBinding
 import ui.fragments.ClassManagementFragment
@@ -23,6 +21,9 @@ class MainActivity : AppCompatActivity() {
     private val managementFragment = ClassManagementFragment()
     private val notebookFragment = NotebookFragment()
     private val numNinjaFragment = NumNinjaFragment()
+    private val bard = Bard()
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,6 +49,8 @@ class MainActivity : AppCompatActivity() {
         }
 
 
+
+        Log.e("What is the class ? :", bard.name)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -58,10 +61,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun replaceFragment(fragment: Fragment){
-        if(fragment != null){
-            val transaction = supportFragmentManager.beginTransaction()
-            transaction.replace(R.id.fragment_container, fragment)
-            transaction.commit()
-        }
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.fragment_container, fragment)
+        transaction.commit()
     }
 }

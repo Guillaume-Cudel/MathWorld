@@ -11,4 +11,6 @@
     <string name="management">Management</string>
     <string name="notebook">Notebook</string>
     <string name="num_ninja" translatable="false">Num Ninja</string>
+    <string name="bard">Bard</string>
+
 </resources>
