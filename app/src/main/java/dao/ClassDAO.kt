@@ -1,24 +1,32 @@
 package dao
 
-import android.database.Cursor
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
+import kotlinx.coroutines.flow.Flow
+import model.Job
+import model.Power
 import model.RpgClass
 import model.Student
+
 
 @Dao
 interface ClassDAO {
 
-    @Insert
-    fun insertClass(rpgClass: RpgClass)
+    // INSERT
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insertClass(rpgClass: RpgClass)
 
-    @Insert
-    fun insertStudent(student: Student)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insertStudent(student: Student)
 
-    @Query("SELECT * FROM class_table")
-    fun getAllClass(): Cursor
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insertJob(job: Job)
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insertPowers(powers: List<Power>)
+
+    // QUERY
+    @Query("SELECT * FROM class_table ORDER BY name DESC")
+    fun getAllClass(): Flow<List<RpgClass>>
 
 
     @Delete
