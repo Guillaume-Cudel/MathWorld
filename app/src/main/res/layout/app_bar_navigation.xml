@@ -19,6 +19,8 @@
         app:itemTextColor="@drawable/bottom_navigation_color"
         app:menu="@menu/bottom_menu"/>
 
+    <include layout="@layout/content_main"/>
+
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"

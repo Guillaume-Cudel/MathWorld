@@ -12,5 +12,19 @@
     <string name="notebook">Notebook</string>
     <string name="num_ninja" translatable="false">Num Ninja</string>
     <string name="bard">Bard</string>
+    <string name="add_class">Add class</string>
+    <string name="enter_the_class_s_name">Enter the class\'s name</string>
+    <string name="level">Level</string>
+    <string name="save">Save</string>
+    <string name="enter_name">Please enter a name to save the class</string>
+    <string name="remove">Remove</string>
+
+
+    <string-array name="Level">
+        <item>6e</item>
+        <item>5e</item>
+        <item>4e</item>
+        <item>3e</item>
+    </string-array>
 
 </resources>

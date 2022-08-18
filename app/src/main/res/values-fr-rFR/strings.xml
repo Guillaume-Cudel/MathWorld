@@ -6,4 +6,8 @@
     <string name="management">Gestion</string>
     <string name="notebook">Cahier</string>
     <string name="hello_blank_fragment">Salut fragment vide</string>
+    <string name="bard">Barde</string>
+    <string name="add_class">Ajout d\'une classe</string>
+    <string name="enter_the_class_s_name">Entrez le nom de la classe</string>
+    <string name="level">Niveau</string>
 </resources>
