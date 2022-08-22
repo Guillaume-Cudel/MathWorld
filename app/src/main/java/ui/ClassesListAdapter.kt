@@ -20,18 +20,20 @@ class ClassesListAdapter: ListAdapter<RpgClass, ClassViewHolder>(ClassViewHolder
     override fun onBindViewHolder(holder: ClassViewHolder, position: Int){
         val current = getItem(position)
 
+        holder.nameText.text = current.name
+        holder.lvlText.text = current.level
+
+        //todo continue to set changeButtons
+
     }
 }
 class ClassViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    //private val wordItemView: TextView = itemView.findViewById(R.id.textView)
     val nameText: TextView = itemView.findViewById(R.id.item_class_name)
     val lvlText: TextView = itemView.findViewById(R.id.item_class_lvl)
     val color: View = itemView.findViewById(R.id.item_class_color)
     val changeColorButton: FloatingActionButton = itemView.findViewById(R.id.item_class_modify_color)
     val changeNameButton: FloatingActionButton = itemView.findViewById(R.id.item_class_modify_name)
-
-
-
+    
     companion object {
         fun create(parent: ViewGroup): ClassViewHolder {
             val view: View = LayoutInflater.from(parent.context)

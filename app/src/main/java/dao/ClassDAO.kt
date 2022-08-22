@@ -25,7 +25,7 @@ interface ClassDAO {
     suspend fun insertPowers(powers: List<Power>)
 
     // QUERY
-    @Query("SELECT * FROM class_table ORDER BY name DESC")
+    @Query("SELECT * FROM class_table ORDER BY level DESC")
     fun getAllClass(): Flow<List<RpgClass>>
 
 

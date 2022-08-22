@@ -2,16 +2,18 @@ package ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Gravity
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.MenuItem
 import android.widget.*
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationBarView
 import com.google.android.material.navigation.NavigationView
 import com.guillaume.mathworld.R
@@ -32,6 +34,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private val managementFragment = ClassManagementFragment()
     private val notebookFragment = NotebookFragment()
     private val numNinjaFragment = NumNinjaFragment()
+    private val classFragment = ClassFragment()
 
     private val mainVM: MainViewModel by viewModels {
         MathWorldViewModelFactory((application as MathWorldApplication).repository)
@@ -45,7 +48,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         configureNavigation()
         replaceFragment(managementFragment)
-        //addClass()
+
+        //todo affiche le fragment
+
 
         binding.navView.setNavigationItemSelectedListener(this)
 
@@ -100,19 +105,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         transaction.commit()
     }
 
-    /*private fun addClass(){
-        val addButton = findViewById<FloatingActionButton>(R.id.nav_header_fab_add)
-
-        addButton.setOnClickListener {
-            //todo change les boutons du navheader sur le fragment et passe les action des boutons sur le fragments
-            createDialog()
-        }
-    }*/
-
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-
-        // Handle navigation view item clicks here.
-        //var fragment:Fragment = ImportFragment.newInstance()
 
         when (item.itemId) {
             R.id.header_item_add -> {
@@ -123,7 +116,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
         }
 
-        binding.drawerLayout.closeDrawer(GravityCompat.START)
+        //binding.drawerLayout.closeDrawer(GravityCompat.START)
         return true
     }
 
@@ -138,10 +131,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val saveButton = view.findViewById<Button>(R.id.add_class_save)
         builder.setView(view)
 
+        activateSaveButton(saveButton, level)
         saveButton.setOnClickListener {
             if(name.editableText?.toString() != ""){
-                val newClass = RpgClass(name.editableText.toString(), null, level.editableText.toString())
+                val newClass = RpgClass(name.editableText.toString(),  level.editableText.toString())
                 mainVM.insertClass(newClass)
+                builder.dismiss()
             } else {
                 Toast.makeText(this, getString(R.string.enter_name), Toast.LENGTH_LONG).show()
             }
@@ -150,6 +145,20 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         builder.show()
 
     }
+
+    private fun activateSaveButton(button: Button, level: AutoCompleteTextView){
+        level.addTextChangedListener(object: TextWatcher{
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            override fun afterTextChanged(s: Editable?) {
+                button.isEnabled = s?.length!! > 0
+                button.backgroundTintList =
+                    ContextCompat.getColorStateList(this@MainActivity, R.color.orange)
+            }
+        })
+
+    }
+
 
 
 

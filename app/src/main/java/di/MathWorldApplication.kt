@@ -8,7 +8,7 @@ import repository.MathWorldRepository
 
 class MathWorldApplication: Application() {
 
-    val scope = CoroutineScope(SupervisorJob())
+    private val scope = CoroutineScope(SupervisorJob())
 
     val database by lazy { AppDatabase.getAppDatabase(this, scope) }
     val repository by lazy { MathWorldRepository(database.classDAO()) }
