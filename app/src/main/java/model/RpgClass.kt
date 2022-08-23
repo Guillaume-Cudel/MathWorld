@@ -6,5 +6,6 @@ import java.io.Serializable
 
 @Entity(tableName = "class_table")
 
-data class RpgClass(@PrimaryKey val name: String,
+data class RpgClass(@PrimaryKey val id: Int,
+                    val name: String,
                     val level: String) : Serializable

@@ -1,18 +1,20 @@
 package ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.*
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
+import androidx.core.view.MenuItemCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import com.google.android.material.navigation.NavigationBarView
 import com.google.android.material.navigation.NavigationView
@@ -20,12 +22,11 @@ import com.guillaume.mathworld.R
 import com.guillaume.mathworld.databinding.ActivityMainBinding
 import di.MathWorldApplication
 import di.MathWorldViewModelFactory
-import model.RpgClass
-import ui.fragments.ClassFragment
 import ui.fragments.ClassManagementFragment
 import ui.fragments.NotebookFragment
 import ui.fragments.NumNinjaFragment
 import viewModel.MainViewModel
+
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -34,7 +35,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private val managementFragment = ClassManagementFragment()
     private val notebookFragment = NotebookFragment()
     private val numNinjaFragment = NumNinjaFragment()
-    private val classFragment = ClassFragment()
+    //private val classFragment = ClassFragment()
 
     private val mainVM: MainViewModel by viewModels {
         MathWorldViewModelFactory((application as MathWorldApplication).repository)
@@ -49,10 +50,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         configureNavigation()
         replaceFragment(managementFragment)
 
-        //todo affiche le fragment
-
 
         binding.navView.setNavigationItemSelectedListener(this)
+
 
 
     }
@@ -69,16 +69,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private fun configureNavigation(){
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val bottomNavigation: NavigationBarView = findViewById(R.id.bottom_navigation)
-
-
         toggle = ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close)
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-
-
-
 
         bottomNavigation.setOnItemSelectedListener {
             when(it.itemId){
@@ -106,21 +100,34 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-
+        //var currentItem: MenuItem = item
         when (item.itemId) {
-            R.id.header_item_add -> {
-                createDialog()
+            R.id.header_item_first -> {
+                Toast.makeText(this, "Hello", Toast.LENGTH_LONG).show()
 
+                /*currentItem = findViewById(R.id.header_item_first)
+                currentItem.actionView.setOnLongClickListener {
+                    createDialog(item.itemId, 1)
+                    return@setOnLongClickListener true
+                }*/
             }
-            R.id.header_item_remove -> {
-            }
+
         }
+
+
+
 
         //binding.drawerLayout.closeDrawer(GravityCompat.START)
         return true
     }
 
-    private fun createDialog(){
+
+    private fun createDialog(item: Int, rpgClassId: Int){
+        val navView: NavigationView = binding.navView
+        val menu: Menu = navView.menu
+        val menuItem: MenuItem = menu.findItem(item)
+
+
         val builder = AlertDialog.Builder(this).create()
         val view = layoutInflater.inflate(R.layout.dialog_add_class, null)
         val name = view.findViewById<EditText>(R.id.add_class_name_edit)
@@ -134,8 +141,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         activateSaveButton(saveButton, level)
         saveButton.setOnClickListener {
             if(name.editableText?.toString() != ""){
-                val newClass = RpgClass(name.editableText.toString(),  level.editableText.toString())
-                mainVM.insertClass(newClass)
+                /*val newClass = RpgClass(name.editableText.toString(),  level.editableText.toString())
+                mainVM.insertClass(newClass)*/
+                menuItem.title = name.editableText.toString()
+                //todo fais une methode pour modifier la bdd avec l'id fournit
                 builder.dismiss()
             } else {
                 Toast.makeText(this, getString(R.string.enter_name), Toast.LENGTH_LONG).show()

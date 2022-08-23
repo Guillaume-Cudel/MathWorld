@@ -3,17 +3,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="@layout/nav_header">
 
-    <item
-        android:id="@+id/header_item_add"
-        android:icon="@drawable/ic_baseline_add_24"
-        android:iconTint="@color/orange"
-        android:title="@string/add_class"/>
+    <item android:title="@string/class_list">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/header_item_first"
+                    android:icon="@drawable/class_icon"
+                    android:title="@string/first_class" />
 
-    <item
-        android:id="@+id/header_item_remove"
-        android:icon="@drawable/ic_baseline_remove_24"
-        android:iconTint="@color/orange"
-        android:title="@string/remove"/>
+                <item
+                    android:id="@+id/header_item_second"
+                    android:icon="@drawable/class_icon"
+                    android:title="@string/second_class" />
 
+                <item
+                    android:id="@+id/header_item_third"
+                    android:icon="@drawable/class_icon"
+                    android:title="@string/third_class" />
 
+                <item
+                    android:id="@+id/header_item_fourth"
+                    android:icon="@drawable/class_icon"
+                    android:title="@string/fourth_class" />
+
+                <item
+                    android:id="@+id/header_item_fifth"
+                    android:icon="@drawable/class_icon"
+                    android:title="@string/fifth_class" />
+
+            </group>
+        </menu>
+    </item>
 </menu>

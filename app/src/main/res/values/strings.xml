@@ -18,6 +18,12 @@
     <string name="save">Save</string>
     <string name="enter_name">Please enter a name to save the class</string>
     <string name="remove">Remove</string>
+    <string name="class_list">Class List</string>
+    <string name="first_class">First class</string>
+    <string name="second_class">Second class</string>
+    <string name="third_class">Third class</string>
+    <string name="fourth_class">Fourth class</string>
+    <string name="fifth_class">Fifth class</string>
 
 
     <string-array name="Level">

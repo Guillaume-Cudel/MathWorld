@@ -136,8 +136,19 @@ public abstract class AppDatabase: RoomDatabase() {
             dao.insertPowers(spellweaverPowers)
             dao.insertPowers(hackerPowers)
 
-            val sixieme = RpgClass("6e", "6e")
-            dao.insertClass(sixieme)
+            val firstClass = RpgClass(1,"first", "6e")
+            val secondClass = RpgClass(2,"second", "6e")
+            val thirdClass = RpgClass(3,"third", "6e")
+            val fourthClass = RpgClass(4,"fourth", "6e")
+            val fifthClass = RpgClass(5,"fifth", "6e")
+            dao.insertClass(firstClass)
+            dao.insertClass(secondClass)
+            dao.insertClass(thirdClass)
+            dao.insertClass(fourthClass)
+            dao.insertClass(fifthClass)
+
+            val firstStudent = Student(1, 1, "Peggie", "Gaulot", barde.name, 3, 1, 0, 1, "White")
+            dao.insertStudent(firstStudent)
         }
     }
 }
