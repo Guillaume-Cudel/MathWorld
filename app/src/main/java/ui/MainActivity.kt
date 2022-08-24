@@ -16,6 +16,7 @@ import androidx.core.view.GravityCompat
 import androidx.core.view.MenuItemCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.navigation.NavigationBarView
 import com.google.android.material.navigation.NavigationView
 import com.guillaume.mathworld.R
@@ -35,11 +36,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private val managementFragment = ClassManagementFragment()
     private val notebookFragment = NotebookFragment()
     private val numNinjaFragment = NumNinjaFragment()
-    //private val classFragment = ClassFragment()
+    private var classNumber = 1
 
-    private val mainVM: MainViewModel by viewModels {
-        MathWorldViewModelFactory((application as MathWorldApplication).repository)
-    }
+    private lateinit var mainVM: MainViewModel
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,8 +46,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        mainVM = ViewModelProvider(this)[MainViewModel::class.java]
+
         configureNavigation()
         replaceFragment(managementFragment)
+        mainVM.setClass(classNumber)
 
 
         binding.navView.setNavigationItemSelectedListener(this)
@@ -100,24 +102,28 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
+
         //var currentItem: MenuItem = item
         when (item.itemId) {
             R.id.header_item_first -> {
-                Toast.makeText(this, "Hello", Toast.LENGTH_LONG).show()
-
-                /*currentItem = findViewById(R.id.header_item_first)
-                currentItem.actionView.setOnLongClickListener {
-                    createDialog(item.itemId, 1)
-                    return@setOnLongClickListener true
-                }*/
+                classNumber = 1
             }
-
+            R.id.header_item_second -> {
+                classNumber = 2
+            }
+            R.id.header_item_third -> {
+                classNumber = 3
+            }
+            R.id.header_item_fourth -> {
+                classNumber = 4
+            }
+            R.id.header_item_fifth -> {
+                classNumber = 5
+            }
         }
 
-
-
-
-        //binding.drawerLayout.closeDrawer(GravityCompat.START)
+        mainVM.setClass(classNumber)
+        binding.drawerLayout.closeDrawer(GravityCompat.START)
         return true
     }
 

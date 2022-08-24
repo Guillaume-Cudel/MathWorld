@@ -14,7 +14,7 @@ import com.guillaume.mathworld.R
 import com.guillaume.mathworld.databinding.FragmentClassBinding
 import di.MathWorldApplication
 import di.MathWorldViewModelFactory
-import ui.ClassesListAdapter
+import ui.adapters.ClassesListAdapter
 import viewModel.MainViewModel
 
 
@@ -37,11 +37,11 @@ class ClassFragment : Fragment() {
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(activity)
 
-        mainVM.allClasses.observe(requireActivity(), Observer { classes ->
+        /*mainVM.allClasses.observe(requireActivity(), Observer { classes ->
             classes?.let {
                 adapter.submitList(it)
             }
-        })
+        })*/
 
         return binding.root
     }

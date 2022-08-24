@@ -1,14 +1,11 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="ui.fragments.ClassManagementFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:id="@+id/cm_text"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/management" />
-
-</FrameLayout>
+<androidx.recyclerview.widget.RecyclerView
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+android:id="@+id/students_list_recycler_view"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context="ui.fragments.ClassManagementFragment"
+android:name="com.guillaume.mathworld.ui.ClassManagementFragment"
+app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+tools:listitem="@layout/item_student" />
