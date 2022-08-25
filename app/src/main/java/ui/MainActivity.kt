@@ -5,15 +5,12 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import android.widget.*
-import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
-import androidx.core.view.MenuItemCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -21,8 +18,7 @@ import com.google.android.material.navigation.NavigationBarView
 import com.google.android.material.navigation.NavigationView
 import com.guillaume.mathworld.R
 import com.guillaume.mathworld.databinding.ActivityMainBinding
-import di.MathWorldApplication
-import di.MathWorldViewModelFactory
+import androidx.appcompat.widget.Toolbar
 import ui.fragments.ClassManagementFragment
 import ui.fragments.NotebookFragment
 import ui.fragments.NumNinjaFragment
@@ -54,23 +50,16 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
 
         binding.navView.setNavigationItemSelectedListener(this)
-
+        binding.navView.setCheckedItem(R.id.header_item_first)
 
 
     }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if(toggle.onOptionsItemSelected(item)){
-            return true
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
-
 
     private fun configureNavigation(){
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val bottomNavigation: NavigationBarView = findViewById(R.id.bottom_navigation)
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
         toggle = ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close)
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
@@ -127,6 +116,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         return true
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if(toggle.onOptionsItemSelected(item)){
+            return true
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+
 
     private fun createDialog(item: Int, rpgClassId: Int){
         val navView: NavigationView = binding.navView
@@ -150,7 +147,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 /*val newClass = RpgClass(name.editableText.toString(),  level.editableText.toString())
                 mainVM.insertClass(newClass)*/
                 menuItem.title = name.editableText.toString()
-                //todo fais une methode pour modifier la bdd avec l'id fournit
                 builder.dismiss()
             } else {
                 Toast.makeText(this, getString(R.string.enter_name), Toast.LENGTH_LONG).show()

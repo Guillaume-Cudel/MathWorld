@@ -27,4 +27,9 @@ class MathWorldRepository(private val dao: ClassDAO) {
     fun getAllStudentsInClass(class_id: Int): Flow<List<StudentsInClass>>{
        return dao.getAllStudentsInClass(class_id)
     }
+
+    @WorkerThread
+    fun getClassInformation(class_id: Int): Flow<RpgClass>{
+        return dao.getClassInformation(class_id)
+    }
 }

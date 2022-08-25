@@ -8,6 +8,9 @@
         <entry key="app/src/main/res/drawable/progress_bar_color.xml" value="0.147" />
         <entry key="app/src/main/res/drawable/progress_state.xml" value="0.1465" />
         <entry key="app/src/main/res/drawable/round.xml" value="0.155" />
+        <entry key="app/src/main/res/drawable/round_job_image.xml" value="0.169" />
+        <entry key="app/src/main/res/drawable/round_job_image_yellow.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_add_student.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/app_bar_navigation.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/app_icon.xml" value="0.28229166666666666" />
@@ -28,6 +31,7 @@
         <entry key="app/src/main/res/menu/bottom_menu.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/menu/nav_drawer_menu.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/menu/nav_menu.xml" value="0.28229166666666666" />
+        <entry key="app/src/main/res/menu/toolbar_menu.xml" value="0.1" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.133" />
       </map>
     </option>

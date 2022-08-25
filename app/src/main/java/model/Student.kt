@@ -6,7 +6,6 @@ import androidx.room.*
     (tableName = "students_table")
 
 data class Student(
-    @PrimaryKey val id: Int,
     val class_id: Int,
     @ColumnInfo(name = "first_name") val firstName: String,
     @ColumnInfo(name = "last_name") val lastName: String,
@@ -15,7 +14,11 @@ data class Student(
     val level: Int,
     val experience: Int,
     val group: Int,
-    val belt: String)
+    val belt: Int,
+    val beltXp: Int) {
+    @PrimaryKey(autoGenerate = true)
+    var id: Int = 0
+}
 
 
 data class StudentsInClass(

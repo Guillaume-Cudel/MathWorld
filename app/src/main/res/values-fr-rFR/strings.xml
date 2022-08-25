@@ -10,4 +10,26 @@
     <string name="add_class">Ajout d\'une classe</string>
     <string name="enter_the_class_s_name">Entrez le nom de la classe</string>
     <string name="level">Niveau</string>
+    <string name="choose_group">Choisis un îlot</string>
+    <string name="save">Sauvegarder</string>
+    <string name="remove">Supprimer</string>
+    <string name="class_list">Liste de la classe</string>
+    <string name="first_class">1ère classe</string>
+    <string name="second_class">2eme classe</string>
+    <string name="third_class">3eme classe</string>
+    <string name="fourth_class">4eme classe</string>
+    <string name="fifth_class">5eme classe</string>
+    <string name="add_student">Ajouter élève</string>
+    <string name="firstname">Prénom</string>
+    <string name="lastname">Nom</string>
+    <string name="choose_job">Choisi une profession</string>
+    <string name="shapeshifter">Changelin</string>
+    <string name="empath">Empathe</string>
+    <string name="rogue">Filou</string>
+    <string name="bettor">Parieur</string>
+    <string name="hacker">Hacker</string>
+    <string name="spellweaver">Tisse-sort</string>
+    <string name="enter_name">Veuillez remplir les champs prénom et nom pour sauvegarder.</string>
+    <string name="fill_fields">Veuillez remplir les champs prénom et nom pour sauvegarder.</string>
+    <string name="student_added">est ajouté.e dans la classe !</string>
 </resources>

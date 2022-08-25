@@ -37,6 +37,10 @@ interface ClassDAO {
     @Query("SELECT * FROM job_table WHERE name = :job")
     fun getAllPowersByJob(job: String): Flow<List<JobWithPower>>
 
+    @Transaction
+    @Query("SELECT * FROM class_table WHERE id = :id")
+    fun getClassInformation(id: Int): Flow<RpgClass>
+
 
     @Delete
     fun deleteRpgClass(rpgClass: RpgClass)

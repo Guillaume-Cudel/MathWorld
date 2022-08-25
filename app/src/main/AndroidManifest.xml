@@ -8,9 +8,12 @@
         android:icon="@mipmap/think"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/think"
-        android:supportsRtl="true"
         android:screenOrientation="portrait"
+        android:supportsRtl="true"
         android:theme="@style/Theme.MathWorld">
+        <activity
+            android:name="ui.AddStudentActivity"
+            android:exported="false" />
         <activity
             android:name="ui.MainActivity"
             android:exported="true">

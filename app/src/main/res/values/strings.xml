@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">MathWorld</string>
 
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="_6e" translatable="false">6e</string>
     <string name="_5e" translatable="false">5e</string>
     <string name="_4e" translatable="false">4e</string>
@@ -24,6 +23,19 @@
     <string name="third_class">Third class</string>
     <string name="fourth_class">Fourth class</string>
     <string name="fifth_class">Fifth class</string>
+    <string name="add_student">Add student</string>
+    <string name="firstname">Firstname</string>
+    <string name="lastname">Lastname</string>
+    <string name="choose_job">Choose job</string>
+    <string name="shapeshifter">Shapeshifter</string>
+    <string name="empath">Empath</string>
+    <string name="rogue">Rogue</string>
+    <string name="bettor">Bettor</string>
+    <string name="hacker">Hacker</string>
+    <string name="choose_group">Choose group</string>
+    <string name="spellweaver">Spellweaver</string>
+    <string name="fill_fields">Please enter name et lastname to save.</string>
+    <string name="student_added">is added to the class !</string>
 
 
     <string-array name="Level">

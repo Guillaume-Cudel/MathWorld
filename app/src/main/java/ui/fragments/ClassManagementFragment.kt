@@ -1,19 +1,21 @@
 package ui.fragments
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.activity.viewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.guillaume.mathworld.R
 import com.guillaume.mathworld.databinding.FragmentClassManagementBinding
 import di.MathWorldApplication
 import di.MathWorldViewModelFactory
+import ui.AddStudentActivity
 import ui.adapters.StudentsListAdapter
 import viewModel.ClassManagementViewModel
 import viewModel.MainViewModel
@@ -25,24 +27,20 @@ class ClassManagementFragment : Fragment() {
         MathWorldViewModelFactory((requireActivity().application as MathWorldApplication).repository)
     }
     private lateinit var mainVM: MainViewModel
-    private var classDisplayed = 1
+    private var class_id: Int? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentClassManagementBinding.inflate(inflater, container, false)
-
-        //val textField = binding.cmText
         mainVM = ViewModelProvider(requireActivity())[MainViewModel::class.java]
-
+        setHasOptionsMenu(true)
 
         mainVM.classNumber.observe(requireActivity(), Observer {
-            classDisplayed = it
-            configureRecyclerView(classDisplayed)
+            class_id = it
+            configureRecyclerView(class_id!!)
         })
-
-        //configureRecyclerView(classDisplayed)
 
 
         return binding.root
@@ -55,7 +53,7 @@ class ClassManagementFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(activity)
         recyclerView.addItemDecoration(
             DividerItemDecoration(
-                requireContext(),
+                requireActivity(),
                 DividerItemDecoration.VERTICAL
             )
         )
@@ -69,6 +67,24 @@ class ClassManagementFragment : Fragment() {
                 adapter.submitList(studentsList)
             }
         })
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, menuInflater: MenuInflater) {
+        //return super.onCreateOptionsMenu(menu)
+        menuInflater.inflate(R.menu.toolbar_menu, menu)
+    }
+
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.toolbar_add_student -> {
+                val intent = Intent(requireActivity(), AddStudentActivity::class.java)
+                intent.putExtra("class_id", class_id)
+                startActivity(intent)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
 
