@@ -41,6 +41,9 @@ interface ClassDAO {
     @Query("SELECT * FROM class_table WHERE id = :id")
     fun getClassInformation(id: Int): Flow<RpgClass>
 
+    @Update
+    suspend fun updateStudent(student: Student)
+
 
     @Delete
     fun deleteRpgClass(rpgClass: RpgClass)

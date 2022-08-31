@@ -96,6 +96,18 @@
         android:max="45"
         android:progress="0" />
 
+    <TextView
+        android:id="@+id/student_level_current_xp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/student_level_response"
+        app:layout_constraintEnd_toEndOf="@+id/student_level_response"
+        app:layout_constraintBottom_toBottomOf="@id/student_xp_bar"
+        android:text="10"
+        android:textSize="10sp"
+        android:textStyle="bold"
+        android:textColor="@color/turquoise"/>
+
     <ImageView
         android:id="@+id/student_ilot_image"
         android:layout_width="40dp"
@@ -105,7 +117,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginStart="15dp"
         android:src="@drawable/travail_en_equipe"
-        app:tint="@color/teal_200" />
+        app:tint="@color/dark_orange" />
 
     <TextView
         android:id="@+id/student_ilot_number"

@@ -11,11 +11,11 @@ data class Student(
     @ColumnInfo(name = "last_name") val lastName: String,
     val job: String,
     @ColumnInfo(name = "point_of_life") val pointOfLife: Int,
-    val level: Int,
-    val experience: Int,
-    val group: Int,
-    val belt: Int,
-    val beltXp: Int) {
+    var level: Int,
+    var experience: Int,
+    var group: Int,
+    var belt: Int,
+    var beltXp: Int) {
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0
 }

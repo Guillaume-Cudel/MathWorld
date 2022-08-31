@@ -2,7 +2,7 @@
 <resources>
 
 <style name="ProgressBarStyle">
-<item name="colorAccent">@color/yellow</item>
+    <item name="colorPrimary">@color/yellow</item>
 </style>
 
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">

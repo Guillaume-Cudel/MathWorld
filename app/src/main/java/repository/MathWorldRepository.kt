@@ -32,4 +32,9 @@ class MathWorldRepository(private val dao: ClassDAO) {
     fun getClassInformation(class_id: Int): Flow<RpgClass>{
         return dao.getClassInformation(class_id)
     }
+
+    @WorkerThread
+    suspend fun updateStudent(student: Student){
+        dao.updateStudent(student)
+    }
 }

@@ -31,4 +31,8 @@ class ClassManagementViewModel(private val repository: MathWorldRepository): Vie
         }
         return rpgClass
     }
+
+    fun updateStudent(student: Student) = viewModelScope.launch {
+        repository.updateStudent(student)
+    }
 }
