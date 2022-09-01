@@ -9,6 +9,7 @@
         <entry key="app/src/main/res/drawable/progress_state.xml" value="0.1465" />
         <entry key="app/src/main/res/drawable/round.xml" value="0.155" />
         <entry key="app/src/main/res/drawable/round_job_image.xml" value="0.169" />
+        <entry key="app/src/main/res/drawable/round_job_image_grey.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/round_job_image_yellow.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_add_student.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />

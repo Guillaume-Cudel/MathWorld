@@ -1,12 +1,14 @@
 package ui.adapters
 
+import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.ViewOutlineProvider.BACKGROUND
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.core.content.ContextCompat
+import androidx.core.widget.ImageViewCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.ListAdapter
@@ -25,32 +27,56 @@ class StudentsListAdapter(private val upStats: StatsUpdater): ListAdapter<Studen
 
     override fun onBindViewHolder(holder: StudentViewHolder, position: Int) {
         val current = getItem(position)
-        val xpBar = holder.xpBar
 
+        // XP & LVL
+        val xpBar = holder.xpBar
         displayExperience(current.level, current.experience, holder.xpInfo)
         holder.level.text = current.level.toString()
         xpBar.progress = current.experience
         xpBar.max = xpMax
-
         xpBar.setOnClickListener {
             xpBar.progress += 1
-
             if(xpBar.progress == xpBar.max){
                 upStats.updateExperience(current, 0)
                 upStats.updateLevel(current)
-                displayExperience(current.level, current.experience, holder.xpInfo)
             } else {
                 displayExperience(current.level, xpBar.progress, holder.xpInfo)
                 upStats.updateExperience(current, xpBar.progress)
             }
         }
 
+        // LIFE
+        displayLife(current.pointOfLife, holder.lifeImage, holder.lifePoint)
+        holder.lifeImage.setOnClickListener {
+            var currentLife = current.pointOfLife
+            if(current.pointOfLife == 0){
+                currentLife = 3
+            }else currentLife--
+
+            upStats.updateLife(current, currentLife)
+        }
+
+        // NAME
         holder.firstname.text = current.firstName
         holder.lastname.text = current.lastName
-        holder.lifePoint.text = current.pointOfLife.toString()
-        holder.ilotNumber.text = current.group.toString()
+
         //todo configure la ceinture
-        //holder.belt
+
+        // GROUP
+        holder.ilotNumber.text = current.group.toString()
+        var groupNumber = current.group
+        changeGroupImageColor(groupNumber, holder.ilotImage)
+
+        holder.ilotImage.setOnClickListener {
+            if(groupNumber == 8) groupNumber = 1
+            else groupNumber++
+            upStats.updateGroup(current, groupNumber)
+        }
+
+        // BELT
+        setBelt(current.belt, holder.belt)
+
+        // JOB
 
 
     }
@@ -109,9 +135,47 @@ class StudentsListAdapter(private val upStats: StatsUpdater): ListAdapter<Studen
         return nextLvl
     }
 
+    private fun displayLife(life: Int, image: ImageView, text: TextView){
+        when(life){
+            0 -> image.setImageResource(R.drawable.broken_heart_3)
+            1 -> image.setImageResource(R.drawable.broken_heart_2)
+            2 -> image.setImageResource(R.drawable.broken_heart_1)
+            3 -> image.setImageResource(R.drawable.heart)
+        }
+        text.text = life.toString()
+    }
 
+    private fun changeGroupImageColor(number: Int, image: ImageView){
+        val context = image.context
+        when(number){
+            1 -> ImageViewCompat.setImageTintList(image, ColorStateList.valueOf(ContextCompat.getColor(context, R.color.dark_orange)))
+            2 -> ImageViewCompat.setImageTintList(image, ColorStateList.valueOf(ContextCompat.getColor(context, R.color.turquoise)))
+            3 -> ImageViewCompat.setImageTintList(image, ColorStateList.valueOf(ContextCompat.getColor(context, R.color.orange)))
+            4 -> ImageViewCompat.setImageTintList(image, ColorStateList.valueOf(ContextCompat.getColor(context, R.color.purple_700)))
+            5 -> ImageViewCompat.setImageTintList(image, ColorStateList.valueOf(ContextCompat.getColor(context, R.color.teal_200)))
+            6 -> ImageViewCompat.setImageTintList(image, ColorStateList.valueOf(ContextCompat.getColor(context, R.color.yellow_pur)))
+            7 -> ImageViewCompat.setImageTintList(image, ColorStateList.valueOf(ContextCompat.getColor(context, R.color.red_light)))
+            8 -> ImageViewCompat.setImageTintList(image, ColorStateList.valueOf(ContextCompat.getColor(context, R.color.green_light)))
+        }
+    }
 
-
+    private fun setBelt(belt: Int, image: ImageView){
+        val context = image.context
+        val beltImage: ImageView = image
+        beltImage.setImageResource(R.drawable.black_belt)
+        when(belt){
+            1 -> { image.setImageResource(R.drawable.white_belt)
+                ImageViewCompat.setImageTintList(image, ColorStateList.valueOf(ContextCompat.getColor(context, R.color.black))) }
+            2 -> ImageViewCompat.setImageTintList(beltImage, ColorStateList.valueOf(ContextCompat.getColor(context, R.color.yellow_pur)))
+            3 -> ImageViewCompat.setImageTintList(beltImage, ColorStateList.valueOf(ContextCompat.getColor(context, R.color.orange)))
+            4 -> ImageViewCompat.setImageTintList(beltImage, ColorStateList.valueOf(ContextCompat.getColor(context, R.color.green_light)))
+            5 -> ImageViewCompat.setImageTintList(beltImage, ColorStateList.valueOf(ContextCompat.getColor(context, R.color.turquoise)))
+            6 -> ImageViewCompat.setImageTintList(beltImage, ColorStateList.valueOf(ContextCompat.getColor(context, R.color.purple_200)))
+            7 -> ImageViewCompat.setImageTintList(beltImage, ColorStateList.valueOf(ContextCompat.getColor(context, R.color.red_light)))
+            8 -> ImageViewCompat.setImageTintList(beltImage, ColorStateList.valueOf(ContextCompat.getColor(context, R.color.brown)))
+            9 -> ImageViewCompat.setImageTintList(beltImage, ColorStateList.valueOf(ContextCompat.getColor(context, R.color.black)))
+        }
+    }
 
 }
 

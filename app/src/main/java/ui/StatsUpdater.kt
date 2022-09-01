@@ -9,7 +9,7 @@ interface StatsUpdater {
 
     fun updateLevel(student: Student)
 
-    fun updateLife(life: Int)
+    fun updateLife(student: Student, life: Int)
 
-    fun updateGroup(group: Int)
+    fun updateGroup(student: Student, group: Int)
 }
