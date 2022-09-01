@@ -19,6 +19,9 @@ import com.google.android.material.navigation.NavigationView
 import com.guillaume.mathworld.R
 import com.guillaume.mathworld.databinding.ActivityMainBinding
 import androidx.appcompat.widget.Toolbar
+import androidx.viewpager2.widget.ViewPager2
+import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
+import ui.adapters.ViewPagerAdapter
 import ui.fragments.ClassManagementFragment
 import ui.fragments.NotebookFragment
 import ui.fragments.NumNinjaFragment
@@ -32,6 +35,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private val managementFragment = ClassManagementFragment()
     private val notebookFragment = NotebookFragment()
     private val numNinjaFragment = NumNinjaFragment()
+    private lateinit var viewPager2: ViewPager2
     private var classNumber = 1
 
     private lateinit var mainVM: MainViewModel
@@ -45,7 +49,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         mainVM = ViewModelProvider(this)[MainViewModel::class.java]
 
         configureNavigation()
-        replaceFragment(managementFragment)
         mainVM.setClass(classNumber)
 
 
@@ -56,6 +59,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     private fun configureNavigation(){
+        viewPager2 = findViewById(R.id.viewpager2)
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val bottomNavigation: NavigationBarView = findViewById(R.id.bottom_navigation)
         val toolbar: Toolbar = findViewById(R.id.toolbar)
@@ -67,12 +71,46 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         bottomNavigation.setOnItemSelectedListener {
             when(it.itemId){
-                R.id.item_class_management -> replaceFragment(managementFragment)
-                R.id.item_notebook ->  replaceFragment(notebookFragment)
-                R.id.item_num_ninja -> replaceFragment(numNinjaFragment)
+                R.id.item_class_management -> {
+                    //replaceFragment(managementFragment)
+                viewPager2.setCurrentItem(0, false)
+                }
+                R.id.item_notebook -> {
+                    //replaceFragment(notebookFragment)
+                    viewPager2.setCurrentItem(1, false)
+                }
+                R.id.item_num_ninja -> {
+                    //replaceFragment(numNinjaFragment)
+                    viewPager2.setCurrentItem(2, false)
+                }
             }
             true
         }
+
+        viewPager2.registerOnPageChangeCallback(object: ViewPager2.OnPageChangeCallback(){
+            override fun onPageSelected(position: Int) {
+                if(position == 0){
+                    bottomNavigation.menu.findItem(R.id.item_class_management).isChecked = true
+                }else if(position == 1){
+                    bottomNavigation.menu.findItem(R.id.item_notebook).isChecked = true
+                }else if(position == 2){
+                    bottomNavigation.menu.findItem(R.id.item_num_ninja).isChecked = true
+                }
+                super.onPageSelected(position)
+            }
+        })
+        setupViewPager(viewPager2)
+    }
+
+    private fun setupViewPager(viewPager: ViewPager2) {
+
+        val adapter = ViewPagerAdapter(supportFragmentManager, lifecycle)
+
+        adapter.addFragment(managementFragment)
+        adapter.addFragment(notebookFragment)
+        adapter.addFragment(numNinjaFragment)
+
+        viewPager.adapter = adapter
     }
 
     override fun onBackPressed() {
@@ -85,9 +123,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     private fun replaceFragment(fragment: Fragment){
-        val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.fragment_container, fragment)
-        transaction.commit()
+        if(!fragment.isVisible) {
+            val transaction = supportFragmentManager.beginTransaction()
+            transaction.replace(R.id.fragment_container, fragment)
+            transaction.commit()
+        }
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {

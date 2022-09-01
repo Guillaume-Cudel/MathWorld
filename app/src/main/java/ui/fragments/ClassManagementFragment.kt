@@ -48,6 +48,8 @@ class ClassManagementFragment : Fragment(), StatsUpdater {
         return binding.root
     }
 
+
+
     private fun configureRecyclerView(classDisplayed: Int){
         val recyclerView = binding.studentsListRecyclerView
         val adapter = StudentsListAdapter(this@ClassManagementFragment)
