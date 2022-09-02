@@ -5,7 +5,7 @@ import model.Student
 
 interface StatsUpdater {
 
-    fun updateExperience(student: Student, experience: Int)
+    fun updateExperience(student: Student, experience: Int, xpMax: Int)
 
     fun updateLevel(student: Student)
 

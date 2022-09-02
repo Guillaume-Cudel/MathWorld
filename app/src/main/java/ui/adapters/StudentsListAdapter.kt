@@ -19,7 +19,7 @@ import ui.StatsUpdater
 
 class StudentsListAdapter(private val upStats: StatsUpdater): ListAdapter<Student, StudentViewHolder>(StudentViewHolder.StudentsComparator()) {
 
-    private var xpMax: Int = 45
+    private var giveExperience: Int = 1
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StudentViewHolder {
         return StudentViewHolder.create(parent)
@@ -30,18 +30,19 @@ class StudentsListAdapter(private val upStats: StatsUpdater): ListAdapter<Studen
 
         // XP & LVL
         val xpBar = holder.xpBar
-        displayExperience(current.level, current.experience, holder.xpInfo)
+        displayExperience(current.experience, current.xpMax, holder.xpInfo)
         holder.level.text = current.level.toString()
         xpBar.progress = current.experience
-        xpBar.max = xpMax
+        xpBar.max = current.xpMax
         xpBar.setOnClickListener {
-            xpBar.progress += 1
-            if(xpBar.progress == xpBar.max){
-                upStats.updateExperience(current, 0)
+            xpBar.progress += giveExperience
+            if(xpBar.progress >= xpBar.max){
+                val currentXp = (current.experience + giveExperience) - xpBar.max
+                val newXpMax = xpBar.max + 5
+                upStats.updateExperience(current, currentXp, newXpMax)
                 upStats.updateLevel(current)
             } else {
-                displayExperience(current.level, xpBar.progress, holder.xpInfo)
-                upStats.updateExperience(current, xpBar.progress)
+                upStats.updateExperience(current, xpBar.progress, xpBar.max)
             }
         }
 
@@ -59,8 +60,6 @@ class StudentsListAdapter(private val upStats: StatsUpdater): ListAdapter<Studen
         // NAME
         holder.firstname.text = current.firstName
         holder.lastname.text = current.lastName
-
-        //todo configure la ceinture
 
         // GROUP
         holder.ilotNumber.text = current.group.toString()
@@ -81,59 +80,11 @@ class StudentsListAdapter(private val upStats: StatsUpdater): ListAdapter<Studen
 
     }
 
-    private fun displayExperience(level: Int, currentXp : Int, textView: TextView){
-        when(level){
-            1 -> { levelUp(currentXp, xpMax, textView) }
-            2 -> {xpMax = 50
-                levelUp(currentXp, xpMax, textView)}
-            3 -> {xpMax = 55
-                levelUp(currentXp, xpMax, textView)}
-            4 -> {xpMax = 60
-                levelUp(currentXp, xpMax, textView)}
-            5 -> {xpMax = 65
-                levelUp(currentXp, xpMax, textView)}
-            6 -> {xpMax = 70
-                levelUp(currentXp, xpMax, textView)}
-            7 -> {xpMax = 75
-                levelUp(currentXp, xpMax, textView)}
-            8 -> {xpMax = 80
-                levelUp(currentXp, xpMax, textView)}
-            9 -> {xpMax = 85
-                levelUp(currentXp, xpMax, textView)}
-            10 -> {xpMax = 90
-                levelUp(currentXp, xpMax, textView)}
-            11 -> {xpMax = 95
-                levelUp(currentXp, xpMax, textView)}
-            12 -> {xpMax = 100
-                levelUp(currentXp, xpMax, textView)}
-            13 -> {xpMax = 105
-                levelUp(currentXp, xpMax, textView)}
-            14 -> {xpMax = 110
-                levelUp(currentXp, xpMax, textView)}
-            15 -> {xpMax = 115
-                levelUp(currentXp, xpMax, textView)}
-        }
+    private fun displayExperience(currentXp : Int, xpMax: Int, textView: TextView){
+        val xpText = "$currentXp/$xpMax"
+        textView.text = xpText
     }
 
-    private fun levelUp(xp: Int, xpMax : Int, textView: TextView): Boolean{
-        var nextLvl = false
-        val newMaxXp = xpMax + 5
-
-         if(xp == xpMax){
-             nextLvl = true
-             val xpInfo = "$xp/$newMaxXp"
-             textView.text = xpInfo
-         } else if(xp > xpMax){
-             val newXp = xpMax - xp
-             val newXpInfo = "$newXp/$newMaxXp"
-             textView.text = newXpInfo
-             nextLvl = true
-         } else {
-             val xpText = "$xp/$xpMax"
-             textView.text = xpText
-         }
-        return nextLvl
-    }
 
     private fun displayLife(life: Int, image: ImageView, text: TextView){
         when(life){
@@ -175,6 +126,11 @@ class StudentsListAdapter(private val upStats: StatsUpdater): ListAdapter<Studen
             8 -> ImageViewCompat.setImageTintList(beltImage, ColorStateList.valueOf(ContextCompat.getColor(context, R.color.brown)))
             9 -> ImageViewCompat.setImageTintList(beltImage, ColorStateList.valueOf(ContextCompat.getColor(context, R.color.black)))
         }
+    }
+
+    fun updateExperienceGiven(xpChoosed: Int){
+        this.giveExperience = xpChoosed
+        this.notifyDataSetChanged()
     }
 
 }

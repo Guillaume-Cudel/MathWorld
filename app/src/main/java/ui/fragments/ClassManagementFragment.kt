@@ -25,6 +25,7 @@ import viewModel.MainViewModel
 class ClassManagementFragment : Fragment(), StatsUpdater {
 
     private lateinit var binding: FragmentClassManagementBinding
+    private lateinit var adapter: StudentsListAdapter
     private val classManagementVM: ClassManagementViewModel by viewModels {
         MathWorldViewModelFactory((requireActivity().application as MathWorldApplication).repository)
     }
@@ -52,7 +53,7 @@ class ClassManagementFragment : Fragment(), StatsUpdater {
 
     private fun configureRecyclerView(classDisplayed: Int){
         val recyclerView = binding.studentsListRecyclerView
-        val adapter = StudentsListAdapter(this@ClassManagementFragment)
+        adapter = StudentsListAdapter(this@ClassManagementFragment)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(activity)
         recyclerView.addItemDecoration(
@@ -63,7 +64,6 @@ class ClassManagementFragment : Fragment(), StatsUpdater {
         )
 
         classManagementVM.getAllStudentsInClass(classDisplayed)?.observe(requireActivity(), Observer {
-            // Exemple de recuperation
             //val firstStudentName = it[0].students[0].firstName
             if(it.isNotEmpty()) {
                 val students = it[0].students
@@ -88,12 +88,19 @@ class ClassManagementFragment : Fragment(), StatsUpdater {
                 startActivity(intent)
                 true
             }
+            /*R.id.toolbar_configure_xp ->{
+                //todo
+            }*/
             else -> super.onOptionsItemSelected(item)
         }
     }
 
-    override fun updateExperience(student: Student, experience: Int) {
+    override fun updateExperience(student: Student, experience: Int, xpMax: Int) {
         student.experience = experience
+        if(student.xpMax != xpMax){
+            student.xpMax = xpMax
+        }
+
         classManagementVM.updateStudent(student)
     }
 
@@ -115,5 +122,8 @@ class ClassManagementFragment : Fragment(), StatsUpdater {
         classManagementVM.updateStudent(student)
     }
 
+    private fun updateExperienceGiven(xpChoosed: Int){
+        adapter.updateExperienceGiven(xpChoosed)
+    }
 
 }

@@ -13,6 +13,7 @@ data class Student(
     @ColumnInfo(name = "point_of_life") var pointOfLife: Int,
     var level: Int,
     var experience: Int,
+    var xpMax: Int,
     var group: Int,
     var belt: Int,
     var beltXp: Int) {

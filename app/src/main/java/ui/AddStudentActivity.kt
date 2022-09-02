@@ -62,10 +62,10 @@ class AddStudentActivity : AppCompatActivity() {
 
             val newStudent = Student(
                 classId, firstname, lastname, job, 3, 1,
-                0, group.toInt(), 1, 0
+                0, 45, group.toInt(), 1, 0
             )
             classManagementVM.insertStudent(newStudent)
-            Toast.makeText(this, "$firstname $lastname" + getString(R.string.student_added), Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "$firstname $lastname" + " " + getString(R.string.student_added), Toast.LENGTH_LONG).show()
             resetFields()
         } else {
             Toast.makeText(this, getString(R.string.fill_fields), Toast.LENGTH_LONG).show()

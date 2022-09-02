@@ -148,7 +148,7 @@ public abstract class AppDatabase: RoomDatabase() {
             dao.insertClass(fifthClass)
 
             val firstStudent = Student( 1, "Peggie", "Gaulot", barde.name,
-                3, 1, 0, 1, 1, 0)
+                3, 1, 0, 45, 1, 1, 0)
             dao.insertStudent(firstStudent)
         }
     }

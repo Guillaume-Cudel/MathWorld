@@ -72,21 +72,17 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         bottomNavigation.setOnItemSelectedListener {
             when(it.itemId){
                 R.id.item_class_management -> {
-                    //replaceFragment(managementFragment)
                 viewPager2.setCurrentItem(0, false)
                 }
                 R.id.item_notebook -> {
-                    //replaceFragment(notebookFragment)
                     viewPager2.setCurrentItem(1, false)
                 }
                 R.id.item_num_ninja -> {
-                    //replaceFragment(numNinjaFragment)
                     viewPager2.setCurrentItem(2, false)
                 }
             }
             true
         }
-
         viewPager2.registerOnPageChangeCallback(object: ViewPager2.OnPageChangeCallback(){
             override fun onPageSelected(position: Int) {
                 if(position == 0){
@@ -103,13 +99,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     private fun setupViewPager(viewPager: ViewPager2) {
-
         val adapter = ViewPagerAdapter(supportFragmentManager, lifecycle)
-
         adapter.addFragment(managementFragment)
         adapter.addFragment(notebookFragment)
         adapter.addFragment(numNinjaFragment)
-
         viewPager.adapter = adapter
     }
 
@@ -119,14 +112,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             drawerLayout.closeDrawer(GravityCompat.START)
         } else {
             super.onBackPressed()
-        }
-    }
-
-    private fun replaceFragment(fragment: Fragment){
-        if(!fragment.isVisible) {
-            val transaction = supportFragmentManager.beginTransaction()
-            transaction.replace(R.id.fragment_container, fragment)
-            transaction.commit()
         }
     }
 
@@ -150,7 +135,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 classNumber = 5
             }
         }
-
         mainVM.setClass(classNumber)
         binding.drawerLayout.closeDrawer(GravityCompat.START)
         return true
@@ -164,12 +148,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
 
-
+// Add dialog to create class NOT USED ACTUALLY
     private fun createDialog(item: Int, rpgClassId: Int){
         val navView: NavigationView = binding.navView
         val menu: Menu = navView.menu
         val menuItem: MenuItem = menu.findItem(item)
-
 
         val builder = AlertDialog.Builder(this).create()
         val view = layoutInflater.inflate(R.layout.dialog_add_class, null)
@@ -207,7 +190,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     ContextCompat.getColorStateList(this@MainActivity, R.color.orange)
             }
         })
-
     }
 
 
