@@ -38,6 +38,10 @@
     <string name="student_added">is added to the class !</string>
     <string name="level_up"> level up !</string>
     <string name="configure_xp">Configure xp</string>
+    <string name="xp_1">XP + 1</string>
+    <string name="xp_5">xp + 5</string>
+    <string name="xp_10">xp + 10</string>
+    <string name="xp_gain">Xp mode +  </string>
 
 
     <string-array name="Level">

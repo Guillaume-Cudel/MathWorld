@@ -19,7 +19,7 @@ import ui.StatsUpdater
 
 class StudentsListAdapter(private val upStats: StatsUpdater): ListAdapter<Student, StudentViewHolder>(StudentViewHolder.StudentsComparator()) {
 
-    private var giveExperience: Int = 1
+    var giveExperience: Int = 1
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StudentViewHolder {
         return StudentViewHolder.create(parent)
