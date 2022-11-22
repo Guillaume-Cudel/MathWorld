@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.guillaume.mathworld">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application
         android:name="di.MathWorldApplication"
@@ -11,6 +10,9 @@
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/Theme.MathWorld">
+        <activity
+            android:name="ui.StudentDetailsActivity"
+            android:exported="false" />
         <activity
             android:name="ui.AddStudentActivity"
             android:exported="false" />

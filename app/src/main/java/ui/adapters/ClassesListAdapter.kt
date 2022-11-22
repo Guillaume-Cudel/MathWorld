@@ -9,9 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.ListAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.guillaume.mathworld.R
-import model.RpgClass
+import model.StudentsClass
 
-class ClassesListAdapter: ListAdapter<RpgClass, ClassViewHolder>(ClassViewHolder.ClassesComparator()) {
+class ClassesListAdapter: ListAdapter<StudentsClass, ClassViewHolder>(ClassViewHolder.ClassesComparator()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ClassViewHolder{
         return ClassViewHolder.create(parent)
@@ -42,12 +42,12 @@ class ClassViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         }
     }
 
-    class ClassesComparator : DiffUtil.ItemCallback<RpgClass>() {
-        override fun areItemsTheSame(oldItem: RpgClass, newItem: RpgClass): Boolean {
+    class ClassesComparator : DiffUtil.ItemCallback<StudentsClass>() {
+        override fun areItemsTheSame(oldItem: StudentsClass, newItem: StudentsClass): Boolean {
             return oldItem === newItem
         }
 
-        override fun areContentsTheSame(oldItem: RpgClass, newItem: RpgClass): Boolean {
+        override fun areContentsTheSame(oldItem: StudentsClass, newItem: StudentsClass): Boolean {
             return oldItem.name == newItem.name
         }
     }

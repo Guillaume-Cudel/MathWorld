@@ -4,6 +4,7 @@ plugins {
 }
 apply plugin: 'kotlin-kapt'
 
+
 android {
     compileSdk 32
 
@@ -33,11 +34,14 @@ android {
         targetCompatibility JavaVersion.VERSION_11
     }
     packagingOptions {
-        exclude 'META-INF/atomicfu.kotlin_module'
+        resources {
+            excludes += ['META-INF/atomicfu.kotlin_module']
+        }
     }
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = '11'
     }
+    namespace 'com.guillaume.mathworld'
 }
 
 dependencies {

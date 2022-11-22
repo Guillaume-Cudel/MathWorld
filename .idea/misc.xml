@@ -13,6 +13,7 @@
         <entry key="app/src/main/res/drawable/round_job_image_yellow.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_add_student.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_student_details.xml" value="0.335" />
         <entry key="app/src/main/res/layout/app_bar_navigation.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/app_icon.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/content_main.xml" value="0.28229166666666666" />
@@ -23,7 +24,7 @@
         <entry key="app/src/main/res/layout/fragment_notebook.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/fragment_num_ninja.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/item_class.xml" value="0.28229166666666666" />
-        <entry key="app/src/main/res/layout/item_student.xml" value="0.375" />
+        <entry key="app/src/main/res/layout/item_student.xml" value="0.25" />
         <entry key="app/src/main/res/layout/level_list_item.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/nav_header.xml" value="0.28229166666666666" />
         <entry key="app/src/main/res/layout/toolbar.xml" value="0.28229166666666666" />

@@ -3,18 +3,16 @@ package repository
 import androidx.annotation.WorkerThread
 import dao.ClassDAO
 import kotlinx.coroutines.flow.Flow
-import model.RpgClass
-import model.Student
-import model.StudentsInClass
+import model.*
 
 class MathWorldRepository(private val dao: ClassDAO) {
 
-    val allRpgClass: Flow<List<RpgClass>> = dao.getAllClass()
+    val allStudentsClass: Flow<List<StudentsClass>> = dao.getAllClass()
 
     @Suppress("RedundantSuspendModifier")
     @WorkerThread
-    suspend fun insertClass(rpgClass: RpgClass){
-        dao.insertClass(rpgClass)
+    suspend fun insertClass(studentsClass: StudentsClass){
+        dao.insertClass(studentsClass)
     }
 
     @Suppress("RedundantSuspendModifier")
@@ -29,8 +27,13 @@ class MathWorldRepository(private val dao: ClassDAO) {
     }
 
     @WorkerThread
-    fun getClassInformation(class_id: Int): Flow<RpgClass>{
+    fun getClassInformation(class_id: Int): Flow<StudentsClass>{
         return dao.getClassInformation(class_id)
+    }
+
+    @WorkerThread
+    fun getPowersByJob(job: String): Flow<List<JobWithPower>>{
+        return dao.getAllPowersByJob(job)
     }
 
     @WorkerThread

@@ -33,4 +33,12 @@
     <string name="fill_fields">Veuillez remplir les champs prénom et nom pour sauvegarder.</string>
     <string name="student_added">est ajouté.e dans la classe !</string>
     <string name="level_up">" monte d'un niveau !"</string>
+    <string name="configure_xp">Configurer l\'xp</string>
+    <string name="xp_1">Xp +1</string>
+    <string name="xp_5">Xp + 5</string>
+    <string name="xp_10">Xp + 10</string>
+    <string name="xp_gain">"Gain d'xp + "</string>
+    <string name="experience">Experience</string>
+    <string name="life">Vie</string>
+    <string name="lvl">Nv</string>
 </resources>

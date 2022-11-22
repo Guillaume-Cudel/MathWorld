@@ -7,7 +7,7 @@ import androidx.room.Relation
 
 @Entity(tableName = "job_table")
 open class Job(
-    @PrimaryKey val name: String,
+    @PrimaryKey val name: String
 )
 
 

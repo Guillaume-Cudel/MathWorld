@@ -6,20 +6,16 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.widget.Toolbar
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.guillaume.mathworld.R
 import com.guillaume.mathworld.databinding.ActivityAddStudentBinding
 import di.MathWorldApplication
 import di.MathWorldViewModelFactory
 import model.Student
-import viewModel.ClassManagementViewModel
-import viewModel.MainViewModel
+import viewModel.DatabaseCallsViewModel
 
 class AddStudentActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAddStudentBinding
-    private val classManagementVM: ClassManagementViewModel by viewModels {
+    private val databaseCallsVM: DatabaseCallsViewModel by viewModels {
         MathWorldViewModelFactory((application as MathWorldApplication).repository)
     }
     private var currentJob = "Bard"
@@ -30,9 +26,7 @@ class AddStudentActivity : AppCompatActivity() {
         binding = ActivityAddStudentBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val toolbar: Toolbar = findViewById(R.id.toolbar)
-        setSupportActionBar(toolbar)
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        configureToolbar()
 
         val bundle = intent.extras
         val classId = bundle!!.getInt("class_id")
@@ -48,9 +42,11 @@ class AddStudentActivity : AppCompatActivity() {
 
     }
 
-
-
-
+    private fun configureToolbar(){
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+    }
 
     private fun saveStudent(classId: Int){
         if(binding.addStudentFirstnameEdit.editableText.toString() != ""
@@ -64,7 +60,7 @@ class AddStudentActivity : AppCompatActivity() {
                 classId, firstname, lastname, job, 3, 1,
                 0, 45, group.toInt(), 1, 0
             )
-            classManagementVM.insertStudent(newStudent)
+            databaseCallsVM.insertStudent(newStudent)
             Toast.makeText(this, "$firstname $lastname" + " " + getString(R.string.student_added), Toast.LENGTH_LONG).show()
             resetFields()
         } else {
@@ -102,7 +98,6 @@ class AddStudentActivity : AppCompatActivity() {
         }
     }
 
-
     private fun setColorJobToGrey(){
         binding.addStudentJobBard.clearColorFilter()
         binding.addStudentJobBard.setBackgroundResource(R.drawable.round_job_image_grey)
@@ -121,7 +116,6 @@ class AddStudentActivity : AppCompatActivity() {
     }
 
     private fun onImageJobClick() {
-
         binding.addStudentJobBard.setOnClickListener {  currentJob = "bard"
             setJob(currentJob)}
         binding.addStudentJobShapeshifter.setOnClickListener {  currentJob = "shapeshifter"
@@ -139,7 +133,7 @@ class AddStudentActivity : AppCompatActivity() {
     }
 
     private fun setClassName(id: Int){
-        classManagementVM.getClassInformation(id)?.observe(this){
+        databaseCallsVM.getClassInformation(id)?.observe(this){
             val className = it.name
             binding.addStudentCurrentClassResponse.text = className
         }

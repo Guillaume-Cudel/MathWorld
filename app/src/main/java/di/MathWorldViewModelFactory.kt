@@ -3,8 +3,7 @@ package di
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import repository.MathWorldRepository
-import viewModel.ClassManagementViewModel
-import viewModel.MainViewModel
+import viewModel.DatabaseCallsViewModel
 
 class MathWorldViewModelFactory(private val repository: MathWorldRepository): ViewModelProvider.Factory {
 
@@ -13,9 +12,9 @@ class MathWorldViewModelFactory(private val repository: MathWorldRepository): Vi
             @Suppress("UNCHECKED_CAST")
             return MainViewModel(repository) as T
         }*/
-        if (modelClass.isAssignableFrom(ClassManagementViewModel::class.java)) {
+        if (modelClass.isAssignableFrom(DatabaseCallsViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
-            return ClassManagementViewModel(repository) as T
+            return DatabaseCallsViewModel(repository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

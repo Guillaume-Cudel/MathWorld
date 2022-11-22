@@ -12,10 +12,11 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import model.Job
 import model.Power
-import model.RpgClass
+import model.SealedPower
+import model.StudentsClass
 import model.Student
 
-@Database(entities = [RpgClass::class, Student::class, Job::class, Power::class], version = 1, exportSchema = false)
+@Database(entities = [StudentsClass::class, Student::class, Job::class, Power::class, SealedPower::class], version = 1, exportSchema = false)
 public abstract class AppDatabase: RoomDatabase() {
 
     abstract fun classDAO(): ClassDAO
@@ -61,56 +62,55 @@ public abstract class AppDatabase: RoomDatabase() {
             val spellweaver = Job("Tisse-sort")
             val hacker = Job("Hacker")
 
-            // todo insert chaque pouvoir manuellement
-            val bardPower1 = Power(1, "Barde", "Nouvel accord", "Joker de ramassage de cahier d'exercice (relancer le dé)")
-            val bardPower2 = Power(2, "Barde", "Inspirer des vocations", "Avoir une musique de fond pendant une séance de cours)")
-            val bardPower3 = Power(3, "Barde", "Chantons ensemble", "+1 Participation pour tout l'ilot")
-            val bardPower4 = Power(4, "Barde", "The eye of the tiger", "Doubler l'XP de l'ilot pendant une journée")
-            val bardPower5 = Power(5, "Barde", "Alors on danse", "Doubler la participation de l'ilot pendant une journée")
-            val bardPower6 = Power(6, "Barde", "Grand festival", "Obtenir les récompenses de Numeracy Ninja de la ceinture du dessus")
+            val bardPower1 = Power( "Barde", "Nouvel accord", "Joker de ramassage de cahier d'exercice (relancer le dé)")
+            val bardPower2 = Power( "Barde", "Inspirer des vocations", "Avoir une musique de fond pendant une séance de cours)")
+            val bardPower3 = Power( "Barde", "Chantons ensemble", "+1 Participation pour tout l'ilot")
+            val bardPower4 = Power( "Barde", "The eye of the tiger", "Doubler l'XP de l'ilot pendant une journée")
+            val bardPower5 = Power( "Barde", "Alors on danse", "Doubler la participation de l'ilot pendant une journée")
+            val bardPower6 = Power( "Barde", "Grand festival", "Obtenir les récompenses de Numeracy Ninja de la ceinture du dessus")
 
-            val shapeshifterPower1 = Power(1, "Changelin", "Jalousie", "Marquer quelqu'un pour la confection des ilots (pour soi)")
-            val shapeshifterPower2 = Power(2, "Changelin", "Confusion", "Choisir le cahier ramassé pour la note d'ilot (pour une séance")
-            val shapeshifterPower3 = Power(3, "Changelin", "Leadership", "Marquer une responsabilité pour la prochaine rotation d'ilots (pour soi)")
-            val shapeshifterPower4 = Power(4, "Changelin", "Abracadabra", "+1 sur une note de cahiers d'exercices (pour l'ilot)")
-            val shapeshifterPower5 = Power(5, "Changelin", "Déguisement", "Echanger le barème de deux questions après un DS (pour soi)")
-            val shapeshifterPower6 = Power(6, "Changelin", "Injection shoot", "Lancer 1d6 : Succès sur +1 charge (pour soi, pour 1 semaine), Succès = XP triplè, Echec = pas d'XP ")
+            val shapeshifterPower1 = Power( "Changelin", "Jalousie", "Marquer quelqu'un pour la confection des ilots (pour soi)")
+            val shapeshifterPower2 = Power( "Changelin", "Confusion", "Choisir le cahier ramassé pour la note d'ilot (pour une séance")
+            val shapeshifterPower3 = Power( "Changelin", "Leadership", "Marquer une responsabilité pour la prochaine rotation d'ilots (pour soi)")
+            val shapeshifterPower4 = Power( "Changelin", "Abracadabra", "+1 sur une note de cahiers d'exercices (pour l'ilot)")
+            val shapeshifterPower5 = Power( "Changelin", "Déguisement", "Echanger le barème de deux questions après un DS (pour soi)")
+            val shapeshifterPower6 = Power( "Changelin", "Injection shoot", "Lancer 1d6 : Succès sur +1 charge (pour soi, pour 1 semaine), Succès = XP triplè, Echec = pas d'XP ")
 
-            val empathPower1 = Power(1, "Empathe", "Télépathie", "Donner un indice pendant un DS à un.e camarade")
-            val empathPower2 = Power(2, "Empathe", "Premiers soins", "Rendre 1 Pdv à un.e camarade")
-            val empathPower3 = Power(3, "Empathe", "Suspendre le temps", "Demander un sursis de sanction pour un.e camarade")
-            val empathPower4 = Power(4, "Empathe", "Eveiller les sens", "Faire obtenir un nouveau pouvoir à un camarade")
-            val empathPower5 = Power(5, "Empathe", "Dans ses chaussures", "Donner un indice pendant un DS à un.e camarade")
-            val empathPower6 = Power(6, "Empathe", "Sacrifice utlime", "Distribuer son XP à son ilot, puis répartir à 0 XP avec gain doublé")
+            val empathPower1 = Power( "Empathe", "Télépathie", "Donner un indice pendant un DS à un.e camarade")
+            val empathPower2 = Power( "Empathe", "Premiers soins", "Rendre 1 Pdv à un.e camarade")
+            val empathPower3 = Power( "Empathe", "Suspendre le temps", "Demander un sursis de sanction pour un.e camarade")
+            val empathPower4 = Power( "Empathe", "Eveiller les sens", "Faire obtenir un nouveau pouvoir à un camarade")
+            val empathPower5 = Power( "Empathe", "Dans ses chaussures", "Donner un indice pendant un DS à un.e camarade")
+            val empathPower6 = Power( "Empathe", "Sacrifice utlime", "Distribuer son XP à son ilot, puis répartir à 0 XP avec gain doublé")
 
 
-            val roguePower1 = Power(1, "Filou", "Ecouter aux portes", "Obtenir un indice pendant un DS")
-            val roguePower2 = Power(2, "Filou", "Entrer par la porte de service", "Vérifier le manuel durant les 5 dernières minutes d'un DS")
-            val roguePower3 = Power(3, "Filou", "Entrer par la grande porte", "Vérifier son cahier de leçons durant les 5 dernières minutes d'un DS")
-            val roguePower4 = Power(4, "Filou", "Voler les plans", "Faire corriger une question par le professeur pendant un DS")
-            val roguePower5 = Power(5, "Filou", "Altruisme", "Possibilité d'appliquer ses pouvoirs aux autres")
-            val roguePower6 = Power(6, "Filou", "Braquage du Siècle", "Pouvoir regarder le sujet d'un sujet d'un DS quelques heures en avance")
+            val roguePower1 = Power( "Filou", "Ecouter aux portes", "Obtenir un indice pendant un DS")
+            val roguePower2 = Power( "Filou", "Entrer par la porte de service", "Vérifier le manuel durant les 5 dernières minutes d'un DS")
+            val roguePower3 = Power( "Filou", "Entrer par la grande porte", "Vérifier son cahier de leçons durant les 5 dernières minutes d'un DS")
+            val roguePower4 = Power( "Filou", "Voler les plans", "Faire corriger une question par le professeur pendant un DS")
+            val roguePower5 = Power( "Filou", "Altruisme", "Possibilité d'appliquer ses pouvoirs aux autres")
+            val roguePower6 = Power( "Filou", "Braquage du Siècle", "Pouvoir regarder le sujet d'un sujet d'un DS quelques heures en avance")
 
-            val bettorPower1 = Power(1, "Parieur", "Roulette russe", "Tirer au sort le nom d'un camarade de la classe")
-            val bettorPower2 = Power(2, "Parieur", "Au petit bonheur", "TMiser de l'XP, puis lancer un d4")
-            val bettorPower3 = Power(3, "Parieur", "Marcheur aléatoire", "Miser de l'XP, puis lancer un d8")
-            val bettorPower4 = Power(4, "Parieur", "S'attirer les faveurs", "Lancer un d12")
-            val bettorPower5 = Power(5, "Parieur", "Modeler la réalité", "Lancer un d20")
-            val bettorPower6 = Power(6, "Parieur", "Sous la bonne étoile", "Tirer une carte de son paquet Divin")
+            val bettorPower1 = Power( "Parieur", "Roulette russe", "Tirer au sort le nom d'un camarade de la classe")
+            val bettorPower2 = Power( "Parieur", "Au petit bonheur", "TMiser de l'XP, puis lancer un d4")
+            val bettorPower3 = Power( "Parieur", "Marcheur aléatoire", "Miser de l'XP, puis lancer un d8")
+            val bettorPower4 = Power( "Parieur", "S'attirer les faveurs", "Lancer un d12")
+            val bettorPower5 = Power( "Parieur", "Modeler la réalité", "Lancer un d20")
+            val bettorPower6 = Power( "Parieur", "Sous la bonne étoile", "Tirer une carte de son paquet Divin")
 
-            val spellweaverPower1 = Power(1, "Tisse-sort", "Time-loop", "Refaire un DTL raté")
-            val spellweaverPower2 = Power(2, "Tisse-sort", "Deuxième chance", "Re-corriger un DS (6e) ou délai supplémentaire pour le rapport (5e/4e)")
-            val spellweaverPower3 = Power(3, "Tisse-sort", "Booster", "Avoir un DTL supplémentaire, noté en bonus, pour augmenter sa moyenne")
-            val spellweaverPower4 = Power(4, "Tisse-sort", "Hyper-booster", "Booster pour tout l'ilot +20XP en Bonus")
-            val spellweaverPower5 = Power(5, "Tisse-sort", "Altruisme", "Possibilité d'appliquer ses pouvoirs aux autres")
-            val spellweaverPower6 = Power(6, "Tisse-sort", "Réécrire l'histoire", "Effacer 1 malus de responsabilité pour tou l'ilot")
+            val spellweaverPower1 = Power( "Tisse-sort", "Time-loop", "Refaire un DTL raté")
+            val spellweaverPower2 = Power( "Tisse-sort", "Deuxième chance", "Re-corriger un DS (6e) ou délai supplémentaire pour le rapport (5e/4e)")
+            val spellweaverPower3 = Power( "Tisse-sort", "Booster", "Avoir un DTL supplémentaire, noté en bonus, pour augmenter sa moyenne")
+            val spellweaverPower4 = Power( "Tisse-sort", "Hyper-booster", "Booster pour tout l'ilot +20XP en Bonus")
+            val spellweaverPower5 = Power( "Tisse-sort", "Altruisme", "Possibilité d'appliquer ses pouvoirs aux autres")
+            val spellweaverPower6 = Power( "Tisse-sort", "Réécrire l'histoire", "Effacer 1 malus de responsabilité pour tou l'ilot")
 
-            val hackerPower1 = Power(1, "Hacker", "Package de données", "Obtenir des paquets des cartes ANKI tout prêts (pour soi)")
-            val hackerPower2 = Power(2, "Hacker", "Trojan horse", "+1 à la note de participation (pour soi)")
-            val hackerPower3 = Power(3, "Hacker", "Code source", "Accéder aux vidéos de cours pendnt les séances (pour l'ilot)")
-            val hackerPower4 = Power(4, "Hacker", "Tracker", "Obtenir un indice sur une énigme 'Cadenas Lockee' (pour soi)")
-            val hackerPower5 = Power(5, "Hacker", "Prendre le contrôle", "Obtenir un mot positif sur Pronote")
-            val hackerPower6 = Power(6, "Hacker", "Infinite loop", "Pouvoir relancer le dé d'attribution d'un pouvoir (pour l'ilot)")
+            val hackerPower1 = Power("Hacker", "Package de données", "Obtenir des paquets des cartes ANKI tout prêts (pour soi)")
+            val hackerPower2 = Power("Hacker", "Trojan horse", "+1 à la note de participation (pour soi)")
+            val hackerPower3 = Power("Hacker", "Code source", "Accéder aux vidéos de cours pendnt les séances (pour l'ilot)")
+            val hackerPower4 = Power("Hacker", "Tracker", "Obtenir un indice sur une énigme 'Cadenas Lockee' (pour soi)")
+            val hackerPower5 = Power("Hacker", "Prendre le contrôle", "Obtenir un mot positif sur Pronote")
+            val hackerPower6 = Power("Hacker", "Infinite loop", "Pouvoir relancer le dé d'attribution d'un pouvoir (pour l'ilot)")
 
             val bardPowers: List<Power> = listOf(bardPower1, bardPower2, bardPower3, bardPower4, bardPower5, bardPower6)
             val shapeshifterPowers: List<Power> = listOf(shapeshifterPower1, shapeshifterPower2, shapeshifterPower3, shapeshifterPower4, shapeshifterPower5, shapeshifterPower6)
@@ -128,19 +128,19 @@ public abstract class AppDatabase: RoomDatabase() {
             dao.insertJob(spellweaver)
             dao.insertJob(hacker)
 
-            dao.insertPowers(bardPowers)
-            dao.insertPowers(shapeshifterPowers)
-            dao.insertPowers(empathPowers)
-            dao.insertPowers(roguePowers)
-            dao.insertPowers(bettorPowers)
-            dao.insertPowers(spellweaverPowers)
-            dao.insertPowers(hackerPowers)
+            dao.insertPowersInformations(bardPowers)
+            dao.insertPowersInformations(shapeshifterPowers)
+            dao.insertPowersInformations(empathPowers)
+            dao.insertPowersInformations(roguePowers)
+            dao.insertPowersInformations(bettorPowers)
+            dao.insertPowersInformations(spellweaverPowers)
+            dao.insertPowersInformations(hackerPowers)
 
-            val firstClass = RpgClass(1,"First class", "6e")
-            val secondClass = RpgClass(2,"Second class", "6e")
-            val thirdClass = RpgClass(3,"Third class", "6e")
-            val fourthClass = RpgClass(4,"Fourth class", "6e")
-            val fifthClass = RpgClass(5,"Fifth class", "6e")
+            val firstClass = StudentsClass(1,"First class", "6e")
+            val secondClass = StudentsClass(2,"Second class", "6e")
+            val thirdClass = StudentsClass(3,"Third class", "6e")
+            val fourthClass = StudentsClass(4,"Fourth class", "6e")
+            val fifthClass = StudentsClass(5,"Fifth class", "6e")
             dao.insertClass(firstClass)
             dao.insertClass(secondClass)
             dao.insertClass(thirdClass)
@@ -149,7 +149,31 @@ public abstract class AppDatabase: RoomDatabase() {
 
             val firstStudent = Student( 1, "Peggie", "Gaulot", barde.name,
                 3, 1, 0, 45, 1, 1, 0)
+            val secondStudent = Student( 1, "Lucas", "Stagne", spellweaver.name,
+                3, 2, 14, 50, 5, 2, 0)
             dao.insertStudent(firstStudent)
+            dao.insertStudent(secondStudent)
+
+            val firstStudentPowers = SealedPower(firstStudent.id,
+                power1 = true,
+                power2 = false,
+                power3 = false,
+                power4 = false,
+                power5 = false,
+                power6 = false
+            )
+
+            val secondStudentPowers = SealedPower(secondStudent.id,
+                power1 = false,
+                power2 = true,
+                power3 = false,
+                power4 = false,
+                power5 = false,
+                power6 = false
+            )
+
+            dao.insertSealedPowers(firstStudentPowers)
+            dao.insertSealedPowers(secondStudentPowers)
         }
     }
 }

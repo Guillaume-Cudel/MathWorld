@@ -5,12 +5,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import model.RpgClass
+import model.JobWithPower
+import model.StudentsClass
 import model.Student
 import model.StudentsInClass
 import repository.MathWorldRepository
 
-class ClassManagementViewModel(private val repository: MathWorldRepository): ViewModel() {
+class DatabaseCallsViewModel(private val repository: MathWorldRepository): ViewModel() {
 
     fun insertStudent(student: Student) = viewModelScope.launch {
         repository.insertStudent(student)
@@ -24,12 +25,20 @@ class ClassManagementViewModel(private val repository: MathWorldRepository): Vie
         return students
     }
 
-    fun getClassInformation(class_id: Int): LiveData<RpgClass>?{
-        var rpgClass: LiveData<RpgClass>? = null
+    fun getClassInformation(class_id: Int): LiveData<StudentsClass>?{
+        var studentsClass: LiveData<StudentsClass>? = null
         viewModelScope.launch {
-            rpgClass = repository.getClassInformation(class_id).asLiveData()
+            studentsClass = repository.getClassInformation(class_id).asLiveData()
         }
-        return rpgClass
+        return studentsClass
+    }
+
+    fun getPowersByJob(job: String): LiveData<List<JobWithPower>>?{
+        var powers: LiveData<List<JobWithPower>>? = null
+        viewModelScope.launch {
+            powers = repository.getPowersByJob(job).asLiveData()
+        }
+        return powers
     }
 
     fun updateStudent(student: Student) = viewModelScope.launch {

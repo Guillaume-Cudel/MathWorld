@@ -1,9 +1,6 @@
 package viewModel
 
 import androidx.lifecycle.*
-import kotlinx.coroutines.launch
-import model.RpgClass
-import repository.MathWorldRepository
 
 class MainViewModel: ViewModel() {
 

@@ -7,11 +7,13 @@ import androidx.room.Relation
 
 @Entity(tableName = "table_power")
 data class Power(
-    @PrimaryKey val id: Int,
     val job_name: String,
     val powerName: String,
-    val description: String,
-    )
+    val description: String
+    ) {
+    @PrimaryKey(autoGenerate = true)
+    var id: Int = 0
+}
 
 
 data class JobWithPower(

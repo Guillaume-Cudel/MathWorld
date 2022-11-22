@@ -1,6 +1,7 @@
 package model
 
 import androidx.room.*
+import java.io.Serializable
 
 @Entity
     (tableName = "students_table")
@@ -16,14 +17,14 @@ data class Student(
     var xpMax: Int,
     var group: Int,
     var belt: Int,
-    var beltXp: Int) {
+    var beltXp: Int): Serializable {
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0
 }
 
 
 data class StudentsInClass(
-    @Embedded val rpgClass: RpgClass,
+    @Embedded val studentsClass: StudentsClass,
     @Relation(
         parentColumn = "id",
         entityColumn = "class_id"
@@ -38,6 +39,15 @@ data class StudentWithJob(
         entityColumn = "name"
     )
     val job: Job
+)
+
+data class StudentWithPowers(
+    @Embedded val student: Student,
+    @Relation(
+        parentColumn = "id",
+        entityColumn = "student_id"
+    )
+    val sealedPowers: List<SealedPower>
 )
 
 

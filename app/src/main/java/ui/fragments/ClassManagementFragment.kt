@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
-import android.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -17,20 +16,23 @@ import di.MathWorldApplication
 import di.MathWorldViewModelFactory
 import model.Student
 import ui.AddStudentActivity
-import ui.StatsUpdater
+import services.StatsUpdater
+import services.UiConfigure
+import services.UiConfigureImpl
+import ui.StudentDetailsActivity
 import ui.adapters.StudentsListAdapter
-import viewModel.ClassManagementViewModel
+import viewModel.DatabaseCallsViewModel
 import viewModel.MainViewModel
-import java.util.*
 
 class ClassManagementFragment : Fragment(), StatsUpdater {
 
     private lateinit var binding: FragmentClassManagementBinding
     private lateinit var adapter: StudentsListAdapter
-    private val classManagementVM: ClassManagementViewModel by viewModels {
+    private val databaseCallsVM: DatabaseCallsViewModel by viewModels {
         MathWorldViewModelFactory((requireActivity().application as MathWorldApplication).repository)
     }
     private lateinit var mainVM: MainViewModel
+    private val uiConfigure: UiConfigure = UiConfigureImpl()
     private var classID: Int? = null
     private var experienceGiven: Int = 1
     private var mActionMode: ActionMode? = null
@@ -57,7 +59,7 @@ class ClassManagementFragment : Fragment(), StatsUpdater {
 
     private fun configureRecyclerView(classDisplayed: Int) {
         val recyclerView = binding.studentsListRecyclerView
-        adapter = StudentsListAdapter(this@ClassManagementFragment)
+        adapter = StudentsListAdapter(this@ClassManagementFragment, uiConfigure)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(activity)
         recyclerView.addItemDecoration(
@@ -67,7 +69,7 @@ class ClassManagementFragment : Fragment(), StatsUpdater {
             )
         )
 
-        classManagementVM.getAllStudentsInClass(classDisplayed)
+        databaseCallsVM.getAllStudentsInClass(classDisplayed)
             ?.observe(requireActivity(), Observer {
                 //val firstStudentName = it[0].students[0].firstName
                 if (it.isNotEmpty()) {
@@ -107,30 +109,37 @@ class ClassManagementFragment : Fragment(), StatsUpdater {
             student.xpMax = xpMax
         }
 
-        classManagementVM.updateStudent(student)
+        databaseCallsVM.updateStudent(student)
     }
 
     override fun updateLevel(student: Student) {
         student.level += 1
         val text = getString(R.string.level_up)
         Toast.makeText(requireActivity(), student.firstName + " " + text, Toast.LENGTH_SHORT).show()
-        classManagementVM.updateStudent(student)
-
+        databaseCallsVM.updateStudent(student)
     }
 
     override fun updateLife(student: Student, life: Int) {
         student.pointOfLife = life
-        classManagementVM.updateStudent(student)
+        databaseCallsVM.updateStudent(student)
     }
 
     override fun updateGroup(student: Student, group: Int) {
         student.group = group
-        classManagementVM.updateStudent(student)
+        databaseCallsVM.updateStudent(student)
+    }
+
+    override fun openDetail(student: Student){
+        val intent = Intent(requireActivity(), StudentDetailsActivity::class.java)
+        intent.putExtra("student", student)
+        startActivity(intent)
     }
 
     private fun updateExperienceGiven(xpChoosed: Int) {
         adapter.updateExperienceGiven(xpChoosed)
     }
+
+
 
     private val actionModeCallback = object : ActionMode.Callback {
         override fun onCreateActionMode(mode: ActionMode, menu: Menu): Boolean {
@@ -149,7 +158,6 @@ class ClassManagementFragment : Fragment(), StatsUpdater {
         override fun onPrepareActionMode(mode: ActionMode, menu: Menu?): Boolean {
             return false
         }
-
 
         override fun onActionItemClicked(mode: ActionMode, item: MenuItem): Boolean {
             return when (item.itemId) {

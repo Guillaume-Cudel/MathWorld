@@ -10,7 +10,7 @@ interface ClassDAO {
 
     // INSERT
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertClass(rpgClass: RpgClass)
+    suspend fun insertClass(studentsClass: StudentsClass)
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertStudent(student: Student)
@@ -19,11 +19,14 @@ interface ClassDAO {
     suspend fun insertJob(job: Job)
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insertPowers(powers: List<Power>)
+    suspend fun insertPowersInformations(powers: List<Power>)
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insertSealedPowers(sealedPowers: SealedPower)
 
     // QUERY
     @Query("SELECT * FROM class_table ORDER BY level DESC")
-    fun getAllClass(): Flow<List<RpgClass>>
+    fun getAllClass(): Flow<List<StudentsClass>>
 
     @Transaction
     @Query("SELECT * FROM class_table WHERE id = :class_id ORDER BY name ASC")
@@ -39,12 +42,12 @@ interface ClassDAO {
 
     @Transaction
     @Query("SELECT * FROM class_table WHERE id = :id")
-    fun getClassInformation(id: Int): Flow<RpgClass>
+    fun getClassInformation(id: Int): Flow<StudentsClass>
 
     @Update
     suspend fun updateStudent(student: Student)
 
 
     @Delete
-    fun deleteRpgClass(rpgClass: RpgClass)
+    fun deleteRpgClass(studentsClass: StudentsClass)
 }

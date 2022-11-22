@@ -1,6 +1,5 @@
-package ui
+package services
 
-import model.RpgClass
 import model.Student
 
 interface StatsUpdater {
@@ -12,4 +11,6 @@ interface StatsUpdater {
     fun updateLife(student: Student, life: Int)
 
     fun updateGroup(student: Student, group: Int)
+
+    fun openDetail(student: Student)
 }
