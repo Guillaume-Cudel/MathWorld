@@ -5,16 +5,17 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import model.JobWithPower
-import model.StudentsClass
-import model.Student
-import model.StudentsInClass
+import model.*
 import repository.MathWorldRepository
 
 class DatabaseCallsViewModel(private val repository: MathWorldRepository): ViewModel() {
 
     fun insertStudent(student: Student) = viewModelScope.launch {
         repository.insertStudent(student)
+    }
+
+    fun insertSealedPowers(sealedPower: SealedPower) = viewModelScope.launch {
+        repository.insertStudentSealedPowers(sealedPower)
     }
 
     fun getAllStudentsInClass(class_id: Int): LiveData<List<StudentsInClass>>?{
@@ -33,12 +34,20 @@ class DatabaseCallsViewModel(private val repository: MathWorldRepository): ViewM
         return studentsClass
     }
 
-    fun getPowersByJob(job: String): LiveData<List<JobWithPower>>?{
+    fun getPowersInformationsByJob(job: String): LiveData<List<JobWithPower>>?{
         var powers: LiveData<List<JobWithPower>>? = null
         viewModelScope.launch {
-            powers = repository.getPowersByJob(job).asLiveData()
+            powers = repository.getAllPowersInformationsByJob(job).asLiveData()
         }
         return powers
+    }
+
+    fun getSealedPowersByStudent(studentId: Int): LiveData<StudentWithSealedPowers>?{
+        var sealedPowers: LiveData<StudentWithSealedPowers>? = null
+        viewModelScope.launch {
+            sealedPowers = repository.getSealedPowersByStudent(studentId).asLiveData()
+        }
+        return sealedPowers
     }
 
     fun updateStudent(student: Student) = viewModelScope.launch {

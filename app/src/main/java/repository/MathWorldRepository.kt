@@ -21,6 +21,12 @@ class MathWorldRepository(private val dao: ClassDAO) {
         dao.insertStudent(student)
     }
 
+    @Suppress("RedundantSuspendModifier")
+    @WorkerThread
+    suspend fun insertStudentSealedPowers(sealedPower: SealedPower){
+        dao.insertSealedPowers(sealedPower)
+    }
+
     @WorkerThread
     fun getAllStudentsInClass(class_id: Int): Flow<List<StudentsInClass>>{
        return dao.getAllStudentsInClass(class_id)
@@ -32,10 +38,16 @@ class MathWorldRepository(private val dao: ClassDAO) {
     }
 
     @WorkerThread
-    fun getPowersByJob(job: String): Flow<List<JobWithPower>>{
-        return dao.getAllPowersByJob(job)
+    fun getAllPowersInformationsByJob(job: String): Flow<List<JobWithPower>>{
+        return dao.getAllPowersInformationsByJob(job)
     }
 
+    @WorkerThread
+    fun getSealedPowersByStudent(studentId: Int): Flow<StudentWithSealedPowers>{
+        return dao.getSealedPowersByStudent(studentId)
+    }
+
+    // UPDATE
     @WorkerThread
     suspend fun updateStudent(student: Student){
         dao.updateStudent(student)

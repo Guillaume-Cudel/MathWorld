@@ -34,7 +34,7 @@
     <string name="hacker">Hacker</string>
     <string name="choose_group">Choose group</string>
     <string name="spellweaver">Spellweaver</string>
-    <string name="fill_fields">Please enter name et lastname to save.</string>
+    <string name="fill_fields">Please enter name and lastname to save.</string>
     <string name="student_added">is added to the class !</string>
     <string name="level_up"> level up !</string>
     <string name="configure_xp">Configure xp</string>

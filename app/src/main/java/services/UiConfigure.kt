@@ -15,5 +15,6 @@ interface UiConfigure {
 
     fun changeGroupImageColor(number: Int, image: ImageView)
 
+    fun displayJobImage(job: String, image: ImageView)
 
 }

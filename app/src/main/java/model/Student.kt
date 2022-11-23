@@ -2,9 +2,10 @@ package model
 
 import androidx.room.*
 import java.io.Serializable
+import kotlin.random.Random
 
 @Entity
-    (tableName = "students_table")
+    (tableName = "student_table")
 
 data class Student(
     val class_id: Int,
@@ -19,7 +20,7 @@ data class Student(
     var belt: Int,
     var beltXp: Int): Serializable {
     @PrimaryKey(autoGenerate = true)
-    var id: Int = 0
+    var id: Int = Random.nextInt()
 }
 
 
@@ -41,13 +42,13 @@ data class StudentWithJob(
     val job: Job
 )
 
-data class StudentWithPowers(
+data class StudentWithSealedPowers(
     @Embedded val student: Student,
     @Relation(
         parentColumn = "id",
         entityColumn = "student_id"
     )
-    val sealedPowers: List<SealedPower>
+    val sealedPowers: SealedPower
 )
 
 

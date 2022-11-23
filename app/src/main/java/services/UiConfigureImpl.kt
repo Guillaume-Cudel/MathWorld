@@ -60,4 +60,16 @@ class UiConfigureImpl: UiConfigure {
         }
     }
 
+    override fun displayJobImage(job: String, image: ImageView) {
+        when (job) {
+            "Barde" -> image.setImageResource(R.drawable.avatar_barde)
+            "Changelin" -> image.setImageResource(R.drawable.avatar_changelin)
+            "Empathe" -> image.setImageResource(R.drawable.avatar_empathe)
+            "Filou" -> image.setImageResource(R.drawable.avatar_filou)
+            "Parieur" -> image.setImageResource(R.drawable.avatar_parieur)
+            "Tisse-sort" -> image.setImageResource(R.drawable.avatar_tisse_sorts)
+            "Hacker" -> image.setImageResource(R.drawable.avatar_hacker)
+        }
+    }
+
 }
