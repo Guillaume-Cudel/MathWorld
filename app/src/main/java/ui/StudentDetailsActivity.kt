@@ -6,7 +6,6 @@ import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.isVisible
-import androidx.lifecycle.Observer
 import com.guillaume.mathworld.R
 import com.guillaume.mathworld.databinding.ActivityStudentDetailsBinding
 import di.MathWorldApplication
@@ -14,7 +13,6 @@ import di.MathWorldViewModelFactory
 import model.JobWithPower
 import model.SealedPower
 import model.Student
-import model.StudentWithSealedPowers
 import services.UiConfigure
 import services.UiConfigureImpl
 import viewModel.DatabaseCallsViewModel
@@ -77,7 +75,8 @@ class StudentDetailsActivity : AppCompatActivity() {
         binding.studentDetailLifeBar.max = 3
         binding.studentDetailLevelResponse.text = student!!.level.toString()
         binding.studentDetailJob.text = student!!.job
-        binding.studentDetailName.text = student!!.firstName
+        val nameAndLastname = student!!.firstName + " " + student!!.lastName
+        binding.studentDetailName.text = nameAndLastname
 
     }
 

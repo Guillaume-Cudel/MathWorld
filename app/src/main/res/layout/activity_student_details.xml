@@ -198,7 +198,8 @@
         app:layout_constraintBottom_toBottomOf="@id/student_detail_power1_image"
         android:layout_marginStart="25dp"
         android:text="Package de données"
-        android:textStyle="italic"
+        android:textStyle="italic|bold"
+        android:textColor="@color/dark_orange"
         android:textSize="14sp"
         android:textAlignment="center"/>
 
@@ -222,7 +223,8 @@
         app:layout_constraintBottom_toBottomOf="@id/student_detail_power2_image"
         android:layout_marginStart="25dp"
         android:text="Package de données"
-        android:textStyle="italic"
+        android:textStyle="italic|bold"
+        android:textColor="@color/dark_orange"
         android:textSize="14sp"
         android:textAlignment="center"/>
 
@@ -245,7 +247,8 @@
         app:layout_constraintBottom_toBottomOf="@id/student_detail_power3_image"
         android:layout_marginStart="25dp"
         android:text="Package de données"
-        android:textStyle="italic"
+        android:textStyle="italic|bold"
+        android:textColor="@color/dark_orange"
         android:textSize="14sp"
         android:textAlignment="center"/>
 
@@ -267,7 +270,8 @@
         app:layout_constraintBottom_toBottomOf="@id/student_detail_power4_image"
         android:layout_marginStart="25dp"
         android:text="Package de données"
-        android:textStyle="italic"
+        android:textStyle="italic|bold"
+        android:textColor="@color/dark_orange"
         android:textSize="14sp"
         android:textAlignment="center"/>
 
@@ -290,7 +294,8 @@
         app:layout_constraintBottom_toBottomOf="@id/student_detail_power5_image"
         android:layout_marginStart="25dp"
         android:text="Package de données"
-        android:textStyle="italic"
+        android:textStyle="italic|bold"
+        android:textColor="@color/dark_orange"
         android:textSize="14sp"
         android:textAlignment="center"/>
 
@@ -312,7 +317,8 @@
         app:layout_constraintBottom_toBottomOf="@id/student_detail_power6_image"
         android:layout_marginStart="25dp"
         android:text="Package de données"
-        android:textStyle="italic"
+        android:textStyle="italic|bold"
+        android:textColor="@color/dark_orange"
         android:textSize="14sp"
         android:textAlignment="center"/>
 

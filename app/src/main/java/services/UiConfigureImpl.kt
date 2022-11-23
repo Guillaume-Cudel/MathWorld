@@ -14,8 +14,7 @@ class UiConfigureImpl: UiConfigure {
         val beltImage: ImageView = image
         beltImage.setImageResource(R.drawable.black_belt)
         when(belt){
-            1 -> { image.setImageResource(R.drawable.white_belt)
-                ImageViewCompat.setImageTintList(image, ColorStateList.valueOf(ContextCompat.getColor(context, R.color.black))) }
+            1 -> ImageViewCompat.setImageTintList(image, ColorStateList.valueOf(ContextCompat.getColor(context, R.color.white)))
             2 -> ImageViewCompat.setImageTintList(beltImage, ColorStateList.valueOf(ContextCompat.getColor(context, R.color.yellow_pur)))
             3 -> ImageViewCompat.setImageTintList(beltImage, ColorStateList.valueOf(ContextCompat.getColor(context, R.color.orange)))
             4 -> ImageViewCompat.setImageTintList(beltImage, ColorStateList.valueOf(ContextCompat.getColor(context, R.color.green_light)))
@@ -23,7 +22,9 @@ class UiConfigureImpl: UiConfigure {
             6 -> ImageViewCompat.setImageTintList(beltImage, ColorStateList.valueOf(ContextCompat.getColor(context, R.color.purple_200)))
             7 -> ImageViewCompat.setImageTintList(beltImage, ColorStateList.valueOf(ContextCompat.getColor(context, R.color.red_light)))
             8 -> ImageViewCompat.setImageTintList(beltImage, ColorStateList.valueOf(ContextCompat.getColor(context, R.color.brown)))
-            9 -> ImageViewCompat.setImageTintList(beltImage, ColorStateList.valueOf(ContextCompat.getColor(context, R.color.black)))
+            9 -> { image.setImageResource(R.drawable.white_belt)
+                ImageViewCompat.setImageTintList(beltImage, ColorStateList.valueOf(ContextCompat.getColor(context, R.color.white)))
+            }
         }
     }
 
