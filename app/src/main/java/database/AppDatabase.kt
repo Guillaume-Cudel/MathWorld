@@ -155,21 +155,21 @@ public abstract class AppDatabase: RoomDatabase() {
             dao.insertStudent(secondStudent)
 
             val firstStudentPowers = SealedPower(firstStudent.id,
-                power1 = true,
-                power2 = false,
-                power3 = false,
-                power4 = false,
-                power5 = false,
-                power6 = false
+                power1 = 1,
+                power2 = 0,
+                power3 = 0,
+                power4 = 0,
+                power5 = 0,
+                power6 = 0
             )
 
             val secondStudentPowers = SealedPower(secondStudent.id,
-                power1 = false,
-                power2 = true,
-                power3 = false,
-                power4 = false,
-                power5 = false,
-                power6 = false
+                power1 = 0,
+                power2 = 1,
+                power3 = 0,
+                power4 = 0,
+                power5 = 0,
+                power6 = 0
             )
 
             dao.insertSealedPowers(firstStudentPowers)
