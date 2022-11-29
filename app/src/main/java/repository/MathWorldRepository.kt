@@ -1,6 +1,7 @@
 package repository
 
 import androidx.annotation.WorkerThread
+import androidx.room.Update
 import dao.ClassDAO
 import kotlinx.coroutines.flow.Flow
 import model.*
@@ -52,4 +53,10 @@ class MathWorldRepository(private val dao: ClassDAO) {
     suspend fun updateStudent(student: Student){
         dao.updateStudent(student)
     }
+
+    @WorkerThread
+    suspend fun updateSealedPower(sealedPower: SealedPower){
+        dao.updateSealedPower(sealedPower)
+    }
+
 }

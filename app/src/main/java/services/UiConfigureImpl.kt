@@ -73,10 +73,4 @@ class UiConfigureImpl: UiConfigure {
         }
     }
 
-    /*override fun setPadlockPosition(lock: Boolean, image: ImageView){
-        if(lock){
-
-        }
-    }*/
-
 }

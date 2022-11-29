@@ -6,10 +6,10 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "sealed_power_table")
 data class SealedPower(
     @PrimaryKey val student_id: Int,
-    val power1: Int,
-    val power2: Int,
-    val power3: Int,
-    val power4: Int,
-    val power5: Int,
-    val power6: Int,
+    var power1: Int,
+    var power2: Int,
+    var power3: Int,
+    var power4: Int,
+    var power5: Int,
+    var power6: Int,
 )

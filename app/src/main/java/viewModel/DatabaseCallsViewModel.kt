@@ -53,4 +53,9 @@ class DatabaseCallsViewModel(private val repository: MathWorldRepository): ViewM
     fun updateStudent(student: Student) = viewModelScope.launch {
         repository.updateStudent(student)
     }
+
+    fun updateSealedPower(sealedPower: SealedPower) = viewModelScope.launch {
+        repository.updateSealedPower(sealedPower)
+    }
+
 }

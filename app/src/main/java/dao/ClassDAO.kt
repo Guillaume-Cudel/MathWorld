@@ -53,6 +53,9 @@ interface ClassDAO {
     @Update
     suspend fun updateStudent(student: Student)
 
+    @Update
+    suspend fun updateSealedPower(sealedPower: SealedPower)
+
 
     @Delete
     fun deleteRpgClass(studentsClass: StudentsClass)
