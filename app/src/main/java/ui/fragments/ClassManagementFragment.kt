@@ -144,8 +144,8 @@ class ClassManagementFragment : Fragment(), StatsUpdater {
     private val actionModeCallback = object : ActionMode.Callback {
         override fun onCreateActionMode(mode: ActionMode, menu: Menu): Boolean {
             mode.menuInflater.inflate(R.menu.action_mode_menu, menu)
-            mode.title = "Xp gain"
-            mode.subtitle = "What quantity ?"
+            mode.title = getString(R.string.xp_gain_txt)
+            mode.subtitle = getString(R.string.what_quantity)
 
             //todo met en surlignance le gain d'xp choisi
             val xp1 = menu.findItem(R.id.action_mode_xp1)

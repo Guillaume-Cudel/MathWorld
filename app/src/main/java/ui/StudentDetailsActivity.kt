@@ -46,13 +46,14 @@ class StudentDetailsActivity : AppCompatActivity() {
         student = bundle!!.getSerializable("student") as Student
 
         databaseCallsVM.getSealedPowersByStudent(student!!.id)?.observe(this) { sealedPower ->
-                studentSealedPower = sealedPower.sealedPowers
-                databaseCallsVM.getPowersInformationsByJob(student!!.job)?.observe(this) { jobPowersList ->
-                        powerList = jobPowersList[0]
-                        displayPowersInformation(studentSealedPower!!, powerList!!)
-                        displayData()
-                    }
-            }
+            studentSealedPower = sealedPower.sealedPowers
+            databaseCallsVM.getPowersInformationsByJob(student!!.job)
+                ?.observe(this) { jobPowersList ->
+                    powerList = jobPowersList[0]
+                    displayPowersInformation(studentSealedPower!!, powerList!!)
+                    displayData()
+                }
+        }
         clickOnPower()
     }
 
@@ -102,24 +103,62 @@ class StudentDetailsActivity : AppCompatActivity() {
 
     private fun configurePowers(i: Int, powersList: JobWithPower, powerActivedNumber: Int) {
         when (i) {
-            0 -> { displayOrNotPower(binding.studentDetailPower1ActivedNumber, powerActivedNumber,
-                binding.studentDetailPower1Text, binding.studentDetailPower1Image, powersList.powers[0].powerName) }
-            1 -> displayOrNotPower(binding.studentDetailPower2ActivedNumber, powerActivedNumber,
-                binding.studentDetailPower2Text, binding.studentDetailPower2Image, powersList.powers[1].powerName)
-            2 -> displayOrNotPower(binding.studentDetailPower3ActivedNumber, powerActivedNumber,
-                binding.studentDetailPower3Text, binding.studentDetailPower3Image, powersList.powers[2].powerName)
-            3 -> displayOrNotPower(binding.studentDetailPower4ActivedNumber, powerActivedNumber,
-                binding.studentDetailPower4Text, binding.studentDetailPower4Image, powersList.powers[3].powerName)
-            4 -> displayOrNotPower(binding.studentDetailPower5ActivedNumber, powerActivedNumber,
-                binding.studentDetailPower5Text, binding.studentDetailPower5Image, powersList.powers[4].powerName)
-            5 -> displayOrNotPower(binding.studentDetailPower6ActivedNumber, powerActivedNumber,
-                binding.studentDetailPower6Text, binding.studentDetailPower6Image, powersList.powers[5].powerName)
+            0 -> {
+                displayOrNotPower(
+                    binding.studentDetailPower1ActivedNumber,
+                    powerActivedNumber,
+                    binding.studentDetailPower1Text,
+                    binding.studentDetailPower1Image,
+                    powersList.powers[0].powerName
+                )
+            }
+            1 -> displayOrNotPower(
+                binding.studentDetailPower2ActivedNumber,
+                powerActivedNumber,
+                binding.studentDetailPower2Text,
+                binding.studentDetailPower2Image,
+                powersList.powers[1].powerName
+            )
+            2 -> displayOrNotPower(
+                binding.studentDetailPower3ActivedNumber,
+                powerActivedNumber,
+                binding.studentDetailPower3Text,
+                binding.studentDetailPower3Image,
+                powersList.powers[2].powerName
+            )
+            3 -> displayOrNotPower(
+                binding.studentDetailPower4ActivedNumber,
+                powerActivedNumber,
+                binding.studentDetailPower4Text,
+                binding.studentDetailPower4Image,
+                powersList.powers[3].powerName
+            )
+            4 -> displayOrNotPower(
+                binding.studentDetailPower5ActivedNumber,
+                powerActivedNumber,
+                binding.studentDetailPower5Text,
+                binding.studentDetailPower5Image,
+                powersList.powers[4].powerName
+            )
+            5 -> displayOrNotPower(
+                binding.studentDetailPower6ActivedNumber,
+                powerActivedNumber,
+                binding.studentDetailPower6Text,
+                binding.studentDetailPower6Image,
+                powersList.powers[5].powerName
+            )
         }
     }
 
 
-    private fun displayOrNotPower(powerActivedNumberText: TextView, powerActivedNumber: Int, powerNameText: TextView, powerImage: ImageView, powerName: String){
-        if(powerActivedNumber == 0) {
+    private fun displayOrNotPower(
+        powerActivedNumberText: TextView,
+        powerActivedNumber: Int,
+        powerNameText: TextView,
+        powerImage: ImageView,
+        powerName: String
+    ) {
+        if (powerActivedNumber == 0) {
             powerImage.setImageResource(R.drawable.power_scroll_closed)
             powerNameText.isVisible = false
             powerActivedNumberText.isVisible = false
@@ -132,7 +171,7 @@ class StudentDetailsActivity : AppCompatActivity() {
         }
     }
 
-    private fun clickOnPower(){
+    private fun clickOnPower() {
         binding.studentDetailPower1Image.setOnClickListener {
             openInformation(0)
         }
@@ -154,65 +193,85 @@ class StudentDetailsActivity : AppCompatActivity() {
 
     }
 
-    private fun openInformation(powerId: Int){
-        if(sealedPowerList.size > 0 && powerList != null) {
-        val currentPower = powerList!!.powers[powerId]
-        val currentSealedPower = sealedPowerList[powerId]
-        var newCurrentSealedPower = currentSealedPower
+    private fun openInformation(powerId: Int) {
+        if (sealedPowerList.size > 0 && powerList != null) {
+            val currentPower = powerList!!.powers[powerId]
+            val currentSealedPower = sealedPowerList[powerId]
+            var newCurrentSealedPower = currentSealedPower
 
-        val builder = AlertDialog.Builder(this).create()
-        val dialogView = layoutInflater.inflate(R.layout.dialog_power_detail, null)
-        builder.setView(dialogView)
-        val title = dialogView.findViewById<TextView>(R.id.power_detail_title)
-        val description = dialogView.findViewById<TextView>(R.id.power_detail_text)
-        val padlock = dialogView.findViewById<ImageView>(R.id.power_detail_padlock)
-        val plusButton = dialogView.findViewById<MaterialButton>(R.id.power_detail_plus)
-        val minusButton = dialogView.findViewById<MaterialButton>(R.id.power_detail_minus)
-        val activedNumberText = dialogView.findViewById<TextView>(R.id.power_detail_actived_number)
+            val builder = AlertDialog.Builder(this).create()
+            val dialogView = layoutInflater.inflate(R.layout.dialog_power_detail, null)
+            builder.setView(dialogView)
+            val title = dialogView.findViewById<TextView>(R.id.power_detail_title)
+            val description = dialogView.findViewById<TextView>(R.id.power_detail_text)
+            val padlock = dialogView.findViewById<ImageView>(R.id.power_detail_padlock)
+            val plusButton = dialogView.findViewById<MaterialButton>(R.id.power_detail_plus)
+            val minusButton = dialogView.findViewById<MaterialButton>(R.id.power_detail_minus)
+            val activedNumberText =
+                dialogView.findViewById<TextView>(R.id.power_detail_actived_number)
 
-        title.text = currentPower.powerName
-        description.text = currentPower.description
-        activedNumberText.text = "X$currentSealedPower"
-        if(currentSealedPower == 0) {
-            activedNumberText.setTextColor(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.little_grey)))
-            padlock.setImageResource(R.drawable.padlock)
-            ImageViewCompat.setImageTintList(padlock,
-                ColorStateList.valueOf(ContextCompat.getColor(this, R.color.black)))
-        } else {
-            activedNumberText.setTextColor(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.green_light)))
-            padlock.setImageResource(R.drawable.unlock)
-            ImageViewCompat.setImageTintList(padlock,
-                ColorStateList.valueOf(ContextCompat.getColor(this, R.color.green_light)))
-        }
+            title.text = currentPower.powerName
+            description.text = currentPower.description
+            activedNumberText.text = "X$currentSealedPower"
+            if (currentSealedPower == 0) {
+                activedNumberText.setTextColor(
+                    ColorStateList.valueOf(
+                        ContextCompat.getColor(
+                            this,
+                            R.color.little_grey
+                        )
+                    )
+                )
+                padlock.setImageResource(R.drawable.padlock)
+                ImageViewCompat.setImageTintList(
+                    padlock,
+                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.black))
+                )
+            } else {
+                activedNumberText.setTextColor(
+                    ColorStateList.valueOf(
+                        ContextCompat.getColor(
+                            this,
+                            R.color.green_light
+                        )
+                    )
+                )
+                padlock.setImageResource(R.drawable.unlock)
+                ImageViewCompat.setImageTintList(
+                    padlock,
+                    ColorStateList.valueOf(ContextCompat.getColor(this, R.color.green_light))
+                )
+            }
 
-        plusButton.setOnClickListener {
-            newCurrentSealedPower++
-            updateSealedPower(powerId, newCurrentSealedPower)
-            builder.cancel()
-        }
-        minusButton.setOnClickListener {
-            if(newCurrentSealedPower > 0){
-                newCurrentSealedPower--
+            plusButton.setOnClickListener {
+                if (newCurrentSealedPower > 0) {
+                    newCurrentSealedPower--
+                    updateSealedPower(powerId, newCurrentSealedPower)
+                    builder.cancel()
+                }
+            }
+            minusButton.setOnClickListener {
+                newCurrentSealedPower++
                 updateSealedPower(powerId, newCurrentSealedPower)
                 builder.cancel()
-            }
-        }
 
-        builder.setCanceledOnTouchOutside(true)
-        builder.show()
+            }
+
+            builder.setCanceledOnTouchOutside(true)
+            builder.show()
         }
     }
 
-    private fun updateSealedPower(position: Int, number: Int){
-        when(position){
-            0 ->  studentSealedPower!!.power1 = number
-            1 ->  studentSealedPower!!.power2 = number
-            2 ->  studentSealedPower!!.power3 = number
-            3 ->  studentSealedPower!!.power4 = number
-            4 ->  studentSealedPower!!.power5 = number
-            5 ->  studentSealedPower!!.power6 = number
+    private fun updateSealedPower(position: Int, number: Int) {
+        when (position) {
+            0 -> studentSealedPower!!.power1 = number
+            1 -> studentSealedPower!!.power2 = number
+            2 -> studentSealedPower!!.power3 = number
+            3 -> studentSealedPower!!.power4 = number
+            4 -> studentSealedPower!!.power5 = number
+            5 -> studentSealedPower!!.power6 = number
         }
-       databaseCallsVM.updateSealedPower(studentSealedPower!!)
+        databaseCallsVM.updateSealedPower(studentSealedPower!!)
     }
 
 }

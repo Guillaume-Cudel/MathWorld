@@ -45,6 +45,8 @@
     <string name="experience">Experience</string>
     <string name="life">Life</string>
     <string name="lvl">Lvl</string>
+    <string name="xp_gain_txt">Xp gain:</string>
+    <string name="what_quantity">What quantity ?</string>
 
 
     <string-array name="Level">

@@ -41,4 +41,6 @@
     <string name="experience">Experience</string>
     <string name="life">Vie</string>
     <string name="lvl">Nv</string>
+    <string name="xp_gain_txt">Gain d\'xp:</string>
+    <string name="what_quantity">Combien ?</string>
 </resources>

@@ -68,11 +68,18 @@ class AddStudentActivity : AppCompatActivity() {
             )
             val newStudentSealedPowers = SealedPower(newStudent.id,
                 power1 = 0,
+                power1Actived = false,
                 power2 = 0,
+                power2Actived = false,
                 power3 = 0,
+                power3Actived = false,
                 power4 = 0,
+                power4Actived = false,
                 power5 = 0,
-                power6 = 0
+                power5Actived = false,
+                power6 = 0,
+                power6Actived = false,
+                powerToAssign = 0
             )
             databaseCallsVM.insertStudent(newStudent)
             databaseCallsVM.insertSealedPowers(newStudentSealedPowers)

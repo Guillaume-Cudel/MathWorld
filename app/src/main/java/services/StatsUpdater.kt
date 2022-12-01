@@ -13,4 +13,5 @@ interface StatsUpdater {
     fun updateGroup(student: Student, group: Int)
 
     fun openDetail(student: Student)
+
 }

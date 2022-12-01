@@ -191,7 +191,7 @@
 
     <TextView
         android:id="@+id/student_detail_power1_text"
-        android:layout_width="100dp"
+        android:layout_width="75dp"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="@id/student_detail_power1_image"
         app:layout_constraintEnd_toEndOf="@id/student_detail_power1_image"
@@ -201,7 +201,7 @@
         android:text="Package de données"
         android:textStyle="italic|bold"
         android:textColor="@color/dark_orange"
-        android:textSize="14sp"
+        android:textSize="12sp"
         android:textAlignment="center"/>
 
     <TextView
@@ -213,7 +213,7 @@
         app:layout_constraintBottom_toBottomOf="@id/student_detail_power1_image"
         android:layout_marginStart="12dp"
         android:text="X2"
-        android:textStyle="italic|bold"
+        android:textStyle="bold"
         android:textColor="@color/green_light"/>
 
     
@@ -228,7 +228,7 @@
 
     <TextView
         android:id="@+id/student_detail_power2_text"
-        android:layout_width="100dp"
+        android:layout_width="75dp"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="@id/student_detail_power2_image"
         app:layout_constraintEnd_toEndOf="@id/student_detail_power2_image"
@@ -238,7 +238,7 @@
         android:text="Package de données"
         android:textStyle="italic|bold"
         android:textColor="@color/dark_orange"
-        android:textSize="14sp"
+        android:textSize="12sp"
         android:textAlignment="center"/>
 
     <TextView
@@ -250,7 +250,7 @@
         app:layout_constraintBottom_toBottomOf="@id/student_detail_power2_image"
         android:layout_marginStart="12dp"
         android:text="X2"
-        android:textStyle="italic|bold"
+        android:textStyle="bold"
         android:textColor="@color/green_light"/>
 
     <ImageView
@@ -264,7 +264,7 @@
 
     <TextView
         android:id="@+id/student_detail_power3_text"
-        android:layout_width="100dp"
+        android:layout_width="75dp"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="@id/student_detail_power3_image"
         app:layout_constraintEnd_toEndOf="@id/student_detail_power3_image"
@@ -274,7 +274,7 @@
         android:text="Package de données"
         android:textStyle="italic|bold"
         android:textColor="@color/dark_orange"
-        android:textSize="14sp"
+        android:textSize="12sp"
         android:textAlignment="center"/>
 
     <TextView
@@ -286,7 +286,7 @@
         app:layout_constraintBottom_toBottomOf="@id/student_detail_power3_image"
         android:layout_marginStart="12dp"
         android:text="X2"
-        android:textStyle="italic|bold"
+        android:textStyle="bold"
         android:textColor="@color/green_light"/>
 
     <ImageView
@@ -299,7 +299,7 @@
 
     <TextView
         android:id="@+id/student_detail_power4_text"
-        android:layout_width="100dp"
+        android:layout_width="75dp"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="@id/student_detail_power4_image"
         app:layout_constraintEnd_toEndOf="@id/student_detail_power4_image"
@@ -309,7 +309,7 @@
         android:text="Package de données"
         android:textStyle="italic|bold"
         android:textColor="@color/dark_orange"
-        android:textSize="14sp"
+        android:textSize="12sp"
         android:textAlignment="center"/>
 
     <TextView
@@ -321,7 +321,7 @@
         app:layout_constraintBottom_toBottomOf="@id/student_detail_power4_image"
         android:layout_marginStart="12dp"
         android:text="X2"
-        android:textStyle="italic|bold"
+        android:textStyle="bold"
         android:textColor="@color/green_light"/>
 
     <ImageView
@@ -335,7 +335,7 @@
 
     <TextView
         android:id="@+id/student_detail_power5_text"
-        android:layout_width="100dp"
+        android:layout_width="75dp"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="@id/student_detail_power5_image"
         app:layout_constraintEnd_toEndOf="@id/student_detail_power5_image"
@@ -345,7 +345,7 @@
         android:text="Package de données"
         android:textStyle="italic|bold"
         android:textColor="@color/dark_orange"
-        android:textSize="14sp"
+        android:textSize="12sp"
         android:textAlignment="center"/>
 
     <TextView
@@ -357,7 +357,7 @@
         app:layout_constraintBottom_toBottomOf="@id/student_detail_power5_image"
         android:layout_marginStart="12dp"
         android:text="X2"
-        android:textStyle="italic|bold"
+        android:textStyle="bold"
         android:textColor="@color/green_light"/>
 
     <ImageView
@@ -370,7 +370,7 @@
 
     <TextView
         android:id="@+id/student_detail_power6_text"
-        android:layout_width="100dp"
+        android:layout_width="75dp"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="@id/student_detail_power6_image"
         app:layout_constraintEnd_toEndOf="@id/student_detail_power6_image"
@@ -380,7 +380,7 @@
         android:text="Package de données"
         android:textStyle="italic|bold"
         android:textColor="@color/dark_orange"
-        android:textSize="14sp"
+        android:textSize="12sp"
         android:textAlignment="center"/>
 
     <TextView
@@ -392,7 +392,7 @@
         app:layout_constraintBottom_toBottomOf="@id/student_detail_power6_image"
         android:layout_marginStart="12dp"
         android:text="X2"
-        android:textStyle="italic|bold"
+        android:textStyle="bold"
         android:textColor="@color/green_light"/>
 
 
