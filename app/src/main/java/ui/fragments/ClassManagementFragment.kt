@@ -45,6 +45,7 @@ class ClassManagementFragment : Fragment(), StatsUpdater {
         mainVM = ViewModelProvider(requireActivity())[MainViewModel::class.java]
         setHasOptionsMenu(true)
 
+
         mainVM.classNumber.observe(requireActivity(), Observer {
             classID = it
             configureRecyclerView(classID!!)
@@ -54,6 +55,11 @@ class ClassManagementFragment : Fragment(), StatsUpdater {
 
 
         return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        activity?.title = getString(R.string.management)
     }
 
 
@@ -83,9 +89,13 @@ class ClassManagementFragment : Fragment(), StatsUpdater {
 
     override fun onCreateOptionsMenu(menu: Menu, menuInflater: MenuInflater) {
         //return super.onCreateOptionsMenu(menu)
-        menuInflater.inflate(R.menu.toolbar_menu, menu)
+        menuInflater.inflate(R.menu.class_management_toolbar_menu, menu)
     }
 
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        super.onPrepareOptionsMenu(menu)
+
+    }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
@@ -108,7 +118,6 @@ class ClassManagementFragment : Fragment(), StatsUpdater {
         if (student.xpMax != xpMax) {
             student.xpMax = xpMax
         }
-
         databaseCallsVM.updateStudent(student)
     }
 

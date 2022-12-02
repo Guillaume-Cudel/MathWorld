@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.guillaume.mathworld.R
 import com.guillaume.mathworld.databinding.FragmentNotebookBinding
 import di.MathWorldApplication
 import di.MathWorldViewModelFactory
@@ -42,6 +43,7 @@ class NotebookFragment : Fragment(), XpByGroupUpdater {
         binding = FragmentNotebookBinding.inflate(inflater, container, false)
         mainVM = ViewModelProvider(requireActivity())[MainViewModel::class.java]
 
+
         mainVM.classNumber.observe(requireActivity(), Observer { classId ->
             classID = classId
             configureRecyclerView()
@@ -53,6 +55,11 @@ class NotebookFragment : Fragment(), XpByGroupUpdater {
         })
 
         return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        activity?.title = getString(R.string.notebook)
     }
 
     private fun configureRecyclerView(){

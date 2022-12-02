@@ -47,6 +47,9 @@
     <string name="lvl">Lvl</string>
     <string name="xp_gain_txt">Xp gain:</string>
     <string name="what_quantity">What quantity ?</string>
+    <string name="save_score">Save score</string>
+    <string name="cancel">Cancel</string>
+    <string name="summary">Summary</string>
 
 
     <string-array name="Level">

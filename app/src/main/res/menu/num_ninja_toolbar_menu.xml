@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.MainActivity">
+
+
+    <item
+        android:id="@+id/toolbar_save_num_ninja"
+        android:icon="@drawable/save"
+        app:showAsAction="ifRoom"
+        android:title="@string/save_score"/>
+
+</menu>

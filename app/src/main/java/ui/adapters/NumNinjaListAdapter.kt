@@ -10,9 +10,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textfield.TextInputEditText
 import com.guillaume.mathworld.R
 import model.Student
+import services.BeltManagement
 import services.UiConfigure
 
-class NumNinjaListAdapter(private val uiConfigure: UiConfigure) :
+class NumNinjaListAdapter(private val uiConfigure: UiConfigure, private val beltManagement: BeltManagement) :
     ListAdapter<Student, NumNinjaViewHolder>(StudentViewHolder.StudentsComparator()) {
 
 
@@ -28,35 +29,29 @@ class NumNinjaListAdapter(private val uiConfigure: UiConfigure) :
         holder.lastnameText.text = current.lastName
 
         // Score
-
-        /*var score: Int = if(holder.scoreEdit.editableText.toString() == ""){
-            0
-        } else {
-            holder.scoreEdit.editableText.toString().toInt()
-        }
-        holder.scoreText.text = score.toString()*/
         var score = 0
-
-        holder.scoreText.text = score.toString()
-        displayBelt(score, holder.beltImage)
+        //holder.scoreText.text = score.toString()
 
         holder.scoreEdit.setOnFocusChangeListener { _, focused ->
             if (!focused){
                 try {
                     score = holder.scoreEdit.editableText.toString().toInt()
+                    beltManagement.addBeltXp(score)
                     holder.scoreText.text = score.toString()
                     displayBelt(score, holder.beltImage)
+
+
                 } catch (ex: NumberFormatException) {
                 }
+
         }
         /*holder.scoreText.text = score.toString()
         displayBelt(score, holder.beltImage)*/
-    }
 
+    }
 
     // Belt
     //displayBelt(score, holder.beltImage)
-
 }
 
 private fun displayBelt(score: Int, image: ImageView) {

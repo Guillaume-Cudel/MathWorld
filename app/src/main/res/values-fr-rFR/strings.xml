@@ -43,4 +43,7 @@
     <string name="lvl">Nv</string>
     <string name="xp_gain_txt">Gain d\'xp:</string>
     <string name="what_quantity">Combien ?</string>
+    <string name="save_score">Sauvegarder score</string>
+    <string name="cancel">Annuler</string>
+    <string name="summary">Recapitulatif</string>
 </resources>
