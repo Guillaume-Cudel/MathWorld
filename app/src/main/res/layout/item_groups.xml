@@ -43,7 +43,7 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/group_xp_plus_five"
         android:layout_width="60dp"
-        android:layout_height="wrap_content"
+        android:layout_height="45dp"
         app:layout_constraintStart_toEndOf="@id/group_xp_text"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -60,7 +60,7 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/group_xp_plus_ten"
         android:layout_width="60dp"
-        android:layout_height="wrap_content"
+        android:layout_height="45dp"
         app:layout_constraintStart_toEndOf="@id/group_xp_plus_five"
         app:layout_constraintTop_toTopOf="@id/group_xp_plus_five"
         android:layout_marginStart="30dp"

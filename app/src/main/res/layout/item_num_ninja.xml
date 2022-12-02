@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="55dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/numninja_student_firstname"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="5dp"
+        android:text="Herve"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:id="@+id/numninja_student_lastname"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/numninja_student_firstname"
+        app:layout_constraintStart_toStartOf="@id/numninja_student_firstname"
+        android:text="Delacour"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:id="@+id/numninja_score_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/numninja_student_firstname"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="15dp"
+        android:text="Score :"
+        android:textColor="@color/teal_200"
+        android:textStyle="bold"
+        android:textSize="16sp"/>
+
+    <ImageView
+        android:id="@+id/numninja_score_image"
+        android:layout_width="50dp"
+        android:layout_height="30dp"
+        app:layout_constraintStart_toEndOf="@id/numninja_score_text"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="5dp"
+        android:background="@drawable/round_job_image_yellow"/>
+
+    <TextView
+        android:id="@+id/numninja_score_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/numninja_score_image"
+        app:layout_constraintEnd_toEndOf="@id/numninja_score_image"
+        app:layout_constraintTop_toTopOf="@id/numninja_score_image"
+        app:layout_constraintBottom_toBottomOf="@id/numninja_score_image"
+        android:textSize="14sp"
+        android:text="22"
+        android:textStyle="bold"
+        android:textColor="@color/teal_200"/>
+
+    <ImageView
+        android:id="@+id/numninja_arrow"
+        android:layout_width="40dp"
+        android:layout_height="30dp"
+        app:layout_constraintStart_toEndOf="@id/numninja_score_image"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="5dp"
+        android:src="@drawable/right_arrow"/>
+
+    <ImageView
+        android:id="@+id/numninja_belt"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:layout_constraintStart_toEndOf="@id/numninja_arrow"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="5dp"
+        android:src="@drawable/white_belt"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/numninja_text_edit_score"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/numninja_belt"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginHorizontal="10dp"
+        android:hint="Score"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/numninja_edit_score"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textSize="14sp"
+            android:inputType="number"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

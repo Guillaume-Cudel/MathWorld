@@ -23,8 +23,8 @@ class UiConfigureImpl: UiConfigure {
             7 -> ImageViewCompat.setImageTintList(beltImage, ColorStateList.valueOf(ContextCompat.getColor(context, R.color.red_light)))
             8 -> ImageViewCompat.setImageTintList(beltImage, ColorStateList.valueOf(ContextCompat.getColor(context, R.color.brown)))
             9 -> { image.setImageResource(R.drawable.white_belt)
-                ImageViewCompat.setImageTintList(beltImage, ColorStateList.valueOf(ContextCompat.getColor(context, R.color.white)))
-            }
+                ImageViewCompat.setImageTintList(beltImage, ColorStateList.valueOf(ContextCompat.getColor(context, R.color.white))) }
+            10 -> ImageViewCompat.setImageTintList(image, ColorStateList.valueOf(ContextCompat.getColor(context, R.color.gold)))
         }
     }
 
