@@ -4,7 +4,6 @@ import android.content.res.ColorStateList
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.viewModels
@@ -71,7 +70,7 @@ class StudentDetailsActivity : AppCompatActivity() {
     }
 
     private fun displayData() {
-        uiConfigure.setBelt(student!!.belt, binding.studentDetailBeltImage)
+        uiConfigure.setBelt(student!!.bestBelt, binding.studentDetailBeltImage)
         uiConfigure.displayExperience(
             student!!.experience,
             student!!.xpMax,
@@ -205,8 +204,8 @@ class StudentDetailsActivity : AppCompatActivity() {
             val title = dialogView.findViewById<TextView>(R.id.power_detail_title)
             val description = dialogView.findViewById<TextView>(R.id.power_detail_text)
             val padlock = dialogView.findViewById<ImageView>(R.id.power_detail_padlock)
-            val plusButton = dialogView.findViewById<MaterialButton>(R.id.power_detail_plus)
-            val minusButton = dialogView.findViewById<MaterialButton>(R.id.power_detail_minus)
+            val minusButton = dialogView.findViewById<MaterialButton>(R.id.power_detail_plus)
+            val plusButton = dialogView.findViewById<MaterialButton>(R.id.power_detail_minus)
             val activedNumberText =
                 dialogView.findViewById<TextView>(R.id.power_detail_actived_number)
 
@@ -243,14 +242,14 @@ class StudentDetailsActivity : AppCompatActivity() {
                 )
             }
 
-            plusButton.setOnClickListener {
+            minusButton.setOnClickListener {
                 if (newCurrentSealedPower > 0) {
                     newCurrentSealedPower--
                     updateSealedPower(powerId, newCurrentSealedPower)
                     builder.cancel()
                 }
             }
-            minusButton.setOnClickListener {
+            plusButton.setOnClickListener {
                 newCurrentSealedPower++
                 updateSealedPower(powerId, newCurrentSealedPower)
                 builder.cancel()
@@ -273,5 +272,7 @@ class StudentDetailsActivity : AppCompatActivity() {
         }
         databaseCallsVM.updateSealedPower(studentSealedPower!!)
     }
+
+    //todo ajoute un bouton pour activer ou desactiver un pouvoir
 
 }

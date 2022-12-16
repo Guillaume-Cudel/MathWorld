@@ -51,7 +51,6 @@
         app:layout_constraintBottom_toTopOf="@id/power_detail_title"
         android:layout_marginEnd="15dp"
         android:src="@drawable/padlock"
-        android:background="@drawable/round_job_image_grey"
         android:clickable="true"
         android:focusable="true"
         app:cornerRadius="20dp"

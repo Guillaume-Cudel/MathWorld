@@ -46,4 +46,6 @@
     <string name="save_score">Sauvegarder score</string>
     <string name="cancel">Annuler</string>
     <string name="summary">Recapitulatif</string>
+    <string name="over_thirty">Tu ne peux pas choisir un nombre au dessus de 30 !</string>
+    <string name="save_num_ninja">Sauvegarde effectuee</string>
 </resources>

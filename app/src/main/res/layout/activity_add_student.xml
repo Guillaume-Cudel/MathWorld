@@ -142,7 +142,7 @@
         app:layout_constraintTop_toTopOf="@id/add_student_job_bard"
         android:layout_marginStart="20dp"
         android:src="@drawable/avatar_changelin"
-        android:background="@drawable/round_job_image_grey"
+        android:background="@drawable/round_orange"
         android:clipToOutline="true"
         android:clickable="true"
         android:focusable="true"/>
@@ -164,7 +164,7 @@
         app:layout_constraintTop_toTopOf="@id/add_student_job_bard"
         android:layout_marginStart="20dp"
         android:src="@drawable/avatar_empathe"
-        android:background="@drawable/round_job_image_grey"
+        android:background="@drawable/round_orange"
         android:clipToOutline="true"
         android:clickable="true"
         android:focusable="true"/>
@@ -186,7 +186,7 @@
         app:layout_constraintTop_toTopOf="@id/add_student_job_bard"
         android:layout_marginStart="20dp"
         android:src="@drawable/avatar_filou"
-        android:background="@drawable/round_job_image_grey"
+        android:background="@drawable/round_orange"
         android:clipToOutline="true"
         android:clickable="true"
         android:focusable="true"/>
@@ -209,7 +209,7 @@
         app:layout_constraintTop_toBottomOf="@id/add_student_job_bard_text"
         android:layout_marginTop="10dp"
         android:src="@drawable/avatar_parieur"
-        android:background="@drawable/round_job_image_grey"
+        android:background="@drawable/round_orange"
         android:clipToOutline="true"
         android:clickable="true"
         android:focusable="true"/>
@@ -231,7 +231,7 @@
         app:layout_constraintEnd_toEndOf="@id/add_student_job_empath"
         app:layout_constraintTop_toTopOf="@id/add_student_job_bettor"
         android:src="@drawable/avatar_tisse_sorts"
-        android:background="@drawable/round_job_image_grey"
+        android:background="@drawable/round_orange"
         android:clipToOutline="true"
         android:clickable="true"
         android:focusable="true"/>
@@ -253,7 +253,7 @@
         app:layout_constraintEnd_toEndOf="@id/add_student_job_rogue"
         app:layout_constraintTop_toTopOf="@id/add_student_job_bettor"
         android:src="@drawable/avatar_hacker"
-        android:background="@drawable/round_job_image_grey"
+        android:background="@drawable/round_orange"
         android:clipToOutline="true"
         android:clickable="true"
         android:focusable="true"/>

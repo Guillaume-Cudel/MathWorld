@@ -1,10 +1,12 @@
 package ui.adapters
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textfield.TextInputEditText
@@ -23,6 +25,7 @@ class NumNinjaListAdapter(private val uiConfigure: UiConfigure, private val belt
 
     override fun onBindViewHolder(holder: NumNinjaViewHolder, position: Int) {
         val current = getItem(position)
+        val context = holder.itemView.context
 
         //Name and lastname
         holder.firstnameText.text = current.firstName
@@ -36,22 +39,27 @@ class NumNinjaListAdapter(private val uiConfigure: UiConfigure, private val belt
             if (!focused){
                 try {
                     score = holder.scoreEdit.editableText.toString().toInt()
-                    beltManagement.addBeltXp(score)
-                    holder.scoreText.text = score.toString()
-                    displayBelt(score, holder.beltImage)
+                    if( score <= 30) {
+                        beltManagement.addBeltXp(score)
+                        holder.scoreText.text = score.toString()
+                        displayBelt(score, holder.beltImage)
+                    } else {
+                        val noScore = "0"
+                        holder.scoreEdit.setText(noScore)
+                        Toast.makeText(
+                            context,
+                            context.getString(R.string.over_thirty),
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
 
 
                 } catch (ex: NumberFormatException) {
                 }
 
         }
-        /*holder.scoreText.text = score.toString()
-        displayBelt(score, holder.beltImage)*/
 
     }
-
-    // Belt
-    //displayBelt(score, holder.beltImage)
 }
 
 private fun displayBelt(score: Int, image: ImageView) {
@@ -78,7 +86,7 @@ class NumNinjaViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     val lastnameText: TextView = itemView.findViewById(R.id.numninja_student_lastname)
     val scoreText: TextView = itemView.findViewById(R.id.numninja_score_result)
     val beltImage: ImageView = itemView.findViewById(R.id.numninja_belt)
-    val scoreEdit: TextInputEditText = itemView.findViewById(R.id.numninja_edit_score)
+    var scoreEdit: TextInputEditText = itemView.findViewById(R.id.numninja_edit_score)
 
 
     companion object {

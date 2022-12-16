@@ -64,7 +64,7 @@ class AddStudentActivity : AppCompatActivity() {
 
             val newStudent = Student(
                 classId, firstname, lastname, job, 3, 1,
-                0, 45, group.toInt(), 1, 0
+                0, 45, group.toInt(), 1, 0, 0, 0
             )
             val newStudentSealedPowers = SealedPower(newStudent.id,
                 power1 = 0,
@@ -81,6 +81,7 @@ class AddStudentActivity : AppCompatActivity() {
                 power6Actived = false,
                 powerToAssign = 0
             )
+            //todo regarder pourquoi les nouveau eleves s'ajoutent pas
             databaseCallsVM.insertStudent(newStudent)
             databaseCallsVM.insertSealedPowers(newStudentSealedPowers)
             Toast.makeText(this, "$firstname $lastname" + " " + getString(R.string.student_added), Toast.LENGTH_LONG).show()

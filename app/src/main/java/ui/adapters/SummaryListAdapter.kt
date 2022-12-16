@@ -14,6 +14,8 @@ import services.UiConfigure
 class SummaryListAdapter(private val uiConfigure: UiConfigure):
     ListAdapter<Student, SummaryListViewHolder>(StudentViewHolder.StudentsComparator()){
 
+    //var xpBeltList = listOf<Int>()
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SummaryListViewHolder {
         return SummaryListViewHolder.create(parent)
     }
@@ -26,25 +28,11 @@ class SummaryListAdapter(private val uiConfigure: UiConfigure):
         holder.lastnameText.text = current.lastName
 
         // Score
-        var score = 0
-
-
+        holder.scoreText.text = current.beltXp.toString()
+        // Xp
+        holder.xpText.text = current.numNinjaXp.toString()
         // Belt
-        displayBelt(score, holder.beltImage)
-    }
-
-    private fun displayBelt(score: Int, image: ImageView) {
-        when (score) {
-            in 0..3 -> uiConfigure.setBelt(1, image)
-            in 4..6 -> uiConfigure.setBelt(2, image)
-            in 7..9 -> uiConfigure.setBelt(3, image)
-            in 10..13 -> uiConfigure.setBelt(4, image)
-            in 14..17 -> uiConfigure.setBelt(5, image)
-            in 18..21 -> uiConfigure.setBelt(6, image)
-            in 22..25 -> uiConfigure.setBelt(7, image)
-            in 26..29 -> uiConfigure.setBelt(8, image)
-            30 -> uiConfigure.setBelt(9, image)
-        }
+        uiConfigure.setBelt(current.currentBelt, holder.beltImage)
     }
 }
 
@@ -57,6 +45,7 @@ class SummaryListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) 
     val lastnameText: TextView = itemView.findViewById(R.id.new_belts_summary_student_lastname)
     val scoreText: TextView = itemView.findViewById(R.id.new_belts_summary_score_result)
     val beltImage: ImageView = itemView.findViewById(R.id.new_belts_summary_belt)
+    val xpText: TextView = itemView.findViewById(R.id.new_belts_summary_xp_result)
 
 
     companion object {

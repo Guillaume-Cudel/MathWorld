@@ -74,7 +74,7 @@ class StudentsListAdapter(private val upStats: StatsUpdater, private val uiConfi
         }
 
         // BELT
-        uiConfigure.setBelt(current.belt, holder.belt)
+        uiConfigure.setBelt(current.bestBelt, holder.belt)
 
 
         // JOB

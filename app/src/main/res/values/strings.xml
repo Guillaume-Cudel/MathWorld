@@ -50,6 +50,8 @@
     <string name="save_score">Save score</string>
     <string name="cancel">Cancel</string>
     <string name="summary">Summary</string>
+    <string name="over_thirty">You cannot choose a number over 30 !</string>
+    <string name="save_num_ninja">Save done</string>
 
 
     <string-array name="Level">

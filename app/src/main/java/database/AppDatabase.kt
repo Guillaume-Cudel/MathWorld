@@ -148,9 +148,9 @@ public abstract class AppDatabase: RoomDatabase() {
             dao.insertClass(fifthClass)
 
             val firstStudent = Student( 1, "Peggie", "Gaulot", barde.name,
-                3, 1, 0, 45, 1, 1, 0)
+                3, 1, 0, 45, 1, 1, 0, 0, 0)
             val secondStudent = Student( 1, "Lucas", "Stagne", spellweaver.name,
-                3, 2, 14, 50, 5, 2, 0)
+                3, 2, 14, 50, 5, 2, 0, 0, 0)
             dao.insertStudent(firstStudent)
             dao.insertStudent(secondStudent)
 
@@ -181,8 +181,8 @@ public abstract class AppDatabase: RoomDatabase() {
                 power4Actived = false,
                 power5 = 0,
                 power5Actived = false,
-                power6 = 0,
-                power6Actived = false,
+                power6 = 1,
+                power6Actived = true,
                 powerToAssign = 0
             )
 

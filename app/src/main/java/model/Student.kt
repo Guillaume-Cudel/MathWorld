@@ -17,8 +17,10 @@ data class Student(
     var experience: Int,
     var xpMax: Int,
     var group: Int,
-    var belt: Int,
-    var beltXp: Int): Serializable {
+    var bestBelt: Int,
+    var beltXp: Int,
+    var currentBelt: Int,
+    var numNinjaXp: Int): Serializable {
     @PrimaryKey(autoGenerate = true)
     var id: Int = Random.nextInt()
 }
