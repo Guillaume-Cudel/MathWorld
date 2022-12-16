@@ -81,7 +81,6 @@ class AddStudentActivity : AppCompatActivity() {
                 power6Actived = false,
                 powerToAssign = 0
             )
-            //todo regarder pourquoi les nouveau eleves s'ajoutent pas
             databaseCallsVM.insertStudent(newStudent)
             databaseCallsVM.insertSealedPowers(newStudentSealedPowers)
             Toast.makeText(this, "$firstname $lastname" + " " + getString(R.string.student_added), Toast.LENGTH_LONG).show()

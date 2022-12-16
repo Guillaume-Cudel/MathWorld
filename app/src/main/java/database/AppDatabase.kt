@@ -156,7 +156,7 @@ public abstract class AppDatabase: RoomDatabase() {
 
             val firstStudentPowers = SealedPower(firstStudent.id,
                 power1 = 1,
-                power1Actived = false,
+                power1Actived = true,
                 power2 = 0,
                 power2Actived = false,
                 power3 = 0,
@@ -174,7 +174,7 @@ public abstract class AppDatabase: RoomDatabase() {
                 power1 = 0,
                 power1Actived = false,
                 power2 = 1,
-                power2Actived = false,
+                power2Actived = true,
                 power3 = 0,
                 power3Actived = false,
                 power4 = 0,
