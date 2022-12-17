@@ -230,6 +230,12 @@ class StudentDetailsActivity : AppCompatActivity() {
                     newCurrentSealedPower--
                     updateSealedPower(powerId, newCurrentSealedPower)
                     setPowerNumberAvailableText(newCurrentSealedPower, powerNumberAvailableText)
+                    if(newCurrentSealedPower == 0){
+                        currentPowerActived = false
+                        updatePowerActived(powerId, currentPowerActived, studentPowers)
+                        setPadlock(currentPowerActived, padlock)
+                        setPowerNumberAvailableText(newCurrentSealedPower, powerNumberAvailableText)
+                    }
                 }
             }
             plusButton.setOnClickListener {

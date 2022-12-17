@@ -11,7 +11,7 @@ data class Student(
     val class_id: Int,
     @ColumnInfo(name = "first_name") val firstName: String,
     @ColumnInfo(name = "last_name") val lastName: String,
-    val job: String,
+    var job: String,
     @ColumnInfo(name = "point_of_life") var pointOfLife: Int,
     var level: Int,
     var experience: Int,

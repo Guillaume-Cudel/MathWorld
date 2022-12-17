@@ -3,7 +3,6 @@ package ui.fragments
 import android.os.Bundle
 import android.view.*
 import android.widget.Button
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
@@ -17,7 +16,6 @@ import com.guillaume.mathworld.R
 import com.guillaume.mathworld.databinding.FragmentNumNinjaBinding
 import di.MathWorldApplication
 import di.MathWorldViewModelFactory
-import kotlinx.coroutines.*
 import model.Student
 import services.BeltManagement
 import services.UiConfigure
@@ -39,13 +37,13 @@ class NumNinjaFragment : Fragment(), BeltManagement {
     private var classLvl: String? = null
     private val uiConfigure: UiConfigure = UiConfigureImpl()
     private lateinit var adapter: NumNinjaListAdapter
-    private var studentsList: List<Student> = listOf()
+    private var mStudentsList: List<Student> = listOf()
     private val beltXpList: MutableList<Int> = mutableListOf()
     // Barde Pouvoir 4 double l'xp
-    val groupListWithBardPower4 = mutableListOf<Int>()
+    private val groupListWithBardPower4 = mutableListOf<Int>()
     // Barde pouvoir 6 donne la ceinture superieur
-    val groupListWithBardPower6 = mutableListOf<Int>()
-    var checkIfBardPowersAreActivedBoolean = false
+    private val groupListWithBardPower6 = mutableListOf<Int>()
+    private var checkIfBardPowersAreActivedBoolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -59,7 +57,29 @@ class NumNinjaFragment : Fragment(), BeltManagement {
 
         mainVM.classNumber.observe(requireActivity(), Observer {
             classID = it
-            configureRecyclerView(classID!!)
+            databaseCallsVM.getAllStudentsInClass(classID!!)
+                ?.observe(requireActivity(), Observer { studentList ->
+                    //val firstStudentName = it[0].students[0].firstName
+                    if (studentList.isNotEmpty()) {
+                        val students = studentList[0].students
+                        students.let { studentsListSaved ->
+                            mStudentsList = studentsListSaved
+                            //adapter.submitList(studentsList)
+                                mStudentsList.forEach { student ->
+                                    checkIfBardPowersAreActived(
+                                        student,
+                                        groupListWithBardPower4,
+                                        groupListWithBardPower6
+                                    )
+                                }
+                        }
+                        configureRecyclerView(students)
+                    }
+                })
+            databaseCallsVM.getClassInformation(classID!!)?.observe(requireActivity()) { classs ->
+                classLvl = classs.level
+            }
+
         })
 
         return binding.root
@@ -71,7 +91,7 @@ class NumNinjaFragment : Fragment(), BeltManagement {
     }
 
 
-    private fun configureRecyclerView(classDisplayed: Int){
+    private fun configureRecyclerView(studentList: List<Student>){
         val recyclerView = binding.numninjaListRecyclerView
         adapter = NumNinjaListAdapter(uiConfigure, this@NumNinjaFragment)
         recyclerView.adapter = adapter
@@ -82,31 +102,8 @@ class NumNinjaFragment : Fragment(), BeltManagement {
                 DividerItemDecoration.VERTICAL
             )
         )
+        adapter.submitList(studentList)
 
-        databaseCallsVM.getAllStudentsInClass(classDisplayed)
-            ?.observe(requireActivity(), Observer {
-                //val firstStudentName = it[0].students[0].firstName
-                if (it.isNotEmpty()) {
-                    val students = it[0].students
-                    students.let { studentsListSaved ->
-                        studentsList = studentsListSaved
-                        adapter.submitList(studentsList)
-                        if(!checkIfBardPowersAreActivedBoolean) {
-                            studentsList.forEach { student ->
-                                checkIfBardPowersAreActived(
-                                    student,
-                                    groupListWithBardPower4,
-                                    groupListWithBardPower6
-                                )
-                            }
-                            checkIfBardPowersAreActivedBoolean = true
-                        }
-                    }
-                }
-            })
-        databaseCallsVM.getClassInformation(classID!!)?.observe(requireActivity()) {
-             classLvl = it.level
-        }
     }
 
 
@@ -131,7 +128,7 @@ class NumNinjaFragment : Fragment(), BeltManagement {
 
     private fun assignXpBelt(){
         if(beltXpList.size > 0) {
-            studentsList.forEachIndexed { i, student ->
+            mStudentsList.forEachIndexed { i, student ->
                 student.beltXp = beltXpList[i]
                 databaseCallsVM.updateStudent(student)
             }
@@ -143,22 +140,32 @@ class NumNinjaFragment : Fragment(), BeltManagement {
 
 
     private fun checkIfBardPowersAreActived(student: Student, powerList4: MutableList<Int>, powerList6: MutableList<Int>){
-            if (student.job == getString(R.string.bard)) {
-                databaseCallsVM.getSealedPowersByStudent(student.id)?.observe(requireActivity()) {
+        val bardJob = getString(R.string.bard)
+            if (student.job == bardJob) {
+                databaseCallsVM.getSealedPowersByStudent(student.id)?.observe(requireActivity()) { powerStudent ->
+
                     // Verifie si le pouvoir 4 est actif
-                    if (it.sealedPowers.power4Actived) {
-                        powerList4.add(student.group)
+                    if (powerStudent.sealedPowers.power4Actived) {
+                        var groupHaveBardPower4 = false
+                        powerList4.forEach { groupNumberWithBard ->
+                            if(student.group == groupNumberWithBard) groupHaveBardPower4 = true
+                        }
+                        if(!groupHaveBardPower4) powerList4.add(student.group)
                     }
                     // Verifie si le pouvoir 6 est actif
-                    if (it.sealedPowers.power6Actived) {
-                        powerList6.add(student.group)
+                    if (powerStudent.sealedPowers.power6Actived) {
+                        var groupHaveBardPower6 = false
+                        powerList6.forEach { groupNumberWithBard ->
+                            if(student.group == groupNumberWithBard) groupHaveBardPower6 = true
+                        }
+                        if(!groupHaveBardPower6) powerList6.add(student.group)
                     }
                 }
             }
 
     }
     private  fun verifyPowersToUpBelt(powerList4: MutableList<Int>, powerList6: MutableList<Int>) {
-            studentsList.forEach { student ->
+            mStudentsList.forEach { student ->
                 if(powerList6.isNotEmpty() && powerList4.isNotEmpty()) {
                     powerList6.forEach { g ->
                         powerList4.forEach { group ->
@@ -223,7 +230,7 @@ class NumNinjaFragment : Fragment(), BeltManagement {
         cancelButton.setOnClickListener {
             powerList4.clear()
             powerList6.clear()
-            resetBeltXp()
+            resetNumNinjaData()
             builder.cancel()
         }
 
@@ -231,15 +238,14 @@ class NumNinjaFragment : Fragment(), BeltManagement {
         builder.show()
     }
 
-    private fun resetBeltXp(){
-        studentsList.forEach { student ->
-            student.beltXp = 0
-            databaseCallsVM.updateStudent(student)
+    private fun resetNumNinjaData(){
+        mStudentsList.forEach { student ->
+            resetSummaryData(student)
         }
     }
 
     private fun saveXpAndBelt(){
-        for (student in studentsList) {
+        for (student in mStudentsList) {
             addExperience(student, student.numNinjaXp)
             upgradeBelt(student)
             resetSummaryData(student)
@@ -294,7 +300,7 @@ class NumNinjaFragment : Fragment(), BeltManagement {
                 DividerItemDecoration.VERTICAL
             ))
 
-        dialogAdapter.submitList(studentsList)
+        dialogAdapter.submitList(mStudentsList)
     }
 
     private fun saveBelt(xpBelt: Int): Int {
