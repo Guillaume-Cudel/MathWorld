@@ -4,6 +4,8 @@ import model.Student
 
 interface StatsUpdater {
 
+    //todo centralise les fonctions avec un impl
+
     fun updateExperience(student: Student, experience: Int, xpMax: Int)
 
     fun updateLevel(student: Student)

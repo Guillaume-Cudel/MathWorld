@@ -233,6 +233,7 @@ class StudentDetailsActivity : AppCompatActivity() {
                     if(newCurrentSealedPower == 0){
                         currentPowerActived = false
                         updatePowerActived(powerId, currentPowerActived, studentPowers)
+                        updateSealedPower(powerId, newCurrentSealedPower)
                         setPadlock(currentPowerActived, padlock)
                         setPowerNumberAvailableText(newCurrentSealedPower, powerNumberAvailableText)
                     }

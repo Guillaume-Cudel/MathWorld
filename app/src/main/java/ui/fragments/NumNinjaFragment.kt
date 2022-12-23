@@ -43,8 +43,9 @@ class NumNinjaFragment : Fragment(), BeltManagement {
     private val groupListWithBardPower4 = mutableListOf<Int>()
     // Barde pouvoir 6 donne la ceinture superieur
     private val groupListWithBardPower6 = mutableListOf<Int>()
-    private var checkIfBardPowersAreActivedBoolean = false
 
+    //todo relance le fragment quand tu cliques dessus
+    // A voir plus tard
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -61,10 +62,11 @@ class NumNinjaFragment : Fragment(), BeltManagement {
                 ?.observe(requireActivity(), Observer { studentList ->
                     //val firstStudentName = it[0].students[0].firstName
                     if (studentList.isNotEmpty()) {
+                        groupListWithBardPower4.clear()
+                        groupListWithBardPower6.clear()
                         val students = studentList[0].students
                         students.let { studentsListSaved ->
                             mStudentsList = studentsListSaved
-                            //adapter.submitList(studentsList)
                                 mStudentsList.forEach { student ->
                                     checkIfBardPowersAreActived(
                                         student,
@@ -198,10 +200,10 @@ class NumNinjaFragment : Fragment(), BeltManagement {
             xpGained = adjustXpGainedByBeltXp(student.beltXp, classLvl!!)
             newBelt = saveBelt(student.beltXp)
         }
-
+        // Double l'xp avec le pouvoir 4
         if (group == student.group) {
-            // verifie si l'xp a un maximum ou non
             xpGained += xpGained
+            val bool = true
         }
         student.numNinjaXp = xpGained
         student.currentBelt = newBelt

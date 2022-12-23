@@ -32,10 +32,6 @@ interface ClassDAO {
     @Query("SELECT * FROM class_table WHERE id = :class_id ORDER BY name ASC")
     fun getAllStudentsInClass(class_id: Int): Flow<List<StudentsInClass>>
 
-    //todo to test
-    /*@Transaction
-    @Query("SELECT * FROM student_table WHERE id = :id")
-    fun getPowerByStudent(id: Int): Flow<StudentWithJob>*/
 
     @Transaction
     @Query("SELECT * FROM job_table WHERE name = :job")
@@ -45,7 +41,6 @@ interface ClassDAO {
     @Query("SELECT * FROM class_table WHERE id = :id")
     fun getClassInformation(id: Int): Flow<StudentsClass>
 
-    //todo get sealedPower
     @Transaction
     @Query("SELECT * FROM student_table WHERE id = :studentId")
     fun getSealedPowersByStudent(studentId: Int): Flow<StudentWithSealedPowers>
