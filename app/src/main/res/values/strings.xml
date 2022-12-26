@@ -10,7 +10,6 @@
     <string name="management">Management</string>
     <string name="notebook">Notebook</string>
     <string name="num_ninja" translatable="false">Num Ninja</string>
-    <string name="bard">Barde</string>
     <string name="add_class">Add class</string>
     <string name="enter_the_class_s_name">Enter the class\'s name</string>
     <string name="level">Level</string>
@@ -27,13 +26,14 @@
     <string name="firstname">Firstname</string>
     <string name="lastname">Lastname</string>
     <string name="choose_job">Choose job</string>
-    <string name="shapeshifter">Shapeshifter</string>
-    <string name="empath">Empath</string>
-    <string name="rogue">Rogue</string>
-    <string name="bettor">Bettor</string>
+    <string name="bard">Barde</string>
+    <string name="shapeshifter">Changelin</string>
+    <string name="empath">Empathe</string>
+    <string name="rogue">Filou</string>
+    <string name="bettor">Parieur</string>
+    <string name="spellweaver">Tisse-sort</string>
     <string name="hacker">Hacker</string>
     <string name="choose_group">Choose group</string>
-    <string name="spellweaver">Spellweaver</string>
     <string name="fill_fields">Please enter name and lastname to save.</string>
     <string name="student_added">is added to the class !</string>
     <string name="level_up"> level up !</string>
@@ -52,6 +52,11 @@
     <string name="summary">Summary</string>
     <string name="over_thirty">You cannot choose a number over 30 !</string>
     <string name="save_num_ninja">Save done</string>
+    <string name="edit_student">Edit student</string>
+    <string name="updated"> updated !"</string>
+    <string name="modify_level">Modify level</string>
+    <string name="modify_job">Modify job</string>
+    <string name="belt">Belt</string>
 
 
     <string-array name="Level">

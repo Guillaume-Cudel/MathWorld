@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.StudentDetailsActivity">
+
+
+    <item
+        android:id="@+id/toolbar_edit_student"
+        android:icon="@drawable/edit_student"
+        app:showAsAction="ifRoom"
+        android:title="@string/edit_student"/>
+
+</menu>

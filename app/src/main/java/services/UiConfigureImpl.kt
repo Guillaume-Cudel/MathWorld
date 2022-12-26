@@ -6,6 +6,7 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.widget.ImageViewCompat
 import com.guillaume.mathworld.R
+import di.MathWorldApplication
 
 class UiConfigureImpl: UiConfigure {
 
@@ -63,13 +64,14 @@ class UiConfigureImpl: UiConfigure {
 
     override fun displayJobImage(job: String, image: ImageView) {
         when (job) {
-            "Barde" -> image.setImageResource(R.drawable.avatar_barde)
-            "Changelin" -> image.setImageResource(R.drawable.avatar_changelin)
-            "Empathe" -> image.setImageResource(R.drawable.avatar_empathe)
-            "Filou" -> image.setImageResource(R.drawable.avatar_filou)
-            "Parieur" -> image.setImageResource(R.drawable.avatar_parieur)
-            "Tisse-sort" -> image.setImageResource(R.drawable.avatar_tisse_sorts)
-            "Hacker" -> image.setImageResource(R.drawable.avatar_hacker)
+
+            MathWorldApplication.context.getString(R.string.bard) -> image.setImageResource(R.drawable.avatar_barde)
+            MathWorldApplication.context.getString(R.string.shapeshifter) -> image.setImageResource(R.drawable.avatar_changelin)
+            MathWorldApplication.context.getString(R.string.empath) -> image.setImageResource(R.drawable.avatar_empathe)
+            MathWorldApplication.context.getString(R.string.rogue) -> image.setImageResource(R.drawable.avatar_filou)
+            MathWorldApplication.context.getString(R.string.bettor) -> image.setImageResource(R.drawable.avatar_parieur)
+            MathWorldApplication.context.getString(R.string.spellweaver) -> image.setImageResource(R.drawable.avatar_tisse_sorts)
+            MathWorldApplication.context.getString(R.string.hacker) -> image.setImageResource(R.drawable.avatar_hacker)
         }
     }
 

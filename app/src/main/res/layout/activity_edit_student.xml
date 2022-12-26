@@ -1,0 +1,478 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="ui.EditStudentActivity">
+
+
+    <LinearLayout
+        android:id="@+id/edit_student_toolbar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include
+            layout="@layout/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+
+    <ImageView
+        android:id="@+id/edit_student_current_class_crown"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="20dp"
+        android:src="@drawable/crown"
+        app:layout_constraintEnd_toStartOf="@+id/edit_student_current_class_response"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/edit_student_current_class_response"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="First class"
+        android:textColor="@color/orange"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@id/edit_student_current_class_crown"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/edit_student_current_class_crown" />
+
+    <ImageView
+        android:id="@+id/edit_student_current_class_crown2"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="20dp"
+        android:src="@drawable/crown"
+        app:layout_constraintStart_toEndOf="@+id/edit_student_current_class_response"
+        app:layout_constraintTop_toTopOf="@id/edit_student_current_class_crown" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/edit_student_firstname_text"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="10dp"
+        android:hint="@string/firstname"
+        android:textSize="15sp"
+        app:endIconMode="clear_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edit_student_current_class_crown">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_student_firstname_edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/edit_student_lastname_text"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:hint="@string/lastname"
+        android:textSize="15sp"
+        app:endIconMode="clear_text"
+        app:layout_constraintEnd_toEndOf="@id/edit_student_firstname_text"
+        app:layout_constraintStart_toStartOf="@id/edit_student_firstname_text"
+        app:layout_constraintTop_toBottomOf="@id/edit_student_firstname_text">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_student_lastname_edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/student_job_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/modify_job"
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="@id/edit_student_firstname_text"
+        app:layout_constraintTop_toBottomOf="@id/edit_student_lastname_text" />
+
+    <com.google.android.material.divider.MaterialDivider
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/student_job_text" />
+
+    <ImageView
+        android:id="@+id/edit_student_job_bard"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/round_job_image_yellow"
+        android:clickable="true"
+        android:clipToOutline="true"
+        android:focusable="true"
+        android:src="@drawable/avatar_barde"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/student_job_text" />
+
+    <TextView
+        android:id="@+id/edit_student_job_bard_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/bard"
+        app:layout_constraintEnd_toEndOf="@id/edit_student_job_bard"
+        app:layout_constraintStart_toStartOf="@id/edit_student_job_bard"
+        app:layout_constraintTop_toBottomOf="@id/edit_student_job_bard" />
+
+    <ImageView
+        android:id="@+id/edit_student_job_shapeshifter"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="20dp"
+        android:background="@drawable/round_orange"
+        android:clickable="true"
+        android:clipToOutline="true"
+        android:focusable="true"
+        android:src="@drawable/avatar_changelin"
+        app:layout_constraintStart_toEndOf="@id/edit_student_job_bard"
+        app:layout_constraintTop_toTopOf="@id/edit_student_job_bard" />
+
+    <TextView
+        android:id="@+id/edit_student_job_shapeshifter_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/shapeshifter"
+        app:layout_constraintEnd_toEndOf="@id/edit_student_job_shapeshifter"
+        app:layout_constraintStart_toStartOf="@id/edit_student_job_shapeshifter"
+        app:layout_constraintTop_toBottomOf="@id/edit_student_job_shapeshifter" />
+
+    <ImageView
+        android:id="@+id/edit_student_job_empath"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="20dp"
+        android:background="@drawable/round_orange"
+        android:clickable="true"
+        android:clipToOutline="true"
+        android:focusable="true"
+        android:src="@drawable/avatar_empathe"
+        app:layout_constraintStart_toEndOf="@id/edit_student_job_shapeshifter"
+        app:layout_constraintTop_toTopOf="@id/edit_student_job_bard" />
+
+    <TextView
+        android:id="@+id/edit_student_job_empath_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/empath"
+        app:layout_constraintEnd_toEndOf="@id/edit_student_job_empath"
+        app:layout_constraintStart_toStartOf="@id/edit_student_job_empath"
+        app:layout_constraintTop_toBottomOf="@id/edit_student_job_empath" />
+
+    <ImageView
+        android:id="@+id/edit_student_job_rogue"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="20dp"
+        android:background="@drawable/round_orange"
+        android:clickable="true"
+        android:clipToOutline="true"
+        android:focusable="true"
+        android:src="@drawable/avatar_filou"
+        app:layout_constraintStart_toEndOf="@id/edit_student_job_empath"
+        app:layout_constraintTop_toTopOf="@id/edit_student_job_bard" />
+
+    <TextView
+        android:id="@+id/edit_student_job_rogue_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/rogue"
+        app:layout_constraintEnd_toEndOf="@id/edit_student_job_rogue"
+        app:layout_constraintStart_toStartOf="@id/edit_student_job_rogue"
+        app:layout_constraintTop_toBottomOf="@id/edit_student_job_rogue" />
+
+    <ImageView
+        android:id="@+id/edit_student_job_bettor"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/round_orange"
+        android:clickable="true"
+        android:clipToOutline="true"
+        android:focusable="true"
+        android:src="@drawable/avatar_parieur"
+        app:layout_constraintEnd_toEndOf="@id/edit_student_job_shapeshifter"
+        app:layout_constraintStart_toStartOf="@id/edit_student_job_bard"
+        app:layout_constraintTop_toBottomOf="@id/edit_student_job_bard_text" />
+
+    <TextView
+        android:id="@+id/edit_student_job_bettor_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/bettor"
+        app:layout_constraintEnd_toEndOf="@id/edit_student_job_bettor"
+        app:layout_constraintStart_toStartOf="@id/edit_student_job_bettor"
+        app:layout_constraintTop_toBottomOf="@id/edit_student_job_bettor" />
+
+    <ImageView
+        android:id="@+id/edit_student_job_spellweaver"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:background="@drawable/round_orange"
+        android:clickable="true"
+        android:clipToOutline="true"
+        android:focusable="true"
+        android:src="@drawable/avatar_tisse_sorts"
+        app:layout_constraintEnd_toEndOf="@id/edit_student_job_empath"
+        app:layout_constraintStart_toStartOf="@id/edit_student_job_shapeshifter"
+        app:layout_constraintTop_toTopOf="@id/edit_student_job_bettor" />
+
+    <TextView
+        android:id="@+id/edit_student_job_spellweaver_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/spellweaver"
+        app:layout_constraintEnd_toEndOf="@id/edit_student_job_spellweaver"
+        app:layout_constraintStart_toStartOf="@id/edit_student_job_spellweaver"
+        app:layout_constraintTop_toBottomOf="@id/edit_student_job_spellweaver" />
+
+    <ImageView
+        android:id="@+id/edit_student_job_hacker"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:background="@drawable/round_orange"
+        android:clickable="true"
+        android:clipToOutline="true"
+        android:focusable="true"
+        android:src="@drawable/avatar_hacker"
+        app:layout_constraintEnd_toEndOf="@id/edit_student_job_rogue"
+        app:layout_constraintStart_toStartOf="@id/edit_student_job_empath"
+        app:layout_constraintTop_toTopOf="@id/edit_student_job_bettor" />
+
+    <TextView
+        android:id="@+id/edit_student_job_hacker_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/hacker"
+        app:layout_constraintEnd_toEndOf="@id/edit_student_job_hacker"
+        app:layout_constraintStart_toStartOf="@id/edit_student_job_hacker"
+        app:layout_constraintTop_toBottomOf="@id/edit_student_job_hacker" />
+
+
+    <TextView
+        android:id="@+id/edit_student_modify_level_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="@string/modify_level"
+        app:layout_constraintStart_toStartOf="@id/student_job_text"
+        app:layout_constraintTop_toBottomOf="@id/edit_student_job_bettor_text" />
+
+    <com.google.android.material.divider.MaterialDivider
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edit_student_modify_level_text" />
+
+    <TextView
+        android:id="@+id/edit_student_experience_progressbar_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="25dp"
+        android:text="@string/experience"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/edit_student_modify_level_text" />
+
+
+    <ProgressBar
+        android:id="@+id/edit_student_progressbar_experience"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:indeterminate="false"
+        android:progressTint="@color/orange"
+        app:layout_constraintBottom_toBottomOf="@id/edit_student_experience_progressbar_text"
+        app:layout_constraintStart_toEndOf="@id/edit_student_experience_progressbar_text"
+        app:layout_constraintTop_toTopOf="@id/edit_student_experience_progressbar_text" />
+
+    <TextView
+        android:id="@+id/edit_student_progressbar_experience_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/edit_student_progressbar_experience"
+        app:layout_constraintTop_toTopOf="@id/edit_student_progressbar_experience"
+        app:layout_constraintBottom_toBottomOf="@id/edit_student_progressbar_experience"
+        android:text="10/100"
+        android:textSize="10sp"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/edit_student_experience_button_one"
+        android:layout_width="40dp"
+        android:layout_height="35dp"
+        app:layout_constraintBottom_toBottomOf="@id/edit_student_progressbar_experience"
+        app:layout_constraintStart_toEndOf="@id/edit_student_progressbar_experience_result"
+        app:layout_constraintTop_toTopOf="@id/edit_student_progressbar_experience"
+        android:layout_marginStart="10dp"
+        android:backgroundTint="@android:color/transparent"
+        android:text="-1"
+        android:textColor="@color/dark_orange"
+        android:textSize="7sp"
+        app:cornerRadius="8dp"
+        app:strokeColor="@color/orange"
+        app:strokeWidth="3dp"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/edit_student_experience_button_five"
+        android:layout_width="40dp"
+        android:layout_height="35dp"
+        app:layout_constraintStart_toEndOf="@id/edit_student_experience_button_one"
+        app:layout_constraintTop_toTopOf="@id/edit_student_experience_button_one"
+        android:layout_marginStart="10dp"
+        android:backgroundTint="@android:color/transparent"
+        android:text="-5"
+        android:textColor="@color/dark_orange"
+        android:textSize="7sp"
+        app:cornerRadius="8dp"
+        app:strokeColor="@color/orange"
+        app:strokeWidth="3dp"/>
+
+    <TextView
+        android:id="@+id/edit_student_level_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@id/edit_student_experience_progressbar_text"
+        app:layout_constraintTop_toBottomOf="@id/edit_student_experience_progressbar_text"
+        android:layout_marginTop="15dp"
+        android:text="@string/level"/>
+
+    <ImageView
+        android:id="@+id/edit_student_level_image"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        app:layout_constraintStart_toStartOf="@id/edit_student_level_result"
+        app:layout_constraintEnd_toEndOf="@id/edit_student_level_result"
+        app:layout_constraintTop_toTopOf="@id/edit_student_level_result"
+        app:layout_constraintBottom_toBottomOf="@id/edit_student_level_result"
+        android:src="@drawable/star"/>
+
+    <TextView
+        android:id="@+id/edit_student_level_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/edit_student_level_button_minus"
+        app:layout_constraintTop_toTopOf="@id/edit_student_level_text"
+        app:layout_constraintBottom_toBottomOf="@id/edit_student_level_text"
+        android:layout_marginStart="25dp"
+        android:text="2"
+        android:textColor="@color/turquoise"
+        android:textSize="18sp"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/edit_student_level_button_minus"
+        android:layout_width="40dp"
+        android:layout_height="35dp"
+        app:layout_constraintBottom_toBottomOf="@id/edit_student_level_text"
+        app:layout_constraintStart_toEndOf="@id/edit_student_level_text"
+        app:layout_constraintTop_toTopOf="@id/edit_student_level_text"
+        android:layout_marginStart="40dp"
+        android:backgroundTint="@android:color/transparent"
+        android:text="-1"
+        android:textColor="@color/dark_orange"
+        android:textSize="7sp"
+        app:cornerRadius="8dp"
+        app:strokeColor="@color/orange"
+        app:strokeWidth="3dp"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/edit_student_level_button_plus"
+        android:layout_width="40dp"
+        android:layout_height="35dp"
+        app:layout_constraintBottom_toBottomOf="@id/edit_student_level_text"
+        app:layout_constraintStart_toEndOf="@id/edit_student_level_result"
+        app:layout_constraintTop_toTopOf="@id/edit_student_level_text"
+        android:layout_marginStart="25dp"
+        android:backgroundTint="@android:color/transparent"
+        android:text="+1"
+        android:textColor="@color/dark_orange"
+        android:textSize="6sp"
+        app:cornerRadius="8dp"
+        app:strokeColor="@color/orange"
+        app:strokeWidth="3dp"/>
+
+    <TextView
+        android:id="@+id/edit_student_belt_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@id/edit_student_experience_progressbar_text"
+        app:layout_constraintTop_toBottomOf="@id/edit_student_level_text"
+        android:layout_marginTop="20dp"
+        android:text="@string/belt"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/edit_student_belt_minus"
+        android:layout_width="40dp"
+        android:layout_height="35dp"
+        app:layout_constraintStart_toStartOf="@id/edit_student_level_button_minus"
+        app:layout_constraintTop_toTopOf="@id/edit_student_belt_text"
+        app:layout_constraintBottom_toBottomOf="@id/edit_student_belt_text"
+        android:backgroundTint="@android:color/transparent"
+        android:text="-1"
+        android:textColor="@color/dark_orange"
+        android:textSize="7sp"
+        app:cornerRadius="8dp"
+        app:strokeColor="@color/orange"
+        app:strokeWidth="3dp"/>
+
+    <ImageView
+        android:id="@+id/edit_student_belt_image"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        app:layout_constraintStart_toEndOf="@id/edit_student_belt_minus"
+        app:layout_constraintTop_toTopOf="@id/edit_student_belt_minus"
+        app:layout_constraintBottom_toBottomOf="@id/edit_student_belt_minus"
+        android:layout_marginStart="15dp"
+        android:src="@drawable/black_belt"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/edit_student_belt_plus"
+        android:layout_width="40dp"
+        android:layout_height="35dp"
+        app:layout_constraintStart_toStartOf="@id/edit_student_level_button_plus"
+        app:layout_constraintTop_toTopOf="@id/edit_student_belt_text"
+        app:layout_constraintBottom_toBottomOf="@id/edit_student_belt_text"
+        android:backgroundTint="@android:color/transparent"
+        android:text="+1"
+        android:textColor="@color/dark_orange"
+        android:textSize="6sp"
+        app:cornerRadius="8dp"
+        app:strokeColor="@color/orange"
+        app:strokeWidth="3dp"/>
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/edit_student_save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:text="@string/save"
+        app:cornerRadius="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/edit_student_firstname_text"
+        app:layout_constraintStart_toStartOf="@id/edit_student_firstname_text" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

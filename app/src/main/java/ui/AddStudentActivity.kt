@@ -24,7 +24,7 @@ class AddStudentActivity : AppCompatActivity() {
     private val databaseCallsVM: DatabaseCallsViewModel by viewModels {
         MathWorldViewModelFactory((application as MathWorldApplication).repository)
     }
-    private var currentJob = "Bard"
+    private var currentJob = ""
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -110,79 +110,64 @@ class AddStudentActivity : AppCompatActivity() {
     private fun setJob(job: String){
         setColorJobToGrey()
         when(job){
-            "Barde" -> { //binding.addStudentJobBard.setColorFilter(resources.getColor(R.color.orange))
-                //binding.addStudentJobBard.setBackgroundResource(R.drawable.round_job_image_yellow)
-            binding.addStudentJobBardText.setTextColor(Color.RED)
+            MathWorldApplication.context.getString(R.string.bard) -> { binding.addStudentJobBardText.setTextColor(Color.RED)
                 binding.addStudentJobBardText.setTypeface(null, Typeface.BOLD)}
-            "Changelin" -> {  //binding.addStudentJobShapeshifter.setBackgroundResource(R.drawable.round_job_image_yellow)
-                binding.addStudentJobShapeshifterText.setTextColor(Color.RED)
+            MathWorldApplication.context.getString(R.string.shapeshifter) -> { binding.addStudentJobShapeshifterText.setTextColor(Color.RED)
                 binding.addStudentJobShapeshifterText.setTypeface(null, Typeface.BOLD)}
-            "Empathe" -> { //binding.addStudentJobEmpath.setBackgroundResource(R.drawable.round_job_image_yellow)
-                binding.addStudentJobEmpathText.setTextColor(Color.RED)
+            MathWorldApplication.context.getString(R.string.empath) -> { binding.addStudentJobEmpathText.setTextColor(Color.RED)
                 binding.addStudentJobEmpathText.setTypeface(null, Typeface.BOLD)}
-            "Filou" -> {//binding.addStudentJobRogue.setBackgroundResource(R.drawable.round_job_image_yellow)
-                binding.addStudentJobRogueText.setTextColor(Color.RED)
+            MathWorldApplication.context.getString(R.string.rogue) -> { binding.addStudentJobRogueText.setTextColor(Color.RED)
                 binding.addStudentJobRogueText.setTypeface(null, Typeface.BOLD)}
-            "Parieur" -> { //binding.addStudentJobBettor.setBackgroundResource(R.drawable.round_job_image_yellow)
-                binding.addStudentJobBettorText.setTextColor(Color.RED)
+            MathWorldApplication.context.getString(R.string.bettor) -> { binding.addStudentJobBettorText.setTextColor(Color.RED)
                 binding.addStudentJobBettorText.setTypeface(null, Typeface.BOLD)}
-            "Tisse-sort" -> { //binding.addStudentJobSpellweaver.setBackgroundResource(R.drawable.round_job_image_yellow)
-                binding.addStudentJobSpellweaverText.setTextColor(Color.RED)
+            MathWorldApplication.context.getString(R.string.spellweaver) -> {  binding.addStudentJobSpellweaverText.setTextColor(Color.RED)
                 binding.addStudentJobSpellweaverText.setTypeface(null, Typeface.BOLD)}
-            "Hacker" -> {//binding.addStudentJobHacker.setBackgroundResource(R.drawable.round_job_image_yellow)
-                binding.addStudentJobHackerText.setTextColor(Color.RED)
+            MathWorldApplication.context.getString(R.string.hacker) -> {binding.addStudentJobHackerText.setTextColor(Color.RED)
                 binding.addStudentJobHackerText.setTypeface(null, Typeface.BOLD)}
         }
     }
 
     private fun setColorJobToGrey(){
         binding.addStudentJobBard.clearColorFilter()
-        //binding.addStudentJobBard.setBackgroundResource(R.drawable.round_job_image_grey)
         binding.addStudentJobBardText.setTextColor(Color.GRAY)
         binding.addStudentJobBardText.setTypeface(null, Typeface.NORMAL)
         binding.addStudentJobShapeshifter.clearColorFilter()
-        //binding.addStudentJobShapeshifter.setBackgroundResource(R.drawable.round_job_image_grey)
         binding.addStudentJobShapeshifterText.setTextColor(Color.GRAY)
         binding.addStudentJobShapeshifterText.setTypeface(null, Typeface.NORMAL)
         binding.addStudentJobEmpath.clearColorFilter()
-        //binding.addStudentJobEmpath.setBackgroundResource(R.drawable.round_job_image_grey)
         binding.addStudentJobEmpathText.setTextColor(Color.GRAY)
         binding.addStudentJobEmpathText.setTypeface(null, Typeface.NORMAL)
         binding.addStudentJobRogue.clearColorFilter()
-        //binding.addStudentJobRogue.setBackgroundResource(R.drawable.round_job_image_grey)
         binding.addStudentJobRogueText.setTextColor(Color.GRAY)
         binding.addStudentJobRogueText.setTypeface(null, Typeface.NORMAL)
         binding.addStudentJobBettor.clearColorFilter()
-        //binding.addStudentJobBettor.setBackgroundResource(R.drawable.round_job_image_grey)
         binding.addStudentJobBettorText.setTextColor(Color.GRAY)
         binding.addStudentJobBettorText.setTypeface(null, Typeface.NORMAL)
         binding.addStudentJobSpellweaver.clearColorFilter()
-        //binding.addStudentJobSpellweaver.setBackgroundResource(R.drawable.round_job_image_grey)
         binding.addStudentJobSpellweaverText.setTextColor(Color.GRAY)
         binding.addStudentJobSpellweaverText.setTypeface(null, Typeface.NORMAL)
         binding.addStudentJobHacker.clearColorFilter()
-        //binding.addStudentJobHacker.setBackgroundResource(R.drawable.round_job_image_grey)
         binding.addStudentJobHackerText.setTextColor(Color.GRAY)
         binding.addStudentJobHackerText.setTypeface(null, Typeface.NORMAL)
     }
 
     private fun onImageJobClick() {
-        currentJob = "Barde"
+        currentJob = MathWorldApplication.context.getString(R.string.bard)
         setJob(currentJob)
 
-        binding.addStudentJobBard.setOnClickListener {  currentJob = "Barde"
+        binding.addStudentJobBard.setOnClickListener {  currentJob = MathWorldApplication.context.getString(R.string.bard)
             setJob(currentJob)}
-        binding.addStudentJobShapeshifter.setOnClickListener {  currentJob = "Changelin"
+        binding.addStudentJobShapeshifter.setOnClickListener {  currentJob = MathWorldApplication.context.getString(R.string.shapeshifter)
             setJob(currentJob)}
-        binding.addStudentJobEmpath.setOnClickListener {  currentJob = "Empathe"
+        binding.addStudentJobEmpath.setOnClickListener {  currentJob = MathWorldApplication.context.getString(R.string.empath)
             setJob(currentJob)}
-        binding.addStudentJobRogue.setOnClickListener {  currentJob = "Filou"
+        binding.addStudentJobRogue.setOnClickListener {  currentJob = MathWorldApplication.context.getString(R.string.rogue)
             setJob(currentJob)}
-        binding.addStudentJobBettor.setOnClickListener {  currentJob = "Parieur"
+        binding.addStudentJobBettor.setOnClickListener {  currentJob = MathWorldApplication.context.getString(R.string.bettor)
             setJob(currentJob)}
-        binding.addStudentJobSpellweaver.setOnClickListener {  currentJob = "Tisse-sort"
+        binding.addStudentJobSpellweaver.setOnClickListener {  currentJob = MathWorldApplication.context.getString(R.string.spellweaver)
             setJob(currentJob)}
-        binding.addStudentJobHacker.setOnClickListener {  currentJob = "Hacker"
+        binding.addStudentJobHacker.setOnClickListener {  currentJob = MathWorldApplication.context.getString(R.string.hacker)
             setJob(currentJob)}
     }
 
@@ -197,7 +182,7 @@ class AddStudentActivity : AppCompatActivity() {
         binding.addStudentFirstnameEdit.editableText.clear()
         binding.addStudentLastnameEdit.editableText.clear()
         binding.addStudentGroupResult.text = "1"
-        currentJob = "Barde"
+        currentJob = R.string.bard.toString()
         setColorJobToGrey()
         binding.addStudentJobBard.setBackgroundResource(R.drawable.round_job_image_yellow)
     }

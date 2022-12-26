@@ -5,8 +5,6 @@
     <string name="close">Ferme</string>
     <string name="management">Gestion</string>
     <string name="notebook">Cahier</string>
-    <string name="hello_blank_fragment">Salut fragment vide</string>
-    <string name="bard">Barde</string>
     <string name="add_class">Ajout d\'une classe</string>
     <string name="enter_the_class_s_name">Entrez le nom de la classe</string>
     <string name="level">Niveau</string>
@@ -23,12 +21,13 @@
     <string name="firstname">Prénom</string>
     <string name="lastname">Nom</string>
     <string name="choose_job">Choisi une profession</string>
+    <string name="bard">Barde</string>
     <string name="shapeshifter">Changelin</string>
     <string name="empath">Empathe</string>
     <string name="rogue">Filou</string>
     <string name="bettor">Parieur</string>
-    <string name="hacker">Hacker</string>
     <string name="spellweaver">Tisse-sort</string>
+    <string name="hacker">Hacker</string>
     <string name="enter_name">Veuillez remplir les champs prénom et nom pour sauvegarder.</string>
     <string name="fill_fields">Veuillez remplir les champs prénom et nom pour sauvegarder.</string>
     <string name="student_added">est ajouté.e dans la classe !</string>
@@ -48,4 +47,9 @@
     <string name="summary">Recapitulatif</string>
     <string name="over_thirty">Tu ne peux pas choisir un nombre au dessus de 30 !</string>
     <string name="save_num_ninja">Sauvegarde effectuee</string>
+    <string name="edit_student">Modifier élève</string>
+    <string name="updated">mis à jour !</string>
+    <string name="modify_level">Modification niveau</string>
+    <string name="modify_job">Modification classe</string>
+    <string name="belt">Ceinture</string>
 </resources>

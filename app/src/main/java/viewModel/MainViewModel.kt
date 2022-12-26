@@ -1,6 +1,7 @@
 package viewModel
 
 import androidx.lifecycle.*
+import model.Student
 
 class MainViewModel: ViewModel() {
 
@@ -10,6 +11,7 @@ class MainViewModel: ViewModel() {
     fun setClass(number: Int){
         _classNumber.value = number
     }
+
 
 
 }

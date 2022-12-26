@@ -1,17 +1,24 @@
 package ui
 
+import android.content.Intent
 import android.content.res.ColorStateList
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.activity.result.ActivityResultCallback
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.core.widget.ImageViewCompat
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.button.MaterialButton
 import com.guillaume.mathworld.R
 import com.guillaume.mathworld.databinding.ActivityStudentDetailsBinding
@@ -23,14 +30,17 @@ import model.Student
 import services.UiConfigure
 import services.UiConfigureImpl
 import viewModel.DatabaseCallsViewModel
+import viewModel.MainViewModel
 
 class StudentDetailsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityStudentDetailsBinding
     private val uiConfigure: UiConfigure = UiConfigureImpl()
     private var student: Student? = null
+    private var classId: Int? = null
     private var studentSealedPower: SealedPower? = null
     private var powerList: JobWithPower? = null
     private var sealedPowerList: MutableList<Int> = mutableListOf()
+    private lateinit var mainVM: MainViewModel
     private val databaseCallsVM: DatabaseCallsViewModel by viewModels {
         MathWorldViewModelFactory((application as MathWorldApplication).repository)
     }
@@ -40,9 +50,15 @@ class StudentDetailsActivity : AppCompatActivity() {
         binding = ActivityStudentDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        mainVM = ViewModelProvider(this)[MainViewModel::class.java]
+
         configureToolbar()
         val bundle = intent.extras
         student = bundle!!.getSerializable("student") as Student
+
+        mainVM.classNumber.observe(this, Observer {
+            classId = it
+        })
 
         databaseCallsVM.getSealedPowersByStudent(student!!.id)?.observe(this) { sealedPower ->
             studentSealedPower = sealedPower.sealedPowers
@@ -54,8 +70,11 @@ class StudentDetailsActivity : AppCompatActivity() {
                     clickOnPower(studentSealedPower!!)
                 }
         }
+        //mainVM.setStudent(student!!)
 
     }
+
+
 
     private fun configureToolbar() {
         val toolbar: Toolbar = findViewById(R.id.toolbar)
@@ -63,12 +82,45 @@ class StudentDetailsActivity : AppCompatActivity() {
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        //return super.onCreateOptionsMenu(menu)
+        menuInflater.inflate(R.menu.student_details_toolbar_menu, menu)
+        return true
+    }
+
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {
             finish()
         }
+        if(item.itemId == R.id.toolbar_edit_student){
+            launchEditStudent()
+        }
         return super.onOptionsItemSelected(item)
     }
+
+    private fun launchEditStudent(){
+        val i = Intent(this, EditStudentActivity::class.java)
+        i.putExtra("student", student)
+        i.putExtra("classId", classId)
+        editStudent.launch(i)
+        //startActivity(i)
+    }
+
+    private val editStudent = registerForActivityResult(ActivityResultContracts.StartActivityForResult(), ActivityResultCallback {
+        val dataRecoved = it.data
+
+        val bundle: Bundle? = dataRecoved?.extras
+        if(bundle != null){
+            student = bundle.get("student") as Student
+            classId = bundle.getInt("classId")
+            //photoDescription= bundle.getString("photo_description")
+        }
+    })
+
+
+
+
 
     private fun displayData() {
         uiConfigure.setBelt(student!!.bestBelt, binding.studentDetailBeltImage)
