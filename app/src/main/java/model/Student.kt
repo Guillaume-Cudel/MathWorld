@@ -9,8 +9,8 @@ import kotlin.random.Random
 
 data class Student(
     val class_id: Int,
-    @ColumnInfo(name = "first_name") val firstName: String,
-    @ColumnInfo(name = "last_name") val lastName: String,
+    @ColumnInfo(name = "first_name") var firstName: String,
+    @ColumnInfo(name = "last_name") var lastName: String,
     var job: String,
     @ColumnInfo(name = "point_of_life") var pointOfLife: Int,
     var level: Int,

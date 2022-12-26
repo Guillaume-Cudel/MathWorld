@@ -141,6 +141,7 @@ class ClassManagementFragment : Fragment(), StatsUpdater {
     override fun openDetail(student: Student){
         val intent = Intent(requireActivity(), StudentDetailsActivity::class.java)
         intent.putExtra("student", student)
+        intent.putExtra("classId", classID)
         startActivity(intent)
     }
 

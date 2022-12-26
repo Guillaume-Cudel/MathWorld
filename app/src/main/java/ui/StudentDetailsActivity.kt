@@ -40,7 +40,6 @@ class StudentDetailsActivity : AppCompatActivity() {
     private var studentSealedPower: SealedPower? = null
     private var powerList: JobWithPower? = null
     private var sealedPowerList: MutableList<Int> = mutableListOf()
-    private lateinit var mainVM: MainViewModel
     private val databaseCallsVM: DatabaseCallsViewModel by viewModels {
         MathWorldViewModelFactory((application as MathWorldApplication).repository)
     }
@@ -50,19 +49,19 @@ class StudentDetailsActivity : AppCompatActivity() {
         binding = ActivityStudentDetailsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        mainVM = ViewModelProvider(this)[MainViewModel::class.java]
-
         configureToolbar()
         val bundle = intent.extras
         student = bundle!!.getSerializable("student") as Student
+        classId = bundle.getInt("classId")
 
-        mainVM.classNumber.observe(this, Observer {
-            classId = it
-        })
+        displayPowers(student!!)
 
-        databaseCallsVM.getSealedPowersByStudent(student!!.id)?.observe(this) { sealedPower ->
+    }
+
+    private fun displayPowers(student: Student){
+        databaseCallsVM.getSealedPowersByStudent(student.id)?.observe(this) { sealedPower ->
             studentSealedPower = sealedPower.sealedPowers
-            databaseCallsVM.getPowersInformationsByJob(student!!.job)
+            databaseCallsVM.getPowersInformationsByJob(student.job)
                 ?.observe(this) { jobPowersList ->
                     powerList = jobPowersList[0]
                     displayPowersInformation(studentSealedPower!!, powerList!!)
@@ -70,8 +69,6 @@ class StudentDetailsActivity : AppCompatActivity() {
                     clickOnPower(studentSealedPower!!)
                 }
         }
-        //mainVM.setStudent(student!!)
-
     }
 
 
@@ -104,7 +101,6 @@ class StudentDetailsActivity : AppCompatActivity() {
         i.putExtra("student", student)
         i.putExtra("classId", classId)
         editStudent.launch(i)
-        //startActivity(i)
     }
 
     private val editStudent = registerForActivityResult(ActivityResultContracts.StartActivityForResult(), ActivityResultCallback {
@@ -114,7 +110,7 @@ class StudentDetailsActivity : AppCompatActivity() {
         if(bundle != null){
             student = bundle.get("student") as Student
             classId = bundle.getInt("classId")
-            //photoDescription= bundle.getString("photo_description")
+            displayPowers(student!!)
         }
     })
 

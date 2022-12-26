@@ -59,11 +59,10 @@ class AddStudentActivity : AppCompatActivity() {
             && binding.addStudentLastnameEdit.editableText.toString() != "") {
             val firstname = binding.addStudentFirstnameEdit.editableText.toString()
             val lastname = binding.addStudentLastnameEdit.editableText.toString()
-            val job = currentJob
             val group = binding.addStudentGroupResult.text.toString()
 
             val newStudent = Student(
-                classId, firstname, lastname, job, 3, 1,
+                classId, firstname, lastname, currentJob, 3, 1,
                 0, 45, group.toInt(), 1, 0, 0, 0
             )
             val newStudentSealedPowers = SealedPower(newStudent.id,

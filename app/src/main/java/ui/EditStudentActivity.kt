@@ -1,14 +1,18 @@
 package ui
 
+import android.app.Activity
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.Toolbar
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.guillaume.mathworld.R
 import com.guillaume.mathworld.databinding.ActivityEditStudentBinding
@@ -46,15 +50,38 @@ class EditStudentActivity : AppCompatActivity() {
         if(student != null){
             setStudentData(student!!)
             currentJob = student!!.job
+            setClassName(classId!!)
         }
 
 
         onImageJobClick()
 
-        binding.editStudentSave.setOnClickListener {
-            editStudent(classId!!, student!!)
-        }
+       configureButtons()
 
+    }
+
+    private fun configureButtons(){
+        binding.editStudentExperienceButtonOne.setOnClickListener {
+            dicreaseExperience(1, student!!)
+        }
+        binding.editStudentExperienceButtonFive.setOnClickListener {
+            dicreaseExperience(5, student!!)
+        }
+        binding.editStudentLevelButtonPlus.setOnClickListener {
+            editLevel(1, student!!)
+        }
+        binding.editStudentLevelButtonMinus.setOnClickListener {
+            editLevel(-1, student!!)
+        }
+        binding.editStudentBeltPlus.setOnClickListener {
+            editBelt(1, student!!)
+        }
+        binding.editStudentBeltMinus.setOnClickListener {
+            editBelt(-1, student!!)
+        }
+        binding.editStudentSave.setOnClickListener {
+            saveEditingStudent()
+        }
     }
 
     private fun configureToolbar() {
@@ -151,22 +178,77 @@ class EditStudentActivity : AppCompatActivity() {
         }
     }
 
-    //todo modifie l activity pour modifier ce qui peut l etre
-    private fun editStudent(classId: Int, student: Student){
+    private fun saveEditingStudent(){
         if(binding.editStudentFirstnameEdit.editableText.toString() != ""
             && binding.editStudentLastnameEdit.editableText.toString() != "") {
             val firstname = binding.editStudentFirstnameEdit.editableText.toString()
             val lastname = binding.editStudentLastnameEdit.editableText.toString()
-            val job = currentJob
+            //currentJob
+            if(student!!.firstName != firstname) student!!.firstName = firstname
+            if(student!!.lastName != lastname) student!!.lastName = lastname
+            if(student!!.job != currentJob) student!!.job = currentJob
 
 
-
-            //databaseCallsVM.insertStudent(newStudent)
-            Toast.makeText(this, "$firstname $lastname" + getString(R.string.updated), Toast.LENGTH_LONG).show()
+            databaseCallsVM.updateStudent(student!!)
+            Toast.makeText(this, "$firstname $lastname " + getString(R.string.updated), Toast.LENGTH_LONG).show()
         } else {
             Toast.makeText(this, getString(R.string.fill_fields), Toast.LENGTH_LONG).show()
         }
+
+        val intent = Intent()
+        intent.putExtra("student", student)
+        intent.putExtra("classId", classId)
+        setResult(Activity.RESULT_OK, intent)
+        finish()
     }
 
-    //todo ajoute la fonctionnalite des boutons
+    private fun editBelt(number: Int, student: Student){
+        var currentBelt = student.bestBelt
+
+        when(number){
+            1 -> {
+                currentBelt++
+                student.bestBelt = currentBelt
+            }
+            -1 -> {
+                if(currentBelt > 1) {
+                    currentBelt--
+                    student.bestBelt = currentBelt
+                } else Toast.makeText(this, "Ceinture minimale atteinte !", Toast.LENGTH_SHORT).show()
+            }
+        }
+        databaseCallsVM.updateStudent(student)
+        setStudentData(student)
+    }
+
+    private fun dicreaseExperience(xpToDecrease: Int, student: Student){
+        var newExperience = student.experience
+        if(newExperience > 0) {
+            newExperience = newExperience.minus(xpToDecrease)
+            student.experience = newExperience
+            databaseCallsVM.updateStudent(student)
+            setStudentData(student)
+        } else Toast.makeText(this, "Il peut pas sous-pex gros !", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun editLevel(editingLevel: Int, student: Student){
+        var newLevel = student.level
+        var newXpMax = student.xpMax
+
+        if(editingLevel > 0) {
+            newLevel = newLevel.plus(1)
+            newXpMax = newXpMax.plus(5)
+            student.level = newLevel
+            student.xpMax = newXpMax
+        } else {
+            if(newLevel > 1) {
+                newLevel = newLevel.minus(1)
+                newXpMax = newXpMax.minus(5)
+                student.level = newLevel
+                student.xpMax = newXpMax
+            } else Toast.makeText(this, "Niveau minimum atteint !", Toast.LENGTH_LONG).show()
+        }
+        databaseCallsVM.updateStudent(student)
+        setStudentData(student)
+    }
 }
