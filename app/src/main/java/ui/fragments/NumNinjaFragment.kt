@@ -87,7 +87,16 @@ class NumNinjaFragment : Fragment(), BeltManagement {
 
     override fun onResume() {
         super.onResume()
-        activity?.title = "Num Ninja"
+        activity?.title = "Temple of Panglossya"
+
+       /* mStudentsList.forEach { student ->
+            checkIfBardPowersAreActived(
+                student,
+                groupListWithBardPower4,
+                groupListWithBardPower6
+            )
+        }*/
+
     }
 
 
@@ -221,15 +230,13 @@ class NumNinjaFragment : Fragment(), BeltManagement {
 
         saveButton.setOnClickListener {
             saveXpAndBelt()
-            powerList4.clear()
-            powerList6.clear()
+            clearAllList(powerList4, powerList6)
             builder.cancel()
             Toast.makeText(requireActivity(), getString(R.string.save_num_ninja), Toast.LENGTH_LONG)
                 .show()
         }
         cancelButton.setOnClickListener {
-            powerList4.clear()
-            powerList6.clear()
+            clearAllList(powerList4, powerList6)
             resetNumNinjaData()
             builder.cancel()
         }
@@ -240,6 +247,15 @@ class NumNinjaFragment : Fragment(), BeltManagement {
         mStudentsList.forEach { student ->
             resetSummaryData(student)
         }
+    }
+
+    private fun clearAllList(
+        powerList4: MutableList<Int>,
+        powerList6: MutableList<Int>
+    ) {
+        powerList4.clear()
+        powerList6.clear()
+        beltXpList.clear()
     }
 
     private fun saveXpAndBelt() {

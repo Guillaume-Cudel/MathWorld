@@ -12,8 +12,8 @@ android {
         applicationId "com.guillaume.mathworld"
         minSdk 21
         targetSdk 32
-        versionCode 8
-        versionName "1.41"
+        versionCode 9
+        versionName "1.5 available"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
