@@ -39,8 +39,10 @@ class NumNinjaFragment : Fragment(), BeltManagement {
     private lateinit var adapter: NumNinjaListAdapter
     private var mStudentsList: List<Student> = listOf()
     private val beltXpList: MutableList<Int> = mutableListOf()
+
     // Barde Pouvoir 4 double l'xp
     private val groupListWithBardPower4 = mutableListOf<Int>()
+
     // Barde pouvoir 6 donne la ceinture superieur
     private val groupListWithBardPower6 = mutableListOf<Int>()
 
@@ -54,8 +56,6 @@ class NumNinjaFragment : Fragment(), BeltManagement {
         mainVM = ViewModelProvider(requireActivity())[MainViewModel::class.java]
         setHasOptionsMenu(true)
 
-
-
         mainVM.classNumber.observe(requireActivity(), Observer {
             classID = it
             databaseCallsVM.getAllStudentsInClass(classID!!)
@@ -67,13 +67,13 @@ class NumNinjaFragment : Fragment(), BeltManagement {
                         val students = studentList[0].students
                         students.let { studentsListSaved ->
                             mStudentsList = studentsListSaved
-                                mStudentsList.forEach { student ->
-                                    checkIfBardPowersAreActived(
-                                        student,
-                                        groupListWithBardPower4,
-                                        groupListWithBardPower6
-                                    )
-                                }
+                            mStudentsList.forEach { student ->
+                                checkIfBardPowersAreActived(
+                                    student,
+                                    groupListWithBardPower4,
+                                    groupListWithBardPower6
+                                )
+                            }
                         }
                         configureRecyclerView(students)
                     }
@@ -81,9 +81,7 @@ class NumNinjaFragment : Fragment(), BeltManagement {
             databaseCallsVM.getClassInformation(classID!!)?.observe(requireActivity()) { classs ->
                 classLvl = classs.level
             }
-
         })
-
         return binding.root
     }
 
@@ -93,7 +91,7 @@ class NumNinjaFragment : Fragment(), BeltManagement {
     }
 
 
-    private fun configureRecyclerView(studentList: List<Student>){
+    private fun configureRecyclerView(studentList: List<Student>) {
         val recyclerView = binding.numninjaListRecyclerView
         adapter = NumNinjaListAdapter(uiConfigure, this@NumNinjaFragment)
         recyclerView.adapter = adapter
@@ -116,20 +114,17 @@ class NumNinjaFragment : Fragment(), BeltManagement {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.toolbar_save_num_ninja -> {
-
-                if(classLvl != null) {
+                if (classLvl != null) {
                     assignXpBelt()
                 }
-
                 true
             }
-
             else -> super.onOptionsItemSelected(item)
         }
     }
 
-    private fun assignXpBelt(){
-        if(beltXpList.size > 0) {
+    private fun assignXpBelt() {
+        if (beltXpList.size > 0) {
             mStudentsList.forEachIndexed { i, student ->
                 student.beltXp = beltXpList[i]
                 databaseCallsVM.updateStudent(student)
@@ -138,58 +133,59 @@ class NumNinjaFragment : Fragment(), BeltManagement {
         }
     }
 
-
-
-
-    private fun checkIfBardPowersAreActived(student: Student, powerList4: MutableList<Int>, powerList6: MutableList<Int>){
+    private fun checkIfBardPowersAreActived(
+        student: Student,
+        powerList4: MutableList<Int>,
+        powerList6: MutableList<Int>
+    ) {
         val bardJob = getString(R.string.bard)
-            if (student.job == bardJob) {
-                databaseCallsVM.getSealedPowersByStudent(student.id)?.observe(requireActivity()) { powerStudent ->
+        if (student.job == bardJob) {
+            databaseCallsVM.getSealedPowersByStudent(student.id)
+                ?.observe(requireActivity()) { powerStudent ->
 
                     // Verifie si le pouvoir 4 est actif
                     if (powerStudent.sealedPowers.power4Actived) {
                         var groupHaveBardPower4 = false
                         powerList4.forEach { groupNumberWithBard ->
-                            if(student.group == groupNumberWithBard) groupHaveBardPower4 = true
+                            if (student.group == groupNumberWithBard) groupHaveBardPower4 = true
                         }
-                        if(!groupHaveBardPower4) powerList4.add(student.group)
+                        if (!groupHaveBardPower4) powerList4.add(student.group)
                     }
                     // Verifie si le pouvoir 6 est actif
                     if (powerStudent.sealedPowers.power6Actived) {
                         var groupHaveBardPower6 = false
                         powerList6.forEach { groupNumberWithBard ->
-                            if(student.group == groupNumberWithBard) groupHaveBardPower6 = true
+                            if (student.group == groupNumberWithBard) groupHaveBardPower6 = true
                         }
-                        if(!groupHaveBardPower6) powerList6.add(student.group)
+                        if (!groupHaveBardPower6) powerList6.add(student.group)
                     }
                 }
-            }
-
+        }
     }
-    private  fun verifyPowersToUpBelt(powerList4: MutableList<Int>, powerList6: MutableList<Int>) {
-            mStudentsList.forEach { student ->
-                if(powerList6.isNotEmpty() && powerList4.isNotEmpty()) {
-                    powerList6.forEach { g ->
-                        powerList4.forEach { group ->
-                            addXpByPowerActived(student, g, group)
-                        }
-                    }
-                } else if(powerList4.isNotEmpty()){
+
+    private fun verifyPowersToUpBelt(powerList4: MutableList<Int>, powerList6: MutableList<Int>) {
+        mStudentsList.forEach { student ->
+            if (powerList6.isNotEmpty() && powerList4.isNotEmpty()) {
+                powerList6.forEach { g ->
                     powerList4.forEach { group ->
-                        addXpByPowerActived(student, 0, group)
+                        addXpByPowerActived(student, g, group)
                     }
-                } else if(powerList6.isNotEmpty()){
-                    powerList6.forEach { g ->
-                        addXpByPowerActived(student, g, 0)
-                    }
-                } else addXpByPowerActived(student, 0, 0)
+                }
+            } else if (powerList4.isNotEmpty()) {
+                powerList4.forEach { group ->
+                    addXpByPowerActived(student, 0, group)
+                }
+            } else if (powerList6.isNotEmpty()) {
+                powerList6.forEach { g ->
+                    addXpByPowerActived(student, g, 0)
+                }
+            } else addXpByPowerActived(student, 0, 0)
 
-            }
-            openVerificationWindows(powerList4, powerList6)
-
+        }
+        openVerificationWindows(powerList4, powerList6)
     }
 
-    private fun addXpByPowerActived(student: Student, g: Int, group: Int){
+    private fun addXpByPowerActived(student: Student, g: Int, group: Int) {
         var xpGained = 0
         var newBelt = 0
         // Ajuste le gain avec le pouvoir 6 actif
@@ -203,14 +199,16 @@ class NumNinjaFragment : Fragment(), BeltManagement {
         // Double l'xp avec le pouvoir 4
         if (group == student.group) {
             xpGained += xpGained
-            val bool = true
         }
         student.numNinjaXp = xpGained
         student.currentBelt = newBelt
         databaseCallsVM.updateStudent(student)
     }
 
-    private  fun openVerificationWindows(powerList4: MutableList<Int>, powerList6: MutableList<Int>) {
+    private fun openVerificationWindows(
+        powerList4: MutableList<Int>,
+        powerList6: MutableList<Int>
+    ) {
         val builder = AlertDialog.Builder(requireActivity()).create()
         val dialogView = layoutInflater.inflate(R.layout.dialog_save_new_belts, null)
         builder.setView(dialogView)
@@ -226,27 +224,25 @@ class NumNinjaFragment : Fragment(), BeltManagement {
             powerList4.clear()
             powerList6.clear()
             builder.cancel()
-            Toast.makeText(requireActivity(), getString(R.string.save_num_ninja), Toast.LENGTH_LONG).show()
+            Toast.makeText(requireActivity(), getString(R.string.save_num_ninja), Toast.LENGTH_LONG)
+                .show()
         }
-
         cancelButton.setOnClickListener {
             powerList4.clear()
             powerList6.clear()
             resetNumNinjaData()
             builder.cancel()
         }
-
-        //builder.setCanceledOnTouchOutside(true)
         builder.show()
     }
 
-    private fun resetNumNinjaData(){
+    private fun resetNumNinjaData() {
         mStudentsList.forEach { student ->
             resetSummaryData(student)
         }
     }
 
-    private fun saveXpAndBelt(){
+    private fun saveXpAndBelt() {
         for (student in mStudentsList) {
             addExperience(student, student.numNinjaXp)
             upgradeBelt(student)
@@ -254,19 +250,19 @@ class NumNinjaFragment : Fragment(), BeltManagement {
         }
     }
 
-    private fun resetSummaryData(student: Student){
+    private fun resetSummaryData(student: Student) {
         student.numNinjaXp = 0
         student.currentBelt = 0
         student.beltXp = 0
         databaseCallsVM.updateStudent(student)
     }
 
-    private fun addExperience(student: Student, xp: Int){
+    private fun addExperience(student: Student, xp: Int) {
         var xpMax = student.xpMax
         var experience = student.experience
         val newExperience = experience + xp
 
-        if(newExperience >= xpMax){
+        if (newExperience >= xpMax) {
             experience = newExperience - xpMax
             xpMax += 5
             student.experience = experience
@@ -279,8 +275,8 @@ class NumNinjaFragment : Fragment(), BeltManagement {
         databaseCallsVM.updateStudent(student)
     }
 
-    private fun upgradeBelt(student: Student){
-        if(student.currentBelt > student.bestBelt){
+    private fun upgradeBelt(student: Student) {
+        if (student.currentBelt > student.bestBelt) {
             student.bestBelt = student.currentBelt
             databaseCallsVM.updateStudent(student)
         }
@@ -300,8 +296,8 @@ class NumNinjaFragment : Fragment(), BeltManagement {
             DividerItemDecoration(
                 requireActivity(),
                 DividerItemDecoration.VERTICAL
-            ))
-
+            )
+        )
         dialogAdapter.submitList(mStudentsList)
     }
 
@@ -318,7 +314,7 @@ class NumNinjaFragment : Fragment(), BeltManagement {
             in 26..29 -> newBelt = 8
             30 -> newBelt = 9
         }
-        return  newBelt
+        return newBelt
     }
 
     private fun saveBeltWithPower6(xpBelt: Int): Int {
@@ -334,15 +330,15 @@ class NumNinjaFragment : Fragment(), BeltManagement {
             in 26..29 -> newBelt = 9
             30 -> newBelt = 10
         }
-        return  newBelt
+        return newBelt
     }
 
     private fun adjustXpGainedByBeltXp(beltXp: Int, classLvl: String): Int {
         var xpResult = 0
 
-        when(classLvl){
+        when (classLvl) {
             "6e" -> {
-                when(beltXp){
+                when (beltXp) {
                     in 0..3 -> xpResult = 0
                     in 4..6 -> xpResult = 0
                     in 7..9 -> xpResult = 2
@@ -354,49 +350,55 @@ class NumNinjaFragment : Fragment(), BeltManagement {
                     30 -> xpResult = 20
                 }
             }
-            "5e" ->{ when(beltXp){
-                in 0..3 -> xpResult = 0
-                in 4..6 -> xpResult = 0
-                in 7..9 -> xpResult = 0
-                in 10..13 -> xpResult = 0
-                in 14..17 -> xpResult = 2
-                in 18..21 -> xpResult = 5
-                in 22..25 -> xpResult = 5
-                in 26..29 -> xpResult = 10
-                30 -> xpResult = 20
-            }}
-            "4e" ->{ when(beltXp){
-                in 0..3 -> xpResult = 0
-                in 4..6 -> xpResult = 0
-                in 7..9 -> xpResult = 0
-                in 10..13 -> xpResult = 0
-                in 14..17 -> xpResult = 0
-                in 18..21 -> xpResult = 1
-                in 22..25 -> xpResult = 3
-                in 26..29 -> xpResult = 5
-                30 -> xpResult = 10
-            }}
-            "3e" ->{ when(beltXp){
-                in 0..3 -> xpResult = 0
-                in 4..6 -> xpResult = 0
-                in 7..9 -> xpResult = 0
-                in 10..13 -> xpResult = 0
-                in 14..17 -> xpResult = 0
-                in 18..21 -> xpResult = 1
-                in 22..25 -> xpResult = 3
-                in 26..29 -> xpResult = 5
-                30 -> xpResult = 10
-            }}
+            "5e" -> {
+                when (beltXp) {
+                    in 0..3 -> xpResult = 0
+                    in 4..6 -> xpResult = 0
+                    in 7..9 -> xpResult = 0
+                    in 10..13 -> xpResult = 0
+                    in 14..17 -> xpResult = 2
+                    in 18..21 -> xpResult = 5
+                    in 22..25 -> xpResult = 5
+                    in 26..29 -> xpResult = 10
+                    30 -> xpResult = 20
+                }
+            }
+            "4e" -> {
+                when (beltXp) {
+                    in 0..3 -> xpResult = 0
+                    in 4..6 -> xpResult = 0
+                    in 7..9 -> xpResult = 0
+                    in 10..13 -> xpResult = 0
+                    in 14..17 -> xpResult = 0
+                    in 18..21 -> xpResult = 1
+                    in 22..25 -> xpResult = 3
+                    in 26..29 -> xpResult = 5
+                    30 -> xpResult = 10
+                }
+            }
+            "3e" -> {
+                when (beltXp) {
+                    in 0..3 -> xpResult = 0
+                    in 4..6 -> xpResult = 0
+                    in 7..9 -> xpResult = 0
+                    in 10..13 -> xpResult = 0
+                    in 14..17 -> xpResult = 0
+                    in 18..21 -> xpResult = 1
+                    in 22..25 -> xpResult = 3
+                    in 26..29 -> xpResult = 5
+                    30 -> xpResult = 10
+                }
+            }
         }
         return xpResult
     }
 
-    private fun adjustXpGainedByBeltXpIfPower6(beltXp: Int, classLvl: String): Int{
+    private fun adjustXpGainedByBeltXpIfPower6(beltXp: Int, classLvl: String): Int {
         var xpResult = 0
 
-        when(classLvl){
+        when (classLvl) {
             "6e" -> {
-                when(beltXp){
+                when (beltXp) {
                     in 0..3 -> xpResult = 0
                     in 4..6 -> xpResult = 2
                     in 7..9 -> xpResult = 2
@@ -408,39 +410,45 @@ class NumNinjaFragment : Fragment(), BeltManagement {
                     30 -> xpResult = 30
                 }
             }
-            "5e" ->{ when(beltXp){
-                in 0..3 -> xpResult = 0
-                in 4..6 -> xpResult = 0
-                in 7..9 -> xpResult = 0
-                in 10..13 -> xpResult = 2
-                in 14..17 -> xpResult = 5
-                in 18..21 -> xpResult = 10
-                in 22..25 -> xpResult = 10
-                in 26..29 -> xpResult = 20
-                30 -> xpResult = 30
-            }}
-            "4e" ->{ when(beltXp){
-                in 0..3 -> xpResult = 0
-                in 4..6 -> xpResult = 0
-                in 7..9 -> xpResult = 0
-                in 10..13 -> xpResult = 0
-                in 14..17 -> xpResult = 1
-                in 18..21 -> xpResult = 3
-                in 22..25 -> xpResult = 5
-                in 26..29 -> xpResult = 10
-                30 -> xpResult = 20
-            }}
-            "3e" ->{ when(beltXp){
-                in 0..3 -> xpResult = 0
-                in 4..6 -> xpResult = 0
-                in 7..9 -> xpResult = 0
-                in 10..13 -> xpResult = 0
-                in 14..17 -> xpResult = 1
-                in 18..21 -> xpResult = 3
-                in 22..25 -> xpResult = 5
-                in 26..29 -> xpResult = 10
-                30 -> xpResult = 15
-            }}
+            "5e" -> {
+                when (beltXp) {
+                    in 0..3 -> xpResult = 0
+                    in 4..6 -> xpResult = 0
+                    in 7..9 -> xpResult = 0
+                    in 10..13 -> xpResult = 2
+                    in 14..17 -> xpResult = 5
+                    in 18..21 -> xpResult = 10
+                    in 22..25 -> xpResult = 10
+                    in 26..29 -> xpResult = 20
+                    30 -> xpResult = 30
+                }
+            }
+            "4e" -> {
+                when (beltXp) {
+                    in 0..3 -> xpResult = 0
+                    in 4..6 -> xpResult = 0
+                    in 7..9 -> xpResult = 0
+                    in 10..13 -> xpResult = 0
+                    in 14..17 -> xpResult = 1
+                    in 18..21 -> xpResult = 3
+                    in 22..25 -> xpResult = 5
+                    in 26..29 -> xpResult = 10
+                    30 -> xpResult = 20
+                }
+            }
+            "3e" -> {
+                when (beltXp) {
+                    in 0..3 -> xpResult = 0
+                    in 4..6 -> xpResult = 0
+                    in 7..9 -> xpResult = 0
+                    in 10..13 -> xpResult = 0
+                    in 14..17 -> xpResult = 1
+                    in 18..21 -> xpResult = 3
+                    in 22..25 -> xpResult = 5
+                    in 26..29 -> xpResult = 10
+                    30 -> xpResult = 15
+                }
+            }
         }
         return xpResult
     }

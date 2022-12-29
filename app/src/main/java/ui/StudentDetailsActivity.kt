@@ -114,10 +114,6 @@ class StudentDetailsActivity : AppCompatActivity() {
         }
     })
 
-
-
-
-
     private fun displayData() {
         uiConfigure.setBelt(student!!.bestBelt, binding.studentDetailBeltImage)
         uiConfigure.displayExperience(

@@ -5,6 +5,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.*
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
@@ -54,11 +55,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         binding.navView.setNavigationItemSelectedListener(this)
         binding.navView.setCheckedItem(R.id.header_item_first)
-
-
     }
 
-    private fun configureNavigation(){
+    private fun configureNavigation() {
         viewPager2 = findViewById(R.id.viewpager2)
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val bottomNavigation: NavigationBarView = findViewById(R.id.bottom_navigation)
@@ -70,9 +69,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         bottomNavigation.setOnItemSelectedListener {
-            when(it.itemId){
+            when (it.itemId) {
                 R.id.item_class_management -> {
-                viewPager2.setCurrentItem(0, false)
+                    viewPager2.setCurrentItem(0, false)
                 }
                 R.id.item_notebook -> {
                     viewPager2.setCurrentItem(1, false)
@@ -83,13 +82,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
             true
         }
-        viewPager2.registerOnPageChangeCallback(object: ViewPager2.OnPageChangeCallback(){
+        viewPager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
-                if(position == 0){
+                if (position == 0) {
                     bottomNavigation.menu.findItem(R.id.item_class_management).isChecked = true
-                }else if(position == 1){
+                } else if (position == 1) {
                     bottomNavigation.menu.findItem(R.id.item_notebook).isChecked = true
-                }else if(position == 2){
+                } else if (position == 2) {
                     bottomNavigation.menu.findItem(R.id.item_num_ninja).isChecked = true
                 }
                 super.onPageSelected(position)
@@ -108,7 +107,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onBackPressed() {
         val drawerLayout: DrawerLayout = binding.drawerLayout
-        if(drawerLayout.isDrawerOpen(GravityCompat.START)){
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START)
         } else {
             super.onBackPressed()
@@ -141,62 +140,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if(toggle.onOptionsItemSelected(item)){
+        if (toggle.onOptionsItemSelected(item)) {
             return true
         }
         return super.onOptionsItemSelected(item)
     }
-
-
-// Add dialog to create class NOT USED ACTUALLY
-    private fun createDialog(item: Int, rpgClassId: Int){
-        val navView: NavigationView = binding.navView
-        val menu: Menu = navView.menu
-        val menuItem: MenuItem = menu.findItem(item)
-
-        val builder = AlertDialog.Builder(this).create()
-        val view = layoutInflater.inflate(R.layout.dialog_add_class, null)
-        val name = view.findViewById<EditText>(R.id.add_class_name_edit)
-        val levelChoice = resources.getStringArray(R.array.Level)
-        val arrayAdapter = ArrayAdapter(this, R.layout.level_list_item, levelChoice)
-        val level: AutoCompleteTextView = view.findViewById(R.id.add_class_level_choice_text)
-        level.setAdapter(arrayAdapter)
-        val saveButton = view.findViewById<Button>(R.id.add_class_save)
-        builder.setView(view)
-
-        activateSaveButton(saveButton, level)
-        saveButton.setOnClickListener {
-            if(name.editableText?.toString() != ""){
-                /*val newClass = RpgClass(name.editableText.toString(),  level.editableText.toString())
-                mainVM.insertClass(newClass)*/
-                menuItem.title = name.editableText.toString()
-                builder.dismiss()
-            } else {
-                Toast.makeText(this, getString(R.string.enter_name), Toast.LENGTH_LONG).show()
-            }
-        }
-        builder.setCanceledOnTouchOutside(true)
-        builder.show()
-
-    }
-
-    private fun activateSaveButton(button: Button, level: AutoCompleteTextView){
-        level.addTextChangedListener(object: TextWatcher{
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-            override fun afterTextChanged(s: Editable?) {
-                button.isEnabled = s?.length!! > 0
-                button.backgroundTintList =
-                    ContextCompat.getColorStateList(this@MainActivity, R.color.orange)
-            }
-        })
-    }
-
-
-
-
-
-
-
-
 }

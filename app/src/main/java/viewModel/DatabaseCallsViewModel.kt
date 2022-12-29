@@ -58,4 +58,8 @@ class DatabaseCallsViewModel(private val repository: MathWorldRepository): ViewM
         repository.updateSealedPower(sealedPower)
     }
 
+    fun updateClass(studentClass: StudentsClass) = viewModelScope.launch{
+        repository.updateClass(studentClass)
+    }
+
 }

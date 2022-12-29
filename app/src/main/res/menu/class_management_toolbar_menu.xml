@@ -5,6 +5,12 @@
     tools:context=".ui.MainActivity">
 
     <item
+        android:id="@+id/toolbar_edit_class"
+        android:icon="@drawable/resource_class"
+        app:showAsAction="always"
+        android:title="@string/edit_class"/>
+
+    <item
         android:id="@+id/toolbar_configure_xp"
         android:icon="@drawable/xp"
         app:showAsAction="always"

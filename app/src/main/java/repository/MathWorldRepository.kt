@@ -59,4 +59,9 @@ class MathWorldRepository(private val dao: ClassDAO) {
         dao.updateSealedPower(sealedPower)
     }
 
+    @WorkerThread
+    suspend fun updateClass(studentClass: StudentsClass){
+        dao.updateClass(studentClass)
+    }
+
 }

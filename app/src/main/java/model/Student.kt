@@ -20,7 +20,8 @@ data class Student(
     var bestBelt: Int,
     var beltXp: Int,
     var currentBelt: Int,
-    var numNinjaXp: Int): Serializable {
+    var numNinjaXp: Int,
+    var xpAndPowersFrozen: Long): Serializable {
     @PrimaryKey(autoGenerate = true)
     var id: Int = Random.nextInt()
 }

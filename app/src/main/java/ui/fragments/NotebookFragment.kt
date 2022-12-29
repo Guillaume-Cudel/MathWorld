@@ -43,7 +43,6 @@ class NotebookFragment : Fragment(), XpByGroupUpdater {
         binding = FragmentNotebookBinding.inflate(inflater, container, false)
         mainVM = ViewModelProvider(requireActivity())[MainViewModel::class.java]
 
-
         mainVM.classNumber.observe(requireActivity(), Observer { classId ->
             classID = classId
             configureRecyclerView()

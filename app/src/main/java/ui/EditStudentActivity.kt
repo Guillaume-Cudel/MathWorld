@@ -47,20 +47,17 @@ class EditStudentActivity : AppCompatActivity() {
         student = recoveStudentBundle?.get("student") as Student
         classId = recoveStudentBundle.getInt("classId")
 
-        if(student != null){
+        if (student != null) {
             setStudentData(student!!)
             currentJob = student!!.job
             setClassName(classId!!)
         }
 
-
         onImageJobClick()
-
-       configureButtons()
-
+        configureButtons()
     }
 
-    private fun configureButtons(){
+    private fun configureButtons() {
         binding.editStudentExperienceButtonOne.setOnClickListener {
             dicreaseExperience(1, student!!)
         }
@@ -91,13 +88,13 @@ class EditStudentActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if(item.itemId == android.R.id.home){
+        if (item.itemId == android.R.id.home) {
             finish()
         }
         return super.onOptionsItemSelected(item)
     }
 
-    private fun setStudentData(student: Student){
+    private fun setStudentData(student: Student) {
         binding.editStudentFirstnameEdit.setText(student.firstName)
         binding.editStudentLastnameEdit.setText(student.lastName)
         setJob(student.job)
@@ -108,27 +105,41 @@ class EditStudentActivity : AppCompatActivity() {
         uiConfigure.setBelt(student.bestBelt, binding.editStudentBeltImage)
     }
 
-    private fun setJob(job: String){
+    private fun setJob(job: String) {
         setColorJobToGrey()
-        when(job){
-            MathWorldApplication.context.getString(R.string.bard) -> { binding.editStudentJobBardText.setTextColor(Color.RED)
-                binding.editStudentJobBardText.setTypeface(null, Typeface.BOLD)}
-            MathWorldApplication.context.getString(R.string.shapeshifter) -> { binding.editStudentJobShapeshifterText.setTextColor(Color.RED)
-                binding.editStudentJobShapeshifterText.setTypeface(null, Typeface.BOLD)}
-            MathWorldApplication.context.getString(R.string.empath) -> { binding.editStudentJobEmpathText.setTextColor(Color.RED)
-                binding.editStudentJobEmpathText.setTypeface(null, Typeface.BOLD)}
-            MathWorldApplication.context.getString(R.string.rogue) -> { binding.editStudentJobRogueText.setTextColor(Color.RED)
-                binding.editStudentJobRogueText.setTypeface(null, Typeface.BOLD)}
-            MathWorldApplication.context.getString(R.string.bettor) -> { binding.editStudentJobBettorText.setTextColor(Color.RED)
-                binding.editStudentJobBettorText.setTypeface(null, Typeface.BOLD)}
-            MathWorldApplication.context.getString(R.string.spellweaver) -> {  binding.editStudentJobSpellweaverText.setTextColor(Color.RED)
-                binding.editStudentJobSpellweaverText.setTypeface(null, Typeface.BOLD)}
-            MathWorldApplication.context.getString(R.string.hacker) -> {binding.editStudentJobHackerText.setTextColor(Color.RED)
-                binding.editStudentJobHackerText.setTypeface(null, Typeface.BOLD)}
+        when (job) {
+            MathWorldApplication.context.getString(R.string.bard) -> {
+                binding.editStudentJobBardText.setTextColor(Color.RED)
+                binding.editStudentJobBardText.setTypeface(null, Typeface.BOLD)
+            }
+            MathWorldApplication.context.getString(R.string.shapeshifter) -> {
+                binding.editStudentJobShapeshifterText.setTextColor(Color.RED)
+                binding.editStudentJobShapeshifterText.setTypeface(null, Typeface.BOLD)
+            }
+            MathWorldApplication.context.getString(R.string.empath) -> {
+                binding.editStudentJobEmpathText.setTextColor(Color.RED)
+                binding.editStudentJobEmpathText.setTypeface(null, Typeface.BOLD)
+            }
+            MathWorldApplication.context.getString(R.string.rogue) -> {
+                binding.editStudentJobRogueText.setTextColor(Color.RED)
+                binding.editStudentJobRogueText.setTypeface(null, Typeface.BOLD)
+            }
+            MathWorldApplication.context.getString(R.string.bettor) -> {
+                binding.editStudentJobBettorText.setTextColor(Color.RED)
+                binding.editStudentJobBettorText.setTypeface(null, Typeface.BOLD)
+            }
+            MathWorldApplication.context.getString(R.string.spellweaver) -> {
+                binding.editStudentJobSpellweaverText.setTextColor(Color.RED)
+                binding.editStudentJobSpellweaverText.setTypeface(null, Typeface.BOLD)
+            }
+            MathWorldApplication.context.getString(R.string.hacker) -> {
+                binding.editStudentJobHackerText.setTextColor(Color.RED)
+                binding.editStudentJobHackerText.setTypeface(null, Typeface.BOLD)
+            }
         }
     }
 
-    private fun setColorJobToGrey(){
+    private fun setColorJobToGrey() {
         binding.editStudentJobBard.clearColorFilter()
         binding.editStudentJobBardText.setTextColor(Color.GRAY)
         binding.editStudentJobBardText.setTypeface(null, Typeface.NORMAL)
@@ -155,42 +166,61 @@ class EditStudentActivity : AppCompatActivity() {
     private fun onImageJobClick() {
         setJob(currentJob)
 
-        binding.editStudentJobBard.setOnClickListener {  currentJob = MathWorldApplication.context.getString(R.string.bard)
-            setJob(currentJob)}
-        binding.editStudentJobShapeshifter.setOnClickListener {  currentJob = MathWorldApplication.context.getString(R.string.shapeshifter)
-            setJob(currentJob)}
-        binding.editStudentJobEmpath.setOnClickListener {  currentJob = MathWorldApplication.context.getString(R.string.empath)
-            setJob(currentJob)}
-        binding.editStudentJobRogue.setOnClickListener {  currentJob = MathWorldApplication.context.getString(R.string.rogue)
-            setJob(currentJob)}
-        binding.editStudentJobBettor.setOnClickListener {  currentJob = MathWorldApplication.context.getString(R.string.bettor)
-            setJob(currentJob)}
-        binding.editStudentJobSpellweaver.setOnClickListener {  currentJob = MathWorldApplication.context.getString(R.string.spellweaver)
-            setJob(currentJob)}
-        binding.editStudentJobHacker.setOnClickListener {  currentJob = MathWorldApplication.context.getString(R.string.hacker)
-            setJob(currentJob)}
+        binding.editStudentJobBard.setOnClickListener {
+            currentJob = MathWorldApplication.context.getString(R.string.bard)
+            setJob(currentJob)
+        }
+        binding.editStudentJobShapeshifter.setOnClickListener {
+            currentJob = MathWorldApplication.context.getString(R.string.shapeshifter)
+            setJob(currentJob)
+        }
+        binding.editStudentJobEmpath.setOnClickListener {
+            currentJob = MathWorldApplication.context.getString(R.string.empath)
+            setJob(currentJob)
+        }
+        binding.editStudentJobRogue.setOnClickListener {
+            currentJob = MathWorldApplication.context.getString(R.string.rogue)
+            setJob(currentJob)
+        }
+        binding.editStudentJobBettor.setOnClickListener {
+            currentJob = MathWorldApplication.context.getString(R.string.bettor)
+            setJob(currentJob)
+        }
+        binding.editStudentJobSpellweaver.setOnClickListener {
+            currentJob = MathWorldApplication.context.getString(R.string.spellweaver)
+            setJob(currentJob)
+        }
+        binding.editStudentJobHacker.setOnClickListener {
+            currentJob = MathWorldApplication.context.getString(R.string.hacker)
+            setJob(currentJob)
+        }
     }
 
-    private fun setClassName(id: Int){
-        databaseCallsVM.getClassInformation(id)?.observe(this){
+    private fun setClassName(id: Int) {
+        databaseCallsVM.getClassInformation(id)?.observe(this) {
             val className = it.name
             binding.editStudentCurrentClassResponse.text = className
         }
     }
 
-    private fun saveEditingStudent(){
-        if(binding.editStudentFirstnameEdit.editableText.toString() != ""
-            && binding.editStudentLastnameEdit.editableText.toString() != "") {
+    private fun saveEditingStudent() {
+        if (binding.editStudentFirstnameEdit.editableText.toString() != ""
+            && binding.editStudentLastnameEdit.editableText.toString() != ""
+        ) {
             val firstname = binding.editStudentFirstnameEdit.editableText.toString()
             val lastname = binding.editStudentLastnameEdit.editableText.toString()
             //currentJob
-            if(student!!.firstName != firstname) student!!.firstName = firstname
-            if(student!!.lastName != lastname) student!!.lastName = lastname
-            if(student!!.job != currentJob) student!!.job = currentJob
+            if (student!!.firstName != firstname) student!!.firstName = firstname
+            if (student!!.lastName != lastname) student!!.lastName = lastname
+            if (student!!.job != currentJob) student!!.job = currentJob
 
 
             databaseCallsVM.updateStudent(student!!)
-            Toast.makeText(this, "$firstname $lastname " + getString(R.string.updated), Toast.LENGTH_LONG).show()
+            Toast.makeText(
+                this,
+                "$firstname $lastname " + getString(R.string.updated),
+                Toast.LENGTH_LONG
+            ).show()
         } else {
             Toast.makeText(this, getString(R.string.fill_fields), Toast.LENGTH_LONG).show()
         }
@@ -202,28 +232,29 @@ class EditStudentActivity : AppCompatActivity() {
         finish()
     }
 
-    private fun editBelt(number: Int, student: Student){
+    private fun editBelt(number: Int, student: Student) {
         var currentBelt = student.bestBelt
 
-        when(number){
+        when (number) {
             1 -> {
                 currentBelt++
                 student.bestBelt = currentBelt
             }
             -1 -> {
-                if(currentBelt > 1) {
+                if (currentBelt > 1) {
                     currentBelt--
                     student.bestBelt = currentBelt
-                } else Toast.makeText(this, "Ceinture minimale atteinte !", Toast.LENGTH_SHORT).show()
+                } else Toast.makeText(this, "Ceinture minimale atteinte !", Toast.LENGTH_SHORT)
+                    .show()
             }
         }
         databaseCallsVM.updateStudent(student)
         setStudentData(student)
     }
 
-    private fun dicreaseExperience(xpToDecrease: Int, student: Student){
+    private fun dicreaseExperience(xpToDecrease: Int, student: Student) {
         var newExperience = student.experience
-        if(newExperience > 0) {
+        if (newExperience > 0) {
             newExperience = newExperience.minus(xpToDecrease)
             student.experience = newExperience
             databaseCallsVM.updateStudent(student)
@@ -231,17 +262,17 @@ class EditStudentActivity : AppCompatActivity() {
         } else Toast.makeText(this, "Il peut pas sous-pex gros !", Toast.LENGTH_SHORT).show()
     }
 
-    private fun editLevel(editingLevel: Int, student: Student){
+    private fun editLevel(editingLevel: Int, student: Student) {
         var newLevel = student.level
         var newXpMax = student.xpMax
 
-        if(editingLevel > 0) {
+        if (editingLevel > 0) {
             newLevel = newLevel.plus(1)
             newXpMax = newXpMax.plus(5)
             student.level = newLevel
             student.xpMax = newXpMax
         } else {
-            if(newLevel > 1) {
+            if (newLevel > 1) {
                 newLevel = newLevel.minus(1)
                 newXpMax = newXpMax.minus(5)
                 student.level = newLevel

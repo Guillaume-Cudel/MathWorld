@@ -2,8 +2,12 @@ package ui.fragments
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.*
-import android.widget.Toast
+import android.widget.*
+import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
@@ -15,6 +19,7 @@ import com.guillaume.mathworld.databinding.FragmentClassManagementBinding
 import di.MathWorldApplication
 import di.MathWorldViewModelFactory
 import model.Student
+import model.StudentsClass
 import ui.AddStudentActivity
 import services.StatsUpdater
 import services.UiConfigure
@@ -34,6 +39,7 @@ class ClassManagementFragment : Fragment(), StatsUpdater {
     private lateinit var mainVM: MainViewModel
     private val uiConfigure: UiConfigure = UiConfigureImpl()
     private var classID: Int? = null
+    private var currentClass: StudentsClass? = null
     private var experienceGiven: Int = 1
     private var mActionMode: ActionMode? = null
 
@@ -45,21 +51,21 @@ class ClassManagementFragment : Fragment(), StatsUpdater {
         mainVM = ViewModelProvider(requireActivity())[MainViewModel::class.java]
         setHasOptionsMenu(true)
 
-
-        mainVM.classNumber.observe(requireActivity(), Observer {
-            classID = it
+        mainVM.classNumber.observe(requireActivity(), Observer { id ->
+            classID = id
             configureRecyclerView(classID!!)
+            databaseCallsVM.getClassInformation(classID!!)?.observe(requireActivity(), Observer { cClass ->
+                currentClass = cClass
+                activity?.title = currentClass!!.name
+            })
         })
-
         updateExperienceGiven(experienceGiven)
-
-
         return binding.root
     }
 
     override fun onResume() {
         super.onResume()
-        activity?.title = getString(R.string.management)
+        if(currentClass != null) activity?.title = currentClass!!.name
     }
 
 
@@ -107,6 +113,10 @@ class ClassManagementFragment : Fragment(), StatsUpdater {
             }
             R.id.toolbar_configure_xp -> {
                 mActionMode = requireActivity().startActionMode(actionModeCallback)!!
+                true
+            }
+            R.id.toolbar_edit_class -> {
+                editClassDialog(currentClass!!)
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -200,6 +210,48 @@ class ClassManagementFragment : Fragment(), StatsUpdater {
             adapter.giveExperience = experienceGiven
             mActionMode = null
         }
+    }
+
+    private fun editClassDialog(cClass: StudentsClass){
+
+        val builder = AlertDialog.Builder(requireActivity()).create()
+        val view = layoutInflater.inflate(R.layout.dialog_modify_class, null)
+        val classNameEditText = view.findViewById<EditText>(R.id.modify_class_name_edit)
+        val levelChoice = resources.getStringArray(R.array.Level)
+        val arrayAdapter = ArrayAdapter(requireActivity(), R.layout.level_list_item, levelChoice)
+        val level: AutoCompleteTextView = view.findViewById(R.id.modify_class_level_choice_text)
+        level.setAdapter(arrayAdapter)
+        val saveButton = view.findViewById<Button>(R.id.modify_class_save)
+        builder.setView(view)
+
+        classNameEditText.setText(cClass.name)
+
+        activateSaveButton(saveButton, level)
+        saveButton.setOnClickListener {
+            if(classNameEditText.editableText?.toString() != ""){
+                cClass.name = classNameEditText.editableText.toString()
+                cClass.level = level.editableText.toString()
+                databaseCallsVM.updateClass(currentClass!!)
+                builder.dismiss()
+            } else {
+                Toast.makeText(requireActivity(), getString(R.string.enter_name), Toast.LENGTH_LONG).show()
+            }
+        }
+        builder.setCanceledOnTouchOutside(true)
+        builder.show()
+
+    }
+
+    private fun activateSaveButton(button: Button, level: AutoCompleteTextView){
+        level.addTextChangedListener(object: TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            override fun afterTextChanged(s: Editable?) {
+                button.isEnabled = s?.length!! > 0
+                button.backgroundTintList =
+                    ContextCompat.getColorStateList(requireActivity(), R.color.orange)
+            }
+        })
     }
 
 }

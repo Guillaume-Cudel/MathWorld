@@ -10,7 +10,7 @@
     <string name="management">Management</string>
     <string name="notebook">Notebook</string>
     <string name="num_ninja" translatable="false">Num Ninja</string>
-    <string name="add_class">Add class</string>
+    <string name="modify_class">Modify class</string>
     <string name="enter_the_class_s_name">Enter the class\'s name</string>
     <string name="level">Level</string>
     <string name="save">Save</string>
@@ -57,6 +57,7 @@
     <string name="modify_level">Modify level</string>
     <string name="modify_job">Modify job</string>
     <string name="belt">Belt</string>
+    <string name="edit_class">Edit class</string>
 
 
     <string-array name="Level">

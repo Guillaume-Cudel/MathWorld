@@ -7,5 +7,5 @@ import java.io.Serializable
 @Entity(tableName = "class_table")
 
 data class StudentsClass(@PrimaryKey val id: Int,
-                         val name: String,
-                         val level: String) : Serializable
+                         var name: String,
+                         var level: String) : Serializable

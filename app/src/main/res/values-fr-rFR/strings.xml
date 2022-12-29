@@ -52,4 +52,6 @@
     <string name="modify_level">Modification niveau</string>
     <string name="modify_job">Modification classe</string>
     <string name="belt">Ceinture</string>
+    <string name="edit_class">Edition de la classe</string>
+    <string name="modify_class">Modification de la classe</string>
 </resources>
