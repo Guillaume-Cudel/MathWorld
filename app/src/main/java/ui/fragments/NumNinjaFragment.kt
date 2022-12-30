@@ -135,6 +135,7 @@ class NumNinjaFragment : Fragment(), BeltManagement {
     private fun assignXpBelt() {
         if (beltXpList.size > 0) {
             mStudentsList.forEachIndexed { i, student ->
+
                 student.beltXp = beltXpList[i]
                 databaseCallsVM.updateStudent(student)
             }

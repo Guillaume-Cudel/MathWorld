@@ -56,7 +56,6 @@ class ClassManagementFragment : Fragment(), StatsUpdater {
             configureRecyclerView(classID!!)
             databaseCallsVM.getClassInformation(classID!!)?.observe(requireActivity(), Observer { cClass ->
                 currentClass = cClass
-                activity?.title = currentClass!!.name
             })
         })
         updateExperienceGiven(experienceGiven)
@@ -87,7 +86,8 @@ class ClassManagementFragment : Fragment(), StatsUpdater {
                 if (it.isNotEmpty()) {
                     val students = it[0].students
                     students.let { studentsList ->
-                        adapter.submitList(studentsList)
+                        val studentListSorted = studentsList.sortedBy { it.lastName }
+                        adapter.submitList(studentListSorted)
                     }
                 }
             })

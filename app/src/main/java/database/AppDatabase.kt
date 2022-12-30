@@ -164,8 +164,8 @@ public abstract class AppDatabase: RoomDatabase() {
                 3, 1, 0, 45, 1, 1, 0, 0, 0, 0)
             val secondStudent = Student( 1, "Lucas", "Stagne", spellweaverName,
                 3, 2, 14, 50, 5, 2, 0, 0, 0, 0)
-            dao.insertStudent(firstStudent)
-            dao.insertStudent(secondStudent)
+            //dao.insertStudent(firstStudent)
+            //dao.insertStudent(secondStudent)
 
             val firstStudentPowers = SealedPower(firstStudent.id,
                 power1 = 1,
@@ -199,8 +199,8 @@ public abstract class AppDatabase: RoomDatabase() {
                 powerToAssign = 0
             )
 
-            dao.insertSealedPowers(firstStudentPowers)
-            dao.insertSealedPowers(secondStudentPowers)
+            //dao.insertSealedPowers(firstStudentPowers)
+            //dao.insertSealedPowers(secondStudentPowers)
         }
     }
 }

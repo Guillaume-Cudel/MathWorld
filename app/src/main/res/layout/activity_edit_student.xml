@@ -327,12 +327,19 @@
         app:layout_constraintTop_toTopOf="@id/edit_student_progressbar_experience"
         android:layout_marginStart="10dp"
         android:backgroundTint="@android:color/transparent"
-        android:text="-1"
-        android:textColor="@color/dark_orange"
-        android:textSize="7sp"
         app:cornerRadius="8dp"
         app:strokeColor="@color/orange"
         app:strokeWidth="3dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/edit_student_experience_button_one"
+        app:layout_constraintEnd_toEndOf="@id/edit_student_experience_button_one"
+        app:layout_constraintTop_toTopOf="@id/edit_student_experience_button_one"
+        app:layout_constraintBottom_toBottomOf="@id/edit_student_experience_button_one"
+        android:text="-1"
+        android:textColor="@color/dark_orange"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/edit_student_experience_button_five"
@@ -342,12 +349,19 @@
         app:layout_constraintTop_toTopOf="@id/edit_student_experience_button_one"
         android:layout_marginStart="10dp"
         android:backgroundTint="@android:color/transparent"
-        android:text="-5"
-        android:textColor="@color/dark_orange"
-        android:textSize="7sp"
         app:cornerRadius="8dp"
         app:strokeColor="@color/orange"
         app:strokeWidth="3dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/edit_student_experience_button_five"
+        app:layout_constraintEnd_toEndOf="@id/edit_student_experience_button_five"
+        app:layout_constraintTop_toTopOf="@id/edit_student_experience_button_five"
+        app:layout_constraintBottom_toBottomOf="@id/edit_student_experience_button_five"
+        android:text="-5"
+        android:textColor="@color/dark_orange"/>
 
     <TextView
         android:id="@+id/edit_student_level_text"
@@ -389,12 +403,20 @@
         app:layout_constraintTop_toTopOf="@id/edit_student_level_text"
         android:layout_marginStart="40dp"
         android:backgroundTint="@android:color/transparent"
-        android:text="-1"
-        android:textColor="@color/dark_orange"
-        android:textSize="7sp"
         app:cornerRadius="8dp"
         app:strokeColor="@color/orange"
         app:strokeWidth="3dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/edit_student_level_button_minus"
+        app:layout_constraintEnd_toEndOf="@id/edit_student_level_button_minus"
+        app:layout_constraintTop_toTopOf="@id/edit_student_level_button_minus"
+        app:layout_constraintBottom_toBottomOf="@id/edit_student_level_button_minus"
+        android:text="-"
+        android:textSize="14sp"
+        android:textColor="@color/dark_orange"/>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/edit_student_level_button_plus"
@@ -405,12 +427,20 @@
         app:layout_constraintTop_toTopOf="@id/edit_student_level_text"
         android:layout_marginStart="25dp"
         android:backgroundTint="@android:color/transparent"
-        android:text="+1"
-        android:textColor="@color/dark_orange"
-        android:textSize="6sp"
         app:cornerRadius="8dp"
         app:strokeColor="@color/orange"
         app:strokeWidth="3dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/edit_student_level_button_plus"
+        app:layout_constraintEnd_toEndOf="@id/edit_student_level_button_plus"
+        app:layout_constraintTop_toTopOf="@id/edit_student_level_button_plus"
+        app:layout_constraintBottom_toBottomOf="@id/edit_student_level_button_plus"
+        android:text="+"
+        android:textSize="14sp"
+        android:textColor="@color/dark_orange"/>
 
     <TextView
         android:id="@+id/edit_student_belt_text"
@@ -429,12 +459,20 @@
         app:layout_constraintTop_toTopOf="@id/edit_student_belt_text"
         app:layout_constraintBottom_toBottomOf="@id/edit_student_belt_text"
         android:backgroundTint="@android:color/transparent"
-        android:text="-1"
-        android:textColor="@color/dark_orange"
-        android:textSize="7sp"
         app:cornerRadius="8dp"
         app:strokeColor="@color/orange"
         app:strokeWidth="3dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/edit_student_belt_minus"
+        app:layout_constraintEnd_toEndOf="@id/edit_student_belt_minus"
+        app:layout_constraintTop_toTopOf="@id/edit_student_belt_minus"
+        app:layout_constraintBottom_toBottomOf="@id/edit_student_belt_minus"
+        android:text="-"
+        android:textSize="14sp"
+        android:textColor="@color/dark_orange"/>
 
     <ImageView
         android:id="@+id/edit_student_belt_image"
@@ -454,12 +492,20 @@
         app:layout_constraintTop_toTopOf="@id/edit_student_belt_text"
         app:layout_constraintBottom_toBottomOf="@id/edit_student_belt_text"
         android:backgroundTint="@android:color/transparent"
-        android:text="+1"
-        android:textColor="@color/dark_orange"
-        android:textSize="6sp"
         app:cornerRadius="8dp"
         app:strokeColor="@color/orange"
         app:strokeWidth="3dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/edit_student_belt_plus"
+        app:layout_constraintEnd_toEndOf="@id/edit_student_belt_plus"
+        app:layout_constraintTop_toTopOf="@id/edit_student_belt_plus"
+        app:layout_constraintBottom_toBottomOf="@id/edit_student_belt_plus"
+        android:text="+"
+        android:textSize="14sp"
+        android:textColor="@color/dark_orange"/>
 
 
     <com.google.android.material.button.MaterialButton
